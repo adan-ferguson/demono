@@ -4,9 +4,9 @@ interface EncounterDefinition {
     enemies: string[]
 }
 
-export default class Encounter {
+class Encounter {
 
-    static createFromData(def: EncounterDefinition): Encounter{
+    public static createFromData(def: EncounterDefinition): Encounter {
         const enemies: Enemy[] = []
         def.enemies.forEach(enemyID => {
             enemies.push(Enemy.createFromID(enemyID))
@@ -20,3 +20,5 @@ export default class Encounter {
         this.enemies = enemies
     }
 }
+
+export { Encounter }

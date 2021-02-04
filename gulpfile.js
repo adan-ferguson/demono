@@ -21,6 +21,9 @@ function compileData(cb){
         })
         Object.assign(target, contents)
       })
+      if(!fs.existsSync('src/data')){
+        fs.mkdirSync('src/data')
+      }
       for(let type in output.data){
         const path = `src/data/${type}.json`
         fs.writeFileSync(path, JSON.stringify(output.data[type]))

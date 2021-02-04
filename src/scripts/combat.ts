@@ -1,4 +1,4 @@
-import Encounter from './encounter'
+import { Encounter } from './encounter'
 import Squad from './squad'
 
 export default class Combat {
