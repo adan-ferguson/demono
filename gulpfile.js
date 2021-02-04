@@ -12,7 +12,7 @@ function compileData(cb){
         const contents = JSON.parse(fs.readFileSync(filename, 'utf8'))
         Object.assign(output, contents)
       })
-      fs.writeFileSync('dist/data.js', JSON.stringify(output))
+      fs.writeFileSync('src/data.json', JSON.stringify(output))
       console.log('Data Compiled')
     }catch(ex){
       console.error(ex)

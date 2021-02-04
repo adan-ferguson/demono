@@ -80,3 +80,4 @@ typings/
 
 manifest.json
 dist/
+src/data.json

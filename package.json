@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve && node gulpfile.js"
+    "start": "webpack serve && gulp"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
-    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.18.0",
     "html-webpack-plugin": "^4.5.1",
@@ -27,6 +26,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "gulp": "^4.0.2",
     "node-glob": "^1.2.0"
   }

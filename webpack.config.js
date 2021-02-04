@@ -23,7 +23,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
+        extensions: [ '.tsx', '.ts', '.js', '.json' ],
     },
     output: {
         filename: 'bundle.js',
@@ -36,6 +36,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Demono',
-        })
+        }),
+        new CleanWebpackPlugin()
     ],
 }
