@@ -36,7 +36,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Demono',
-        }),
-        new CleanWebpackPlugin()
+        })
     ],
 }

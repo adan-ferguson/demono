@@ -1,15 +1,11 @@
 module.exports = {
     env: {
-        node: true
+        es2020: true,
+        node: true,
     },
     root: true,
-    parser: '@typescript-eslint/parser',
-    plugins: [
-        '@typescript-eslint',
-    ],
     extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
+        'eslint:recommended'
     ],
     rules: {
         quotes: [
