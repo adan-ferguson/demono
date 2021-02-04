@@ -79,5 +79,8 @@ typings/
 .idea
 
 manifest.json
+
 dist/
-src/data.json
+
+# Generated data json files
+src/data

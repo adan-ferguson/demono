@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve && gulp"
+    "serve": "webpack serve",
+    "data": "gulp"
   },
   "keywords": [],
   "author": "",
