@@ -1,4 +1,4 @@
-import Enemy from './enemy'
+import { Enemy } from './enemy'
 
 interface EncounterDefinition {
     enemies: string[]
@@ -21,4 +21,4 @@ class Encounter {
     }
 }
 
-export { Encounter }
+export { Encounter, EncounterDefinition }

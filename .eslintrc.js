@@ -13,13 +13,18 @@ module.exports = {
             'single'
         ],
         'quote-props': [
-          'error',
+            'error',
             'as-needed'
         ],
         semi: [
             'error',
             'never'
         ],
-      'no-console': 'off'
+        'no-console': 'off',
+        'object-curly-spacing': [
+            'error',
+            'always'
+        ],
+        indent: ['error', 4]
     }
 }
