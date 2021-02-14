@@ -23,6 +23,7 @@ setScene(testCombatScene)
 
 function setScene(scene: Scene){
     mainEl.querySelector('.scene').replaceWith(scene.element)
+    scene.begin()
 }
 
 function loadPlayer(){

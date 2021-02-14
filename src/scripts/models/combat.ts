@@ -9,7 +9,6 @@ interface CombatUpdate {
     id?: string
 }
 
-
 class Combat {
 
     enemyCombatants: EnemyCombatant[]
@@ -19,6 +18,11 @@ class Combat {
     constructor(encounter: Encounter, player: Player){
         this.enemyCombatants = encounter.enemies.map((enemy: Enemy) => new EnemyCombatant(enemy))
         this.playerCombatant = new PlayerCombatant(player)
+    }
+
+    init(): void{
+        this.enemyCombatants.forEach(ec => ec.init())
+        this.playerCombatant.init()
     }
 }
 

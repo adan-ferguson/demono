@@ -1,10 +1,10 @@
 abstract class DemonoElement {
 
-    element: HTMLElement
+    public element: Element
 
     constructor(className: string){
-        this.element = document.createElement('div')
-        this.element.classList.add(...className.split(' '))
+        this.element = document.createElement('demono')
+        this.element.classList.add(...className.trim().split(' '))
     }
 }
 

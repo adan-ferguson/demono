@@ -1,15 +1,16 @@
 import { PlayerCombatant } from '../../models/playerCombatant'
 import { ModelElement } from '../modelElement'
+import { DemonInstanceElement } from './demonInstanceElement'
 
 const PLAYER_HTML = `
-<div class='stat'>
-    Health: <span stat-name="currentHealth"></span> / <span stat-name="maxHealth"></span>
+<div>
+    Health: <span data-key="currentHealth"></span> / <span data-key="maxHealth"></span>
 </div>
-<div class='stat'>
-    PDef: <span class='physicalDefense'></span>
+<div>
+    PDef: <span data-key='physicalDefense'></span>
 </div>
-<div class='stat'>
-    MDef: <span class='magicDefense'></span>
+<div>
+    MDef: <span data-key='magicDefense'></span>
 </div>
 <div class='demons'></div>
 `
@@ -20,8 +21,12 @@ class PlayerCombatantElement extends ModelElement<PlayerCombatant> {
         super(playerCombatant, 'player-combatant')
     }
 
-    makeContents(): void {
-
+    protected makeContents(): void {
+        this.element.innerHTML = PLAYER_HTML
+        const demons = this.element.querySelector('demons')
+        this.model.demonInstances.forEach(demonInstance => {
+            demons.append(new DemonInstanceElement(demonInstance).element)
+        })
     }
 }
 

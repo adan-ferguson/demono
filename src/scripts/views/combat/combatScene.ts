@@ -3,24 +3,30 @@ import { Combat } from '../../models/combat'
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
 import { EnemyCombatantElement } from './enemyCombatantElement'
 import { PlayerCombatantElement } from './playerCombatantElement'
+import { ModelElement } from '../modelElement'
 
 const COMBAT_HTML = `
 <div class="top">
     <div class="enemies"></div>
 </div>
 <div class="bottom">
+    <div class="player"></div>
 </div>
 `
 
 class CombatScene extends Scene {
 
-    className: 'combat'
-    combat: Combat
+    private combat: Combat
 
     constructor(combat: Combat){
-        super()
+        super('combat')
         this.combat = combat
         this.populate()
+    }
+
+    begin(): void {
+        this.combat.init()
+        this.update()
     }
 
     private populate(): void {
@@ -33,6 +39,13 @@ class CombatScene extends Scene {
 
         const playerEl = this.element.querySelector('.player')
         playerEl.append(new PlayerCombatantElement(this.combat.playerCombatant).element)
+    }
+
+    private update(): void {
+        const modelEls = this.element.querySelectorAll('demono.model')
+        modelEls.forEach(modelEl => {
+            ModelElement.getFromRegistry(modelEl).update()
+        })
     }
 }
 

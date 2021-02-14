@@ -14,6 +14,10 @@ class Player extends Serializable<PlayerDefinition> {
     demons: Demon[] = []
     name = 'Player'
 
+    get startingHealth(): number {
+        return 100
+    }
+
     serialize(): PlayerDefinition {
         return {
             name: this.name,

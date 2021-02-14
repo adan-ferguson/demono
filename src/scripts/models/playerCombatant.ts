@@ -13,6 +13,14 @@ class PlayerCombatant extends Combatant {
         this.player = player
         this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon))
     }
+
+    public get name(): string {
+        return this.player.name
+    }
+
+    public get startingHealth(): number {
+        return this.player.startingHealth
+    }
 }
 
 export { PlayerCombatant }
