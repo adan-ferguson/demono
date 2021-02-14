@@ -1,14 +1,11 @@
-abstract class DemonoElement<T> extends HTMLElement {
+abstract class DemonoElement {
 
-    model: T
+    element: HTMLElement
 
-    constructor(model: T){
-        super()
-        this.model = model
-        this.makeContents()
+    constructor(className: string){
+        this.element = document.createElement('div')
+        this.element.classList.add(...className.split(' '))
     }
-
-    abstract makeContents(): void
 }
 
 export { DemonoElement }

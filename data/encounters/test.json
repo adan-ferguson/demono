@@ -1,3 +1,19 @@
 {
-  "enemies": ["bat"]
+  "enemies": [
+    {
+      "id": "bat"
+    },
+    {
+      "id": "bat",
+      "options": {
+        "turnOffset": 1
+      }
+    },
+    {
+      "id": "bat",
+      "options": {
+        "turnOffset": 2
+      }
+    }
+  ]
 }

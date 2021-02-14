@@ -1,18 +1,24 @@
 import { Encounter } from './encounter'
-import { Squad } from './squad'
+import { PlayerCombatant } from './playerCombatant'
 import { EnemyCombatant } from './combat/enemyCombatant'
 import { Enemy } from './enemy'
-import { Demon } from './demon'
-import { DemonInstance } from './combat/demonInstance'
+import { Player } from './player'
+import { LiteEvent } from './liteEvent'
+
+interface CombatUpdate {
+    id?: string
+}
+
 
 class Combat {
 
     enemyCombatants: EnemyCombatant[]
-    demonInstances: DemonInstance[]
+    playerCombatant: PlayerCombatant
+    onUpdate = new LiteEvent<CombatUpdate>()
 
-    constructor(encounter: Encounter, squad: Squad){
+    constructor(encounter: Encounter, player: Player){
         this.enemyCombatants = encounter.enemies.map((enemy: Enemy) => new EnemyCombatant(enemy))
-        this.demonInstances = squad.demons.map((demon: Demon) => new DemonInstance(demon))
+        this.playerCombatant = new PlayerCombatant(player)
     }
 }
 

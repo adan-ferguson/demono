@@ -5,15 +5,27 @@ interface EnemyDefinition {
     health: number
 }
 
+interface EnemyOptions {
+    turnOffset ?: number
+}
+
 class Enemy {
 
-    static createFromID(enemyID: string): Enemy {
-        return new Enemy(enemies[enemyID as keyof typeof enemies])
+    static loadDefinitionFromID(id: string): EnemyDefinition {
+        return enemies[id as keyof typeof enemies]
     }
 
-    constructor(enemyDef: EnemyDefinition){
+    name: string
+    health: number
+    options: EnemyOptions
 
+    constructor(enemyDef: EnemyDefinition, options: EnemyOptions = {}){
+        this.name = enemyDef.name
+        this.health = enemyDef.health
+        this.options = Object.assign({
+            turnOffset: 0
+        }, options)
     }
 }
 
-export { EnemyDefinition, Enemy }
+export { EnemyDefinition, Enemy, EnemyOptions }

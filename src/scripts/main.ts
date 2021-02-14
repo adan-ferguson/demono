@@ -16,14 +16,13 @@ document.body.prepend(mainEl)
 
 const encounter = Encounter.createFromData(testEncounter)
 const player = loadPlayer()
-const squad = player.makeSquad()
 
-const testCombat = new Combat(encounter, squad)
+const testCombat = new Combat(encounter, player)
 const testCombatScene = new CombatScene(testCombat)
 setScene(testCombatScene)
 
 function setScene(scene: Scene){
-    mainEl.querySelector('.scene').replaceWith(scene)
+    mainEl.querySelector('.scene').replaceWith(scene.element)
 }
 
 function loadPlayer(){

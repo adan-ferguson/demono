@@ -1,15 +1,21 @@
-import { Enemy } from './enemy'
+import { Enemy, EnemyOptions } from './enemy'
+
+interface EncounterEnemyDefinition {
+    id: string,
+    options?: EnemyOptions
+}
 
 interface EncounterDefinition {
-    enemies: string[]
+    enemies: EncounterEnemyDefinition[]
 }
 
 class Encounter {
 
     public static createFromData(def: EncounterDefinition): Encounter {
         const enemies: Enemy[] = []
-        def.enemies.forEach(enemyID => {
-            enemies.push(Enemy.createFromID(enemyID))
+        def.enemies.forEach(enemyData => {
+            const enemyDefinition = Enemy.loadDefinitionFromID(enemyData.id)
+            enemies.push(new Enemy(enemyDefinition, enemyData.options))
         })
         return new Encounter(enemies)
     }
@@ -21,4 +27,4 @@ class Encounter {
     }
 }
 
-export { Encounter, EncounterDefinition }
+export { Encounter, EncounterDefinition, EncounterEnemyDefinition }

@@ -1,6 +1,6 @@
 import { Demon, DemonDefinition } from './demon'
 import { Serializable } from './serializable'
-import { Squad } from './squad'
+import { PlayerCombatant } from './playerCombatant'
 
 interface PlayerDefinition {
     name: string,
@@ -26,11 +26,6 @@ class Player extends Serializable<PlayerDefinition> {
         this.name = definition.name
         this.experience = definition.experience
         this.demons = definition.demons.map(demonDef => new Demon(demonDef))
-    }
-
-    makeSquad(): Squad {
-        const squad = new Squad(this, this.demons)
-        return squad
     }
 }
 

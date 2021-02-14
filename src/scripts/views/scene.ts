@@ -1,8 +1,9 @@
-abstract class Scene extends HTMLElement {
+import { DemonoElement } from './demonoElement'
+
+abstract class Scene extends DemonoElement {
 
     constructor(){
-        super()
-        this.classList.add('scene')
+        super('scene')
     }
 }
 
