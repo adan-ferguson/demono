@@ -1,42 +1,40 @@
 const fs = require('fs')
 const glob = require('glob')
-const {watch} = require('gulp')
+const { watch } = require('gulp')
 
-const output = {}
-const DATA_GLOB = 'data/**/*.json'
+const MODELS_PATH = 'src/scripts/models'
+const DEFINITIONS_FOLDERS = [
+    'demons',
+    'encounters',
+    'enemies'
+]
 
-function compileData(cb){
-  glob(DATA_GLOB, (error, files) => {
-    try {
-      files.forEach((filename) => {
-        const contents = JSON.parse(fs.readFileSync(filename, 'utf8'))
-        const pathArray = filename.split('/')
-        let target = output
-        pathArray.forEach(parent => {
-          parent = parent.replace('.json', '')
-          if(!target[parent]){
-            target[parent] = {}
-          }
-          target = target[parent]
-        })
-        Object.assign(target, contents)
-      })
-      if(!fs.existsSync('src/data')){
-        fs.mkdirSync('src/data')
-      }
-      for(let type in output.data){
-        const path = `src/data/${type}.json`
-        fs.writeFileSync(path, JSON.stringify(output.data[type]))
-        console.log('wrote', path)
-      }
-      console.log('Data Compiled')
-    }catch(ex){
-      console.error(ex)
-    }
-    cb()
-  })
+function compileData(folderName, cb){
+    let contents = ''
+    let names = []
+    glob(toGlob(folderName), (error, files) => {
+        try {
+            files.forEach((filename) => {
+                let name = filename
+                names.push(name)
+                contents += `import { ${name} } from './definitions/${name}\n`
+            })
+            contents += `export { ${names.join(',')} }`
+            fs.writeFileSync(`${MODELS_PATH}/${folderName}/definitionLoader.js`, contents)
+            console.log(`Definition Loader for ${folderName} compiled.`)
+        }catch(ex){
+            console.error(ex)
+        }
+        cb()
+    })
+}
+
+function toGlob(folderName){
+    return `${MODELS_PATH}/${folderName}/definitions/*.ts`
 }
 
 exports.default = () => {
-  watch(DATA_GLOB, {ignoreInitial: false}, compileData)
+    DEFINITIONS_FOLDERS.forEach(folderName => {
+        watch(toGlob(folderName), { ignoreInitial: false }, cb => compileData(folderName, cb))
+    })
 }

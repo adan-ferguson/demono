@@ -1,5 +1,5 @@
 import { Scene } from '../scene'
-import { Combat } from '../../models/combat'
+import { Combat } from '../../models/combat/combat'
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
 import { EnemyCombatantElement } from './enemyCombatantElement'
 import { PlayerCombatantElement } from './playerCombatantElement'

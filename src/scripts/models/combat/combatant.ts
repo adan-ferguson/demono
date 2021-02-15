@@ -8,19 +8,21 @@ abstract class Combatant {
     private _health: number
     private _maxHealth: number
 
-    public init(): void {
+    init(): void {
         this._health = this.startingHealth
         this._maxHealth = this.startingHealth
     }
 
-    public abstract get startingHealth(): number
-    public abstract get name(): string
+    abstract get startingHealth(): number
+    abstract get name(): string
+    abstract get physDefense(): number
+    abstract get magicDefense(): number
 
-    public get health(): number {
+    get health(): number {
         return this._health
     }
 
-    public get maxHealth(): number {
+    get maxHealth(): number {
         return this._maxHealth
     }
 }

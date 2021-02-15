@@ -1,9 +1,9 @@
-import { Encounter } from './encounter'
+import { Encounter } from '../encounters/encounter'
 import { PlayerCombatant } from './playerCombatant'
-import { EnemyCombatant } from './combat/enemyCombatant'
-import { Enemy } from './enemy'
-import { Player } from './player'
-import { LiteEvent } from './liteEvent'
+import { EnemyCombatant } from './enemyCombatant'
+import { Enemy } from '../enemies/enemy'
+import { Player } from '../player'
+import { LiteEvent } from '../liteEvent'
 
 interface CombatUpdate {
     id?: string

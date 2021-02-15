@@ -1,4 +1,4 @@
-import { PlayerCombatant } from '../../models/playerCombatant'
+import { PlayerCombatant } from '../../models/combat/playerCombatant'
 import { ModelElement } from '../modelElement'
 import { DemonInstanceElement } from './demonInstanceElement'
 

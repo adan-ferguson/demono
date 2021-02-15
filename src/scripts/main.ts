@@ -3,8 +3,8 @@ import { CombatScene } from './views/combat/combatScene'
 import { Scene } from './views/scene'
 import { test as testEncounter } from '../data/encounters.json'
 
-import { Encounter } from './models/encounter'
-import { Combat } from './models/combat'
+import { Encounter } from './models/encounters/encounter'
+import { Combat } from './models/combat/combat'
 import { Player } from './models/player'
 
 const mainEl:HTMLElement = document.createElement('main')

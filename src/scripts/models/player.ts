@@ -1,6 +1,6 @@
-import { Demon, DemonDefinition } from './demon'
+import { Demon, DemonDefinition } from './demons/demon'
 import { Serializable } from './serializable'
-import { PlayerCombatant } from './playerCombatant'
+import { PlayerCombatant } from './combat/playerCombatant'
 
 interface PlayerDefinition {
     name: string,

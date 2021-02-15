@@ -6,13 +6,13 @@
     {
       "id": "bat",
       "options": {
-        "turnOffset": 1
+        "turnOffset": -1
       }
     },
     {
       "id": "bat",
       "options": {
-        "turnOffset": 2
+        "turnOffset": -2
       }
     }
   ]

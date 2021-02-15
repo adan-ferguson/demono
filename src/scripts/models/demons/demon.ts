@@ -1,4 +1,11 @@
-import {Serializable} from './serializable'
+import { Serializable } from '../serializable'
+
+interface DemonStats {
+    strength: number,
+    magic: number,
+    armor: number,
+    speed: number
+}
 
 interface DemonDefinition {
     name: string,
@@ -23,6 +30,15 @@ class Demon extends Serializable<DemonDefinition> {
             class: 'huh?'
         }
     }
+
+    getStats(): DemonStats {
+        return {
+            strength: 10,
+            magic: 10,
+            armor: 10,
+            speed: 10
+        }
+    }
 }
 
-export {DemonDefinition, Demon}
+export { DemonDefinition, Demon, DemonStats }
