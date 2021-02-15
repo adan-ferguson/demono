@@ -82,5 +82,5 @@ manifest.json
 
 dist/
 
-# Generated data json files
-src/data
+# Generated definition loaders
+definitionLoader.ts

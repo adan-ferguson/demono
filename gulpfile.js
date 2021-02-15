@@ -1,5 +1,6 @@
 const fs = require('fs')
 const glob = require('glob')
+const path = require('path')
 const { watch } = require('gulp')
 
 const MODELS_PATH = 'src/scripts/models'
@@ -15,12 +16,12 @@ function compileData(folderName, cb){
     glob(toGlob(folderName), (error, files) => {
         try {
             files.forEach((filename) => {
-                let name = filename
+                let name = path.basename(filename).replace(/\.[^/.]+$/, '')
                 names.push(name)
-                contents += `import { ${name} } from './definitions/${name}\n`
+                contents += `import { ${name} } from './definitions/${name}'\n`
             })
             contents += `export { ${names.join(',')} }`
-            fs.writeFileSync(`${MODELS_PATH}/${folderName}/definitionLoader.js`, contents)
+            fs.writeFileSync(`${MODELS_PATH}/${folderName}/definitionLoader.ts`, contents)
             console.log(`Definition Loader for ${folderName} compiled.`)
         }catch(ex){
             console.error(ex)
