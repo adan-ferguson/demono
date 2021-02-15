@@ -1,5 +1,5 @@
 import { Serializable } from '../serializable'
-import { DemonClass } from './classes/class'
+import { DemonClass, DemonClassId } from './classes/class'
 
 interface DemonStats {
     strength: number,
@@ -10,8 +10,8 @@ interface DemonStats {
 
 interface SerializedDemon {
     name: string,
-    class: string,
-    // element: string
+    classId: DemonClassId,
+    // elementId: string
 }
 
 class Demon extends Serializable<SerializedDemon> {
@@ -22,7 +22,7 @@ class Demon extends Serializable<SerializedDemon> {
 
     deserialize(serialized: SerializedDemon): void {
         this.name = serialized.name
-        this.class = DemonClass.loadFromId(serialized.class)
+        this.class = DemonClass.loadFromId(serialized.classId)
         // this.element = serialized.element
     }
 
@@ -30,7 +30,7 @@ class Demon extends Serializable<SerializedDemon> {
         return {
             name: this.name,
             // element: this.element,
-            class: this.class.id
+            classId: this.class.id
         }
     }
 

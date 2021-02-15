@@ -26,11 +26,19 @@ function setScene(scene: Scene){
 }
 
 function loadPlayer(){
-    const player = new Player()
     const str = window.localStorage.getItem('player')
     if(str){
         const playerDef = window.JSON.parse(str)
-        player.deserialize(playerDef)
+        return new Player(playerDef)
     }
-    return player
+    return new Player({
+        name: 'Sample',
+        experience: 0,
+        demons: [
+            {
+                name: 'Bipbop',
+                classId: 'brawler'
+            }
+        ]
+    })
 }

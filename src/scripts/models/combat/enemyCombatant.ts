@@ -9,7 +9,7 @@ class EnemyCombatant extends Combatant {
 
     public enemy: Enemy
 
-    constructor(enemy: Enemy, options: EnemyOptions){
+    constructor(enemy: Enemy, options: EnemyOptions = {}){
         super()
         this.enemy = enemy
 
