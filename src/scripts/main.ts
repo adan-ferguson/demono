@@ -1,7 +1,6 @@
 import '../styles/main.sass'
 import { CombatScene } from './views/combat/combatScene'
 import { Scene } from './views/scene'
-import { test as testEncounter } from '../data/encounters.json'
 
 import { Encounter } from './models/encounters/encounter'
 import { Combat } from './models/combat/combat'
@@ -14,7 +13,7 @@ mainEl.innerHTML = `
 
 document.body.prepend(mainEl)
 
-const encounter = Encounter.createFromData(testEncounter)
+const encounter = Encounter.loadFromId('test')
 const player = loadPlayer()
 
 const testCombat = new Combat(encounter, player)

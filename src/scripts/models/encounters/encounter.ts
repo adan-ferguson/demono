@@ -1,5 +1,6 @@
 import { EnemyCombatant, EnemyOptions } from '../combat/enemyCombatant'
 import { Enemy } from '../enemies/enemy'
+import * as EncounterDefinitions from './definitionLoader'
 
 interface EncounterDefinition {
     enemies: {
@@ -10,13 +11,20 @@ interface EncounterDefinition {
 
 class Encounter {
 
-    public enemies: EnemyCombatant[]
+    static loadFromId(id: string): Encounter {
+        const def = EncounterDefinitions[id as keyof typeof EncounterDefinitions]
+        return new Encounter(def)
+    }
 
-    constructor(def: EncounterDefinition){
-        this.enemies = def.enemies.map(enemyData => {
-            const enemyDefinition = Enemy.loadDefinitionFromID(enemyData.id)
-            const enemy = new Enemy(enemyDefinition)
-            return new EnemyCombatant(enemy, enemyData.options)
+    private encounterDefinition: EncounterDefinition
+
+    constructor(encounterDefinition: EncounterDefinition){
+        this.encounterDefinition = encounterDefinition
+    }
+
+    createEnemyCombatants(): EnemyCombatant[] {
+        return this.encounterDefinition.enemies.map(enemyData => {
+            return new EnemyCombatant(Enemy.loadFromId(enemyData.id), enemyData.options)
         })
     }
 }

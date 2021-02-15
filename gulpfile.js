@@ -5,7 +5,8 @@ const { watch } = require('gulp')
 
 const MODELS_PATH = 'src/scripts/models'
 const DEFINITIONS_FOLDERS = [
-    'demons',
+    'demons/classes',
+    'demons/elements',
     'encounters',
     'enemies'
 ]

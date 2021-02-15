@@ -1,4 +1,5 @@
 import { Serializable } from '../serializable'
+import { DemonClass } from './classes/class'
 
 interface DemonStats {
     strength: number,
@@ -7,27 +8,29 @@ interface DemonStats {
     speed: number
 }
 
-interface DemonDefinition {
+interface SerializedDemon {
     name: string,
     class: string,
-    element: string
+    // element: string
 }
 
-class Demon extends Serializable<DemonDefinition> {
+class Demon extends Serializable<SerializedDemon> {
 
     name: string
-    element: string
+    // element: DemonElement
+    class: DemonClass
 
-    deserialize(definition: DemonDefinition): void {
-        this.name = definition.name
-        this.element = definition.element
+    deserialize(serialized: SerializedDemon): void {
+        this.name = serialized.name
+        this.class = DemonClass.loadFromId(serialized.class)
+        // this.element = serialized.element
     }
 
-    serialize(): DemonDefinition {
+    serialize(): SerializedDemon {
         return {
             name: this.name,
-            element: this.element,
-            class: 'huh?'
+            // element: this.element,
+            class: this.class.id
         }
     }
 
@@ -41,4 +44,4 @@ class Demon extends Serializable<DemonDefinition> {
     }
 }
 
-export { DemonDefinition, Demon, DemonStats }
+export { Demon, DemonStats, SerializedDemon }

@@ -1,5 +1,5 @@
-import * as enemies from '../../../data/enemies.json'
 import { EnemyAbility, EnemyAbilityDefinition } from './abilities/enemyAbility'
+import * as EnemyDefinitions from './definitionLoader'
 
 interface EnemyDefinition {
     name: string,
@@ -11,8 +11,9 @@ interface EnemyDefinition {
 
 class Enemy {
 
-    static loadDefinitionFromID(id: string): EnemyDefinition {
-        return enemies[id as keyof typeof enemies]
+    static loadFromId(id: string): Enemy {
+        const def = EnemyDefinitions[id as keyof typeof EnemyDefinitions]
+        return new Enemy(def)
     }
 
     name: string

@@ -1,14 +1,13 @@
-import { Demon, DemonDefinition } from './demons/demon'
+import { Demon, SerializedDemon } from './demons/demon'
 import { Serializable } from './serializable'
-import { PlayerCombatant } from './combat/playerCombatant'
 
-interface PlayerDefinition {
+interface SerializedPlayer {
     name: string,
     experience: number,
-    demons: DemonDefinition[]
+    demons: SerializedDemon[]
 }
 
-class Player extends Serializable<PlayerDefinition> {
+class Player extends Serializable<SerializedPlayer> {
 
     experience = 0
     demons: Demon[] = []
@@ -18,7 +17,7 @@ class Player extends Serializable<PlayerDefinition> {
         return 100
     }
 
-    serialize(): PlayerDefinition {
+    serialize(): SerializedPlayer {
         return {
             name: this.name,
             experience: this.experience,
@@ -26,10 +25,10 @@ class Player extends Serializable<PlayerDefinition> {
         }
     }
 
-    deserialize(definition: PlayerDefinition): void {
-        this.name = definition.name
-        this.experience = definition.experience
-        this.demons = definition.demons.map(demonDef => new Demon(demonDef))
+    deserialize(serialized: SerializedPlayer): void {
+        this.name = serialized.name
+        this.experience = serialized.experience
+        this.demons = serialized.demons.map(demonDef => new Demon(demonDef))
     }
 }
 

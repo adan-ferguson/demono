@@ -16,7 +16,7 @@ class Combat {
     onUpdate = new LiteEvent<CombatUpdate>()
 
     constructor(encounter: Encounter, player: Player){
-        this.enemyCombatants = encounter.enemies.map((enemy: Enemy) => new EnemyCombatant(enemy))
+        this.enemyCombatants = encounter.createEnemyCombatants()
         this.playerCombatant = new PlayerCombatant(player)
     }
 
