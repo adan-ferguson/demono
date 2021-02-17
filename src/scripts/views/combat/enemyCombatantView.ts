@@ -1,5 +1,5 @@
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
-import { ModelElement } from '../modelElement'
+import { ModelView } from '../modelView'
 
 const ENEMY_HTML = `
 <div>
@@ -10,7 +10,7 @@ const ENEMY_HTML = `
 </div>
 `
 
-class EnemyCombatantElement extends ModelElement<EnemyCombatant> {
+class EnemyCombatantView extends ModelView<EnemyCombatant> {
 
     constructor(enemyCombatant: EnemyCombatant){
         super(enemyCombatant, 'enemy-combatant')
@@ -21,4 +21,4 @@ class EnemyCombatantElement extends ModelElement<EnemyCombatant> {
     }
 }
 
-export { EnemyCombatantElement }
+export { EnemyCombatantView }

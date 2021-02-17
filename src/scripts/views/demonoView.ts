@@ -1,4 +1,4 @@
-abstract class DemonoElement {
+abstract class DemonoView {
 
     public element: Element
 
@@ -8,4 +8,4 @@ abstract class DemonoElement {
     }
 }
 
-export { DemonoElement }
+export { DemonoView }

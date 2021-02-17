@@ -1,13 +1,13 @@
-abstract class Serializable<SerializedObject> {
+abstract class Serializable<SerializedType> {
 
-    constructor(typeDefinition ?:SerializedObject){
+    constructor(typeDefinition ?:SerializedType){
         if(typeDefinition){
             this.deserialize(typeDefinition)
         }
     }
 
-    abstract serialize(): SerializedObject
-    abstract deserialize(definition: SerializedObject): void
+    abstract serialize(): SerializedType
+    abstract deserialize(definition: SerializedType): void
 }
 
 export { Serializable }

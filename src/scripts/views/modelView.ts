@@ -1,18 +1,18 @@
-import { DemonoElement } from './demonoElement'
+import { DemonoView } from './demonoView'
 
 interface RegistryObj {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: ModelElement<any>
+    [key: string]: ModelView<any>
 }
 
 const modelRegistry: RegistryObj = {}
 
 let nextId = 1
 
-abstract class ModelElement<T> extends DemonoElement {
+abstract class ModelView<T> extends DemonoView {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public static getFromRegistry(el: Element): ModelElement<any> {
+    public static getFromRegistry(el: Element): ModelView<any> {
         const registryId = el.getAttribute('model-id')
         const modelElement = modelRegistry[registryId]
         if(!modelElement){
@@ -47,9 +47,9 @@ abstract class ModelElement<T> extends DemonoElement {
 
         const nestedModelEls = this.element.querySelectorAll('demono.model')
         nestedModelEls.forEach(modelEl => {
-            ModelElement.getFromRegistry(modelEl).update()
+            ModelView.getFromRegistry(modelEl).update()
         })
     }
 }
 
-export { ModelElement }
+export { ModelView }

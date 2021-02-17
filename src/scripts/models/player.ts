@@ -9,9 +9,9 @@ interface SerializedPlayer {
 
 class Player extends Serializable<SerializedPlayer> {
 
-    experience = 0
-    demons: Demon[] = []
-    name = 'Player'
+    experience: number
+    demons: Demon[]
+    name: string
 
     get startingHealth(): number {
         return 100

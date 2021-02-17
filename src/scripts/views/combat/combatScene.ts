@@ -1,9 +1,9 @@
 import { Scene } from '../scene'
 import { Combat } from '../../models/combat/combat'
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
-import { EnemyCombatantElement } from './enemyCombatantElement'
-import { PlayerCombatantElement } from './playerCombatantElement'
-import { ModelElement } from '../modelElement'
+import { EnemyCombatantView } from './enemyCombatantView'
+import { PlayerCombatantView } from './playerCombatantView'
+import { ModelView } from '../modelView'
 
 const COMBAT_HTML = `
 <div class="top">
@@ -34,17 +34,17 @@ class CombatScene extends Scene {
 
         const enemiesEl = this.element.querySelector('.enemies')
         this.combat.enemyCombatants.forEach((enemyCombatant: EnemyCombatant) => {
-            enemiesEl.append(new EnemyCombatantElement(enemyCombatant).element)
+            enemiesEl.append(new EnemyCombatantView(enemyCombatant).element)
         })
 
         const playerEl = this.element.querySelector('.player')
-        playerEl.append(new PlayerCombatantElement(this.combat.playerCombatant).element)
+        playerEl.append(new PlayerCombatantView(this.combat.playerCombatant).element)
     }
 
     private update(): void {
         const modelEls = this.element.querySelectorAll('demono.model')
         modelEls.forEach(modelEl => {
-            ModelElement.getFromRegistry(modelEl).update()
+            ModelView.getFromRegistry(modelEl).update()
         })
     }
 }

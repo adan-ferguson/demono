@@ -1,6 +1,6 @@
-import { DemonoElement } from './demonoElement'
+import { DemonoView } from './demonoView'
 
-abstract class Scene extends DemonoElement {
+abstract class Scene extends DemonoView {
 
     constructor(className: string) {
         super('scene ' + className)

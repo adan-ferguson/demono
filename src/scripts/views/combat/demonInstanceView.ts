@@ -1,5 +1,5 @@
 import { DemonInstance } from '../../models/combat/demonInstance'
-import { ModelElement } from '../modelElement'
+import { ModelView } from '../modelView'
 
 const DEMON_HTML = `
 <div>
@@ -7,7 +7,7 @@ const DEMON_HTML = `
 </div>
 `
 
-class DemonInstanceElement extends ModelElement<DemonInstance> {
+class DemonInstanceView extends ModelView<DemonInstance> {
 
     constructor(demonInstance: DemonInstance){
         super(demonInstance, 'demon-instance')
@@ -18,4 +18,4 @@ class DemonInstanceElement extends ModelElement<DemonInstance> {
     }
 }
 
-export { DemonInstanceElement }
+export { DemonInstanceView }

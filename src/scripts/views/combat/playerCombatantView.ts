@@ -1,6 +1,6 @@
 import { PlayerCombatant } from '../../models/combat/playerCombatant'
-import { ModelElement } from '../modelElement'
-import { DemonInstanceElement } from './demonInstanceElement'
+import { ModelView } from '../modelView'
+import { DemonInstanceView } from './demonInstanceView'
 
 const PLAYER_HTML = `
 <div>
@@ -15,7 +15,7 @@ const PLAYER_HTML = `
 <div class='demons'></div>
 `
 
-class PlayerCombatantElement extends ModelElement<PlayerCombatant> {
+class PlayerCombatantView extends ModelView<PlayerCombatant> {
 
     constructor(playerCombatant: PlayerCombatant){
         super(playerCombatant, 'player-combatant')
@@ -23,11 +23,11 @@ class PlayerCombatantElement extends ModelElement<PlayerCombatant> {
 
     protected makeContents(): void {
         this.element.innerHTML = PLAYER_HTML
-        const demons = this.element.querySelector('demons')
+        const demonsEl = this.element.querySelector('.demons')
         this.model.demonInstances.forEach(demonInstance => {
-            demons.append(new DemonInstanceElement(demonInstance).element)
+            demonsEl.append(new DemonInstanceView(demonInstance).element)
         })
     }
 }
 
-export { PlayerCombatantElement }
+export { PlayerCombatantView }
