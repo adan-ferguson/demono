@@ -50,6 +50,17 @@ abstract class ModelView<T> extends DemonoView {
         }
         return null
     }
+
+    update(): void {
+        this.element.querySelectorAll('[data-key]').forEach(el => {
+            const model = el.closest('demono.model')
+            if(model !== this.element){
+                return
+            }
+            el.textContent = this.getData(el.getAttribute('data-key'))
+        })
+        super.update()
+    }
 }
 
 export { ModelView }
