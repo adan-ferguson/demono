@@ -4,10 +4,10 @@ import { DemonInstanceView } from './demonInstanceView'
 
 const PLAYER_HTML = `
 <div>
-    Health: <span data-key="currentHealth"></span> / <span data-key="maxHealth"></span>
+    Health: <span data-key="health"></span> / <span data-key="maxHealth"></span>
 </div>
 <div>
-    PDef: <span data-key='physicalDefense'></span>
+    PDef: <span data-key='physDefense'></span>
 </div>
 <div>
     MDef: <span data-key='magicDefense'></span>

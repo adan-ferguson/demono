@@ -36,19 +36,19 @@ abstract class ModelView<T> extends DemonoView {
 
     protected abstract makeContents(): void
 
-    public update(): void {
-        const bindedEls = this.element.querySelectorAll(':not(.model) [data-key], [data-key]')
-        bindedEls.forEach(el => {
-            const key = el.getAttribute('data-key')
-            if (key in this.model) {
-                el.textContent = this.model[key as keyof T].toString()
-            }
-        })
+    public getData(key: string): string {
+        const result = this.getDataFromObject<T>(this.model, key)
+        if(result === null){
+            console.error(`Invalid data-key value for ${this.model.constructor.name}: ${key}`)
+        }
+        return result
+    }
 
-        const nestedModelEls = this.element.querySelectorAll('demono.model')
-        nestedModelEls.forEach(modelEl => {
-            ModelView.getFromRegistry(modelEl).update()
-        })
+    protected getDataFromObject<Type>(obj: Type, key: string): string | null {
+        if(key in obj){
+            return obj[key as keyof typeof obj].toString()
+        }
+        return null
     }
 }
 

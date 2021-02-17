@@ -26,26 +26,30 @@ class CombatScene extends Scene {
 
     begin(): void {
         this.combat.init()
-        this.update()
+        this.fullUpdate()
     }
 
     private populate(): void {
+        this.element.append(new CombatView(this.combat).element)
+    }
+}
+
+class CombatView extends ModelView<Combat> {
+
+    constructor(combat: Combat){
+        super(combat, 'combat-view')
+    }
+
+    protected makeContents(): void {
         this.element.innerHTML = COMBAT_HTML
 
         const enemiesEl = this.element.querySelector('.enemies')
-        this.combat.enemyCombatants.forEach((enemyCombatant: EnemyCombatant) => {
+        this.model.enemyCombatants.forEach((enemyCombatant: EnemyCombatant) => {
             enemiesEl.append(new EnemyCombatantView(enemyCombatant).element)
         })
 
         const playerEl = this.element.querySelector('.player')
-        playerEl.append(new PlayerCombatantView(this.combat.playerCombatant).element)
-    }
-
-    private update(): void {
-        const modelEls = this.element.querySelectorAll('demono.model')
-        modelEls.forEach(modelEl => {
-            ModelView.getFromRegistry(modelEl).update()
-        })
+        playerEl.append(new PlayerCombatantView(this.model.playerCombatant).element)
     }
 }
 
