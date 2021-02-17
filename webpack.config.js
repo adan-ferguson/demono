@@ -32,6 +32,8 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
+        hot: false,
+        inline: false
     },
     plugins: [
         new HtmlWebpackPlugin({

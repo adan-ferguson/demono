@@ -1,3 +1,4 @@
+import '../../../styles/combat.sass'
 import { Scene } from '../scene'
 import { Combat } from '../../models/combat/combat'
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
@@ -8,6 +9,8 @@ import { ModelView } from '../modelView'
 const COMBAT_HTML = `
 <div class="top">
     <div class="enemies"></div>
+</div>
+<div class="middle">
 </div>
 <div class="bottom">
     <div class="player"></div>
