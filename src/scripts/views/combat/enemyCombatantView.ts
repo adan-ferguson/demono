@@ -1,5 +1,5 @@
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
-import { ModelView } from '../modelView'
+import { ModelView } from '../demonoView'
 
 const ENEMY_HTML = `
 <div>

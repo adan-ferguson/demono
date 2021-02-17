@@ -1,5 +1,5 @@
 import { PlayerCombatant } from '../../models/combat/playerCombatant'
-import { ModelView } from '../modelView'
+import { ModelView } from '../demonoView'
 import { DemonInstanceView } from './demonInstanceView'
 
 const PLAYER_HTML = `

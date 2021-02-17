@@ -1,5 +1,4 @@
 import { DemonoView } from './demonoView'
-import { ModelView } from './modelView'
 
 abstract class Scene extends DemonoView {
 

@@ -1,5 +1,5 @@
 import { DemonInstance } from '../../models/combat/demonInstance'
-import { ModelView } from '../modelView'
+import { ModelView } from '../demonoView'
 
 const DEMON_HTML = `
 <div class="demon-bar">
