@@ -1,4 +1,4 @@
-import { EnemyCombatant } from '../../models/combat/enemyCombatant'
+import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 import { ModelView } from '../demonoView'
 import { HealthbarView } from './healthbarView'
 

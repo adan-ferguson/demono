@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     mode: 'development',
-    entry: './src/scripts/main.ts',
+    entry: './src/www/main.ts',
     module: {
         rules: [
             {
@@ -19,11 +19,18 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
+        alias: {
+            game: path.join(__dirname, 'src/game')
+        }
     },
     output: {
         filename: 'bundle.js',

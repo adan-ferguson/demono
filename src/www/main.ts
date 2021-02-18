@@ -1,10 +1,10 @@
-import '../styles/main.sass'
+import './styles/main.sass'
 import { CombatScene } from './views/combat/combatScene'
 import { Scene } from './views/scene'
 
-import { Encounter } from './models/encounters/encounter'
-import { Combat } from './models/combat/combat'
-import { Player } from './models/player'
+import { Encounter } from '../game/models/encounters/encounter'
+import { Combat } from '../game/models/combat/combat'
+import { Player } from '../game/models/player'
 
 const mainEl:HTMLElement = document.createElement('main')
 mainEl.innerHTML = `

@@ -1,4 +1,4 @@
-import { PlayerCombatant } from '../../models/combat/playerCombatant'
+import { PlayerCombatant } from '../../../game/models/combat/playerCombatant'
 import { ModelView } from '../demonoView'
 import { DemonEnergyBarView } from './demonEnergyBarView'
 

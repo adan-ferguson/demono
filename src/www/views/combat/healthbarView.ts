@@ -1,4 +1,4 @@
-import { Combatant } from '../../models/combat/combatant'
+import { Combatant } from '../../../game/models/combat/combatant'
 import { ModelView } from '../demonoView'
 
 const HEALTHBAR_HTML = `
