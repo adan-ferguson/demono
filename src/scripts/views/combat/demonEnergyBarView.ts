@@ -11,10 +11,10 @@ const DEMON_HTML = `
 </div>
 `
 
-class DemonInstanceView extends ModelView<DemonInstance> {
+class DemonEnergyBarView extends ModelView<DemonInstance> {
 
     constructor(demonInstance: DemonInstance){
-        super(demonInstance, 'demon-instance')
+        super(demonInstance, 'demon-energy-bar')
     }
 
     protected makeContents(): void {
@@ -33,4 +33,4 @@ class DemonInstanceView extends ModelView<DemonInstance> {
     }
 }
 
-export { DemonInstanceView }
+export { DemonEnergyBarView }

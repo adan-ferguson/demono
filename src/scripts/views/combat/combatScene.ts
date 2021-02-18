@@ -1,18 +1,20 @@
-import '../../../styles/combat.sass'
+import '../../../styles/combat/combat.sass'
 import { Scene } from '../scene'
 import { Combat } from '../../models/combat/combat'
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
 import { EnemyCombatantView } from './enemyCombatantView'
 import { PlayerCombatantView } from './playerCombatantView'
+import { DemonEnergyBarView } from './demonEnergyBarView'
 
 const COMBAT_HTML = `
-<div class="top">
+<div class="left">
     <div class="enemies"></div>
-</div>
-<div class="middle">
-</div>
-<div class="bottom">
+    <div class="messaging"></div>
     <div class="player"></div>
+</div>
+<div class="right">
+    <div class="actions"></div>
+    <div class="demons"></div>
 </div>
 `
 
@@ -41,6 +43,11 @@ class CombatScene extends Scene {
 
         const playerEl = this.element.querySelector('.player')
         playerEl.append(new PlayerCombatantView(this.combat.playerCombatant).element)
+
+        const demonsEl = this.element.querySelector('.demons')
+        this.combat.playerCombatant.demonInstances.forEach(demonInstance => {
+            demonsEl.append(new DemonEnergyBarView(demonInstance).element)
+        })
     }
 }
 

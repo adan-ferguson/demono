@@ -1,12 +1,10 @@
 import { EnemyCombatant } from '../../models/combat/enemyCombatant'
 import { ModelView } from '../demonoView'
+import { HealthbarView } from './healthbarView'
 
 const ENEMY_HTML = `
-<div>
+<div class="enemy-card">
     <span data-key='name'></span>
-</div>
-<div>
-    <span data-key='health'></span> / <span data-key='maxHealth'></span>
 </div>
 `
 
@@ -18,6 +16,7 @@ class EnemyCombatantView extends ModelView<EnemyCombatant> {
 
     protected makeContents(): void {
         this.element.innerHTML = ENEMY_HTML
+        this.element.append(new HealthbarView(this.model).element)
     }
 }
 

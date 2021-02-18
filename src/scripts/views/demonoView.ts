@@ -34,6 +34,8 @@ abstract class DemonoView {
 
 abstract class ModelView<T> extends DemonoView {
 
+    registryId: string
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static getFromRegistry(el: Element): ModelView<any> {
         const registryId = el.getAttribute('model-id')
@@ -49,9 +51,9 @@ abstract class ModelView<T> extends DemonoView {
     constructor(model: T, className: string){
         super('model ' + className)
 
-        const registryId = 'd' + nextId++
-        modelRegistry[registryId] = this
-        this.element.setAttribute('model-id', registryId)
+        this.registryId = 'd' + nextId++
+        modelRegistry[this.registryId] = this
+        this.element.setAttribute('model-id', this.registryId)
 
         this.model = model
         this.makeContents()
