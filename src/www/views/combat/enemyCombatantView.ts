@@ -6,6 +6,16 @@ const ENEMY_HTML = `
 <div class="enemy-card">
     <span data-key='name'></span>
 </div>
+<div class="health-bar"></div>
+<div class="stats">
+</div>
+`
+
+const STAT_HTML = (iconName: string, value: number) => `
+<span class="stat">
+    <span class="stat-icon" icon-name="${iconName}"></span>
+    <span class="stat-value">${value}</span>
+</span>
 `
 
 class EnemyCombatantView extends ModelView<EnemyCombatant> {
@@ -17,13 +27,26 @@ class EnemyCombatantView extends ModelView<EnemyCombatant> {
     }
 
     protected makeContents(): void {
+        this.element.innerHTML = ENEMY_HTML
         this.healthbar = new Bar({
             showMax: false,
             maxValue: this.model.startingHealth,
-            initialValue: this.model.health
+            initialValue: this.model.startingHealth
         })
-        this.element.innerHTML = ENEMY_HTML
-        this.element.append(this.healthbar.element)
+        this.find('.health-bar').append(this.healthbar.element)
+    }
+
+    update(): void {
+        super.update()
+
+        let statsHTML = ''
+        if(this.model.physDef > 0){
+            statsHTML += STAT_HTML('pshield', this.model.physDef)
+        }
+        if(this.model.magicDef > 0){
+            statsHTML += STAT_HTML('mshield', this.model.magicDef)
+        }
+        this.find('.stats').innerHTML = statsHTML
     }
 }
 

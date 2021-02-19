@@ -47,7 +47,9 @@ class Bar extends DemonoView {
 
     update(): void {
         this.find('.value-text').textContent = this.value.toString()
-        this.find('.bar-value').style.width = `${this.value / this.maxValue}%`
+
+        const pct = Math.min(100, Math.max(0, 100 * this.value / this.maxValue))
+        this.find('.bar-value').style.width = `${pct}%`
     }
 }
 

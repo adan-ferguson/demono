@@ -26,12 +26,12 @@ class EnemyCombatant extends Combatant {
         return this.enemy.name
     }
 
-    get magicDefense(): number {
-        return this.enemy.magicDefense
+    get magicDef(): number {
+        return this.enemy.magicDef
     }
 
-    get physDefense(): number {
-        return this.enemy.physDefense
+    get physDef(): number {
+        return this.enemy.physDef
     }
 }
 

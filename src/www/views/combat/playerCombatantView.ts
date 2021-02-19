@@ -6,10 +6,10 @@ const PLAYER_HTML = `
     Health: <span data-key="health"></span> / <span data-key="maxHealth"></span>
 </div>
 <div>
-    PDef: <span data-key='physDefense'></span>
+    PDef: <span data-key='physDef'></span>
 </div>
 <div>
-    MDef: <span data-key='magicDefense'></span>
+    MDef: <span data-key='magicDef'></span>
 </div>
 `
 

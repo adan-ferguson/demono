@@ -3,6 +3,7 @@ import { EnemyDefinition } from '../enemy'
 const bat: EnemyDefinition = {
     health: 5,
     name: 'Bat',
+    physDef: 1,
     abilities: [
         {
             name: 'Bite',

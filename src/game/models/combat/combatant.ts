@@ -15,8 +15,8 @@ abstract class Combatant {
 
     abstract get startingHealth(): number
     abstract get name(): string
-    abstract get physDefense(): number
-    abstract get magicDefense(): number
+    abstract get physDef(): number
+    abstract get magicDef(): number
 
     get health(): number {
         return this._health

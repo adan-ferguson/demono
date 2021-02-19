@@ -28,14 +28,14 @@ class PlayerCombatant extends Combatant {
         return this.player.startingHealth
     }
 
-    get magicDefense(): number {
+    get magicDef(): number {
         const def =
             this.currentDemonInstance.stats.armor * 2 +
             this.currentDemonInstance.stats.strength
         return Math.floor(def / 3)
     }
 
-    get physDefense(): number {
+    get physDef(): number {
         const def =
             this.currentDemonInstance.stats.armor * 2 +
             this.currentDemonInstance.stats.magic

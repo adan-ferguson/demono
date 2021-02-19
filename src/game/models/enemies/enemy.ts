@@ -4,8 +4,8 @@ import * as EnemyDefinitions from './definitionLoader'
 interface EnemyDefinition {
     name: string,
     health: number,
-    magicDefense?: number,
-    physDefense?: number,
+    magicDef?: number,
+    physDef?: number,
     abilities: EnemyAbilityDefinition[]
 }
 
@@ -18,15 +18,15 @@ class Enemy {
 
     name: string
     health: number
-    magicDefense: number
-    physDefense: number
+    magicDef: number
+    physDef: number
     abilities: EnemyAbility[]
 
     constructor(enemyDef: EnemyDefinition){
         this.name = enemyDef.name
         this.health = enemyDef.health
-        this.magicDefense = enemyDef.magicDefense || 0
-        this.physDefense = enemyDef.physDefense || 0
+        this.magicDef = enemyDef.magicDef || 0
+        this.physDef = enemyDef.physDef || 0
         this.abilities = enemyDef.abilities.map(abilityDef => new EnemyAbility(abilityDef))
     }
 
