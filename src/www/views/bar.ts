@@ -32,6 +32,7 @@ class Bar extends DemonoView {
         if(options.initialValue !== undefined){
             this.value = options.initialValue
         }
+        this.makeContents()
         this.update()
     }
 
@@ -46,7 +47,7 @@ class Bar extends DemonoView {
 
     update(): void {
         this.find('.value-text').textContent = this.value.toString()
-        this.find('.bar-style').style.width = `${this.value / this.maxValue}%`
+        this.find('.bar-value').style.width = `${this.value / this.maxValue}%`
     }
 }
 
