@@ -21,7 +21,11 @@ const testCombatScene = new CombatScene(testCombat)
 setScene(testCombatScene)
 
 function setScene(scene: Scene){
-    mainEl.querySelector('.scene').replaceWith(scene.element)
+    const sceneEl = mainEl.querySelector('.scene')
+    if(!sceneEl){
+        throw 'Error while trying to replace scenes.'
+    }
+    sceneEl.replaceWith(scene.element)
     scene.begin()
 }
 

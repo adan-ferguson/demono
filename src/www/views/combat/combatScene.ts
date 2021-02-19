@@ -36,15 +36,15 @@ class CombatScene extends Scene {
     private populate(): void {
         this.element.innerHTML = COMBAT_HTML
 
-        const enemiesEl = this.element.querySelector('.enemies')
+        const enemiesEl = this.find('.enemies')
         this.combat.enemyCombatants.forEach((enemyCombatant: EnemyCombatant) => {
             enemiesEl.append(new EnemyCombatantView(enemyCombatant).element)
         })
 
-        const playerEl = this.element.querySelector('.player')
+        const playerEl = this.find('.player')
         playerEl.append(new PlayerCombatantView(this.combat.playerCombatant).element)
 
-        const demonsEl = this.element.querySelector('.demons')
+        const demonsEl = this.find('.demons')
         this.combat.playerCombatant.demonInstances.forEach(demonInstance => {
             demonsEl.append(new DemonEnergyBarView(demonInstance).element)
         })

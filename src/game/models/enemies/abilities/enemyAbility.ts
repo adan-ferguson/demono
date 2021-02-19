@@ -16,7 +16,7 @@ class EnemyAbility {
     timeLeft: number
     time: number
     description: string
-    damage: DamageData
+    damage?: DamageData
 
     constructor(def: EnemyAbilityDefinition){
         this.name = def.name
