@@ -1,6 +1,5 @@
-import { PlayerCombatant } from '../../../game/models/combat/playerCombatant'
+import { PlayerCombatant } from 'game/models/combat/playerCombatant'
 import { ModelView } from '../demonoView'
-import { DemonEnergyBarView } from './demonEnergyBarView'
 
 const PLAYER_HTML = `
 <div>

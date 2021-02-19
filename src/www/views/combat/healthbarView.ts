@@ -1,14 +1,10 @@
-import { Combatant } from '../../../game/models/combat/combatant'
+import { Combatant } from 'game/models/combat/combatant'
 import { ModelView } from '../demonoView'
 
 const HEALTHBAR_HTML = `
 <div class="bar-value"></div>
 <div class="bar-damage"></div>
-<div class="flex-spacer">
-    <div class="phys-defense"></div>
-    <div class='value-text'></div>
-    <div class="magic-defense"></div>
-</div>
+<div class='value-text'>9</div>
 `
 class HealthbarView extends ModelView<Combatant> {
 

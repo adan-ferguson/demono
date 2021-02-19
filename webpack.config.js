@@ -29,7 +29,7 @@ module.exports = {
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
         alias: {
-            game: path.join(__dirname, 'src/game')
+            game: path.resolve(__dirname, './src/game')
         }
     },
     output: {

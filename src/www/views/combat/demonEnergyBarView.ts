@@ -1,4 +1,4 @@
-import { DemonInstance } from '../../../game/models/combat/demonInstance'
+import { DemonInstance } from 'game/models/combat/demonInstance'
 import { ModelView } from '../demonoView'
 
 const DEMON_HTML = `
