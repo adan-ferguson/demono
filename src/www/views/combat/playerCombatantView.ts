@@ -2,13 +2,13 @@ import { PlayerCombatant } from 'game/models/combat/playerCombatant'
 import { Bar } from '../bar'
 import { DemonoView } from '../demonoView'
 
-const PLAYER_HTML = `
+const PLAYER_HTML = (name: string) => `
 <div class="something">
 
 </div>
 <div class="middle">
     <div class="player-card">
-        <span data-key='name'></span>
+        ${name}
     </div>
     <div class="health-bar"></div>
     <div class="energy-bar"></div>
@@ -23,7 +23,7 @@ class PlayerCombatantView extends DemonoView {
 
     constructor(private playerCombatant: PlayerCombatant){
         super('player-combatant')
-        this.element.innerHTML = PLAYER_HTML
+        this.element.innerHTML = PLAYER_HTML(playerCombatant.name)
 
         this.healthbar = new Bar(
             () => playerCombatant.health,

@@ -3,6 +3,10 @@ import { EnemyDefinition } from '../enemy'
 const cat: EnemyDefinition = {
     health: 5,
     name: 'Cat',
+    armor: {
+        type: 'magic',
+        value: 1
+    },
     abilities: [
         {
             name: 'Bite',

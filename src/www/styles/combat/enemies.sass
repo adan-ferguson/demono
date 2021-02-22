@@ -15,10 +15,31 @@ demono.combat
 
       .enemy-card
         @include boxshadow
+        position: relative
         width: 16rem
-        height: 3rem
-        padding: 1rem
-        text-align: center
+        height: 6rem
+        display: flex
+        align-items: center
+        justify-content: center
+
+        .armor-icon
+          $size: 1.6em
+          position: absolute
+          right: $size/-2
+          bottom: $size/-4
+          height: $size
+          width: $size
+          display: inline-block
+          background-repeat: no-repeat
+          background-size: contain
+          &.none
+            display: none
+          &.phys
+            background-image: url('../../assets/pshield.svg')
+          &.magic
+            background-image: url('../../assets/mshield.svg')
+
+
 
       .health-bar
         position: relative
@@ -26,26 +47,12 @@ demono.combat
         height: 2.5rem
         margin-top: 1.3rem
 
-      .stats
-        width: 84%
-        display: flex
-        flex-direction: row
-
-        .stat
-          display: flex
-          flex-direction: row
-          align-items: center
-
-        .stat-icon
-          height: 1em
-          width: 1em
-          display: inline-block
-          margin-right: 0.1em
-          background-repeat: no-repeat
-          background-size: contain
-
-          &[icon-name='pshield']
-            background-image: url('../../assets/pshield.svg')
-
-          &[icon-name='mshield']
-            background-image: url('../../assets/mshield.svg')
+      //.stats
+      //  width: 84%
+      //  display: flex
+      //  flex-direction: row
+      //
+      //  .stat
+      //    display: flex
+      //    flex-direction: row
+      //    align-items: center

@@ -6,6 +6,8 @@ demono.combat
   width: 100%
   height: 100%
 
+  $playerHeight: 40%
+
   > .combat-zone
     flex-basis: 75%
 
@@ -14,18 +16,22 @@ demono.combat
     align-items: stretch
 
     .enemies
-      flex-basis: 32%
+      flex-basis: (100% - $playerHeight) / 2
 
     .player
-      flex-basis: 40%
+      flex-basis: $playerHeight
 
     .messaging
-      flex-basis: 28%
+      flex-basis: (100% - $playerHeight) / 2
 
   > .actions
     flex-basis: 25%
-    //border-left: 0.6rem solid #EEE
+    display: flex
+    flex-direction: column
+    align-items: stretch
 
-    //display: flex
-    //flex-direction: column
-    //align-items: stretch
+    .abilities
+      flex-basis: (100% - $playerHeight)
+
+    .demon-list
+      flex-basis: $playerHeight

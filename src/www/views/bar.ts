@@ -1,13 +1,15 @@
 import { DemonoView } from './demonoView'
 
-const HEALTHBAR_HTML = `
+const BAR_HTML = (label = '') => `
 <div class="bar-value"></div>
 <div class="bar-damage"></div>
-<div class='value-text'></div>
+${label ? `<div class="text label left">${label}</div>` : ''}
+<div class='text value${label ? ' right' : ''}'></div>
 `
 
 interface BarOptions {
-    showMax?: boolean
+    showMax?: boolean,
+    label?: string
 }
 
 /**
@@ -18,11 +20,15 @@ class Bar extends DemonoView {
     private currentValue
     private currentMaxValue
     showMax = false
+    label = ''
 
     constructor(private value: () => number, private maxValue: () => number, options: BarOptions = {}){
         super('bar')
         if(options.showMax !== undefined){
             this.showMax = options.showMax
+        }
+        if(options.label !== undefined){
+            this.label = options.label
         }
         this.currentValue = value()
         this.currentMaxValue = maxValue()
@@ -30,15 +36,15 @@ class Bar extends DemonoView {
     }
 
     protected makeContents(): void {
-        this.element.innerHTML = HEALTHBAR_HTML
+        this.element.innerHTML = BAR_HTML(this.label)
     }
 
     update(): void {
         const value = this.value()
-        const maxValue = this.value()
+        const maxValue = this.maxValue()
 
         const str = this.showMax ? value + '/' + maxValue : value.toString()
-        this.find('.value-text').textContent = str
+        this.find('.text.value').textContent = str
 
         const pct = Math.min(100, Math.max(0, 100 * value / maxValue))
         this.find('.bar-value').style.width = `${pct}%`

@@ -14,15 +14,22 @@ demono.bar
     width: 0
     transition: width 0.3s ease
 
-  .value-text
+  .text
     @include fullsize
-    text-align: center
 
     -webkit-text-stroke-color: #777
-    -webkit-text-stroke-width: 0.12rem
+    -webkit-text-stroke-width: 0.07em
     -webkit-text-fill-color: white
     font-weight: bold
     font-size: 1.3em
     display: flex
     align-items: center
     justify-content: center
+
+    &.left
+      justify-content: flex-start
+      left: 2rem
+
+    &.right
+      justify-content: flex-end
+      right: 2rem

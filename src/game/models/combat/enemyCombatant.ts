@@ -27,11 +27,11 @@ class EnemyCombatant extends Combatant {
     }
 
     get magicDef(): number {
-        return this.enemy.magicDef
+        return this.enemy.armor.type === 'magic' ? this.enemy.armor.value : 0
     }
 
     get physDef(): number {
-        return this.enemy.physDef
+        return this.enemy.armor.type === 'phys' ? this.enemy.armor.value : 0
     }
 }
 

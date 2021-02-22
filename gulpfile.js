@@ -3,7 +3,7 @@ const glob = require('glob')
 const path = require('path')
 const { watch } = require('gulp')
 
-const MODELS_PATH = 'src/www/models'
+const MODELS_PATH = './src/game/models'
 const DEFINITIONS_FOLDERS = [
     'demons/classes',
     'demons/affinities',

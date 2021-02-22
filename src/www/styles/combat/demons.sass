@@ -1,9 +1,15 @@
-demono.combat .demons
+demono.combat .demon-list
 
   display: flex
   flex-direction: column
   align-items: stretch
-  justify-content: center
 
-  demono.demon-instance
+  > *
     flex-basis: 20%
+    margin: 1rem
+
+  .demon-bar
+    position: relative
+
+    .bar
+      font-size: 1.2em

@@ -6,13 +6,13 @@ const test: EncounterDefinition = {
             id: 'bat'
         },
         {
-            id: 'bat',
+            id: 'cat',
             options: {
                 turnOffset: -1
             }
         },
         {
-            id: 'bat',
+            id: 'dat',
             options: {
                 turnOffset: -2
             }

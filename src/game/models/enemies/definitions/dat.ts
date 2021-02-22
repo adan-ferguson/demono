@@ -1,12 +1,8 @@
 import { EnemyDefinition } from '../enemy'
 
-const bat: EnemyDefinition = {
+const dat: EnemyDefinition = {
     health: 5,
-    name: 'Bat',
-    armor: {
-        type: 'phys',
-        value: 1
-    },
+    name: 'Dat',
     abilities: [
         {
             name: 'Bite',
@@ -20,4 +16,4 @@ const bat: EnemyDefinition = {
     ]
 }
 
-export { bat }
+export { dat }
