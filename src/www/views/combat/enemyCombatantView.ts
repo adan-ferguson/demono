@@ -28,17 +28,16 @@ class EnemyCombatantView extends ModelView<EnemyCombatant> {
 
     protected makeContents(): void {
         this.element.innerHTML = ENEMY_HTML
-        this.healthbar = new Bar({
-            showMax: false,
-            maxValue: this.model.startingHealth,
-            initialValue: this.model.startingHealth
-        })
+        this.healthbar = new Bar(() => this.model.health, () => this.model.startingHealth)
         this.find('.health-bar').append(this.healthbar.element)
     }
 
     update(): void {
+        this.updateStatsList()
         super.update()
+    }
 
+    private updateStatsList(): void {
         let statsHTML = ''
         if(this.model.physDef > 0){
             statsHTML += STAT_HTML('pshield', this.model.physDef)

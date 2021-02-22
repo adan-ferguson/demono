@@ -4,17 +4,16 @@ import { Combat } from 'game/models/combat/combat'
 import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 import { EnemyCombatantView } from './enemyCombatantView'
 import { PlayerCombatantView } from './playerCombatantView'
-import { DemonEnergyBarView } from './demonEnergyBarView'
 
 const COMBAT_HTML = `
-<div class="left">
-    <div class="enemies"></div>
+<div class="combat-zone">
+    <div class="enemies">
+        <span data-key='name'></span>
+    </div>
     <div class="messaging"></div>
     <div class="player"></div>
 </div>
-<div class="right">
-    <div class="actions"></div>
-    <div class="demons"></div>
+<div class="actions">
 </div>
 `
 
@@ -43,11 +42,6 @@ class CombatScene extends Scene {
 
         const playerEl = this.find('.player')
         playerEl.append(new PlayerCombatantView(this.combat.playerCombatant).element)
-
-        const demonsEl = this.find('.demons')
-        this.combat.playerCombatant.demonInstances.forEach(demonInstance => {
-            demonsEl.append(new DemonEnergyBarView(demonInstance).element)
-        })
     }
 }
 

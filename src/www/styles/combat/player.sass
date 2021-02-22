@@ -1,0 +1,41 @@
+demono.combat
+  .player
+    demono.player-combatant
+      display: flex
+      flex-direction: row
+      justify-content: space-around
+      align-items: center
+      width: 100%
+      height: 100%
+
+      .stats
+        flex-basis: 25%
+
+      .middle
+        flex-basis: 50%
+        display: flex
+        flex-direction: column
+
+        > *
+          margin-top: 1rem
+
+        .player-card
+          @include boxshadow
+          font-size: 4rem
+          padding: 1rem 2rem
+          margin-bottom: 1.5rem
+
+        .health-bar
+          position: relative
+          font-size: 3rem
+          width: 90%
+          height: 1em
+
+        .energy-bar
+          position: relative
+          font-size: 2.5rem
+          width: 90%
+          height: 1em
+
+      .demons
+        flex-basis: 25%
