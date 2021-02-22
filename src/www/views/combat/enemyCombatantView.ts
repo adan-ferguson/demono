@@ -1,6 +1,6 @@
 import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 import { Bar } from '../bar'
-import { ModelView } from '../modelView'
+import { DemonoView } from '../demonoView'
 
 const ENEMY_HTML = `
 <div class="enemy-card">
@@ -18,17 +18,14 @@ const STAT_HTML = (iconName: string, value: number) => `
 </span>
 `
 
-class EnemyCombatantView extends ModelView<EnemyCombatant> {
+class EnemyCombatantView extends DemonoView {
 
     healthbar: Bar
 
-    constructor(enemyCombatant: EnemyCombatant){
-        super(enemyCombatant, 'enemy-combatant')
-    }
-
-    protected makeContents(): void {
+    constructor(private enemyCombatant: EnemyCombatant){
+        super('enemy-combatant')
         this.element.innerHTML = ENEMY_HTML
-        this.healthbar = new Bar(() => this.model.health, () => this.model.startingHealth)
+        this.healthbar = new Bar(() => enemyCombatant.health, () => enemyCombatant.startingHealth)
         this.find('.health-bar').append(this.healthbar.element)
     }
 
@@ -39,11 +36,11 @@ class EnemyCombatantView extends ModelView<EnemyCombatant> {
 
     private updateStatsList(): void {
         let statsHTML = ''
-        if(this.model.physDef > 0){
-            statsHTML += STAT_HTML('pshield', this.model.physDef)
+        if(this.enemyCombatant.physDef > 0){
+            statsHTML += STAT_HTML('pshield', this.enemyCombatant.physDef)
         }
-        if(this.model.magicDef > 0){
-            statsHTML += STAT_HTML('mshield', this.model.magicDef)
+        if(this.enemyCombatant.magicDef > 0){
+            statsHTML += STAT_HTML('mshield', this.enemyCombatant.magicDef)
         }
         this.find('.stats').innerHTML = statsHTML
     }

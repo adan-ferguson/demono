@@ -1,10 +1,9 @@
 import { PlayerCombatant } from 'game/models/combat/playerCombatant'
-import { ModelView } from '../modelView'
-import { DemonEnergyBarView } from './demonEnergyBarView'
 import { Bar } from '../bar'
+import { DemonoView } from '../demonoView'
 
 const PLAYER_HTML = `
-<div class="stats">
+<div class="something">
 
 </div>
 <div class="middle">
@@ -14,40 +13,32 @@ const PLAYER_HTML = `
     <div class="health-bar"></div>
     <div class="energy-bar"></div>
 </div>
-<div class="demons">
-
+<div class="demon-stats">
 </div>
 `
 
-class PlayerCombatantView extends ModelView<PlayerCombatant> {
+class PlayerCombatantView extends DemonoView {
     healthbar: Bar
     energybar: Bar
 
-    constructor(playerCombatant: PlayerCombatant){
-        super(playerCombatant, 'player-combatant')
-    }
-
-    protected makeContents(): void {
+    constructor(private playerCombatant: PlayerCombatant){
+        super('player-combatant')
         this.element.innerHTML = PLAYER_HTML
 
-        const demonsEl = this.find('.demons')
-        this.model.demonInstances.forEach(demonInstance => {
-            demonsEl.append(new DemonEnergyBarView(demonInstance).element)
-        })
-
         this.healthbar = new Bar(
-            () => this.model.health,
-            () => this.model.maxHealth, {
+            () => playerCombatant.health,
+            () => playerCombatant.maxHealth, {
                 showMax: true
             })
         this.find('.health-bar').append(this.healthbar.element)
 
         this.energybar = new Bar(
-            () => this.model.currentDemonInstance.energy,
-            () => this.model.currentDemonInstance.maxEnergy,
+            () => playerCombatant.currentDemonInstance.energy,
+            () => playerCombatant.currentDemonInstance.maxEnergy,
             {
                 showMax: true
             })
+
         this.find('.energy-bar').append(this.energybar.element)
     }
 }

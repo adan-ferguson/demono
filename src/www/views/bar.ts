@@ -19,7 +19,7 @@ class Bar extends DemonoView {
     private currentMaxValue
     showMax = false
 
-    constructor(readonly value: () => number, readonly maxValue: () => number, options: BarOptions = {}){
+    constructor(private value: () => number, private maxValue: () => number, options: BarOptions = {}){
         super('bar')
         if(options.showMax !== undefined){
             this.showMax = options.showMax
