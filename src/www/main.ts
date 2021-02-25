@@ -40,8 +40,37 @@ function loadPlayer(){
         experience: 0,
         demons: [
             {
-                name: 'Bipbop',
-                classId: 'brawler'
+                name: 'Aaaaa',
+                classId: 'brawler',
+                affinityId: 'fire',
+                equipment: [{
+                    name: 'Sword',
+                    abilities: ['fireball']
+                }]
+            },
+            {
+                name: 'Bbbbb',
+                classId: 'brawler',
+                affinityId: 'fire',
+                equipment: []
+            },
+            {
+                name: 'Ccccccc',
+                classId: 'brawler',
+                affinityId: 'fire',
+                equipment: []
+            },
+            {
+                name: 'Ddddd',
+                classId: 'brawler',
+                affinityId: 'fire',
+                equipment: []
+            },
+            {
+                name: 'Eeeeeeeee',
+                classId: 'brawler',
+                affinityId: 'fire',
+                equipment: []
             }
         ]
     })

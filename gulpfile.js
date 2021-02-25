@@ -7,6 +7,7 @@ const MODELS_PATH = './src/game/models'
 const DEFINITIONS_FOLDERS = [
     'demons/classes',
     'demons/affinities',
+    'demons/abilities',
     'encounters',
     'enemies'
 ]

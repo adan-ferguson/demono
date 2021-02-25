@@ -2,9 +2,10 @@ import '../../styles/combat/combat.sass'
 import { Scene } from '../scene'
 import { Combat } from 'game/models/combat/combat'
 import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
-import { EnemyCombatantView } from './enemyCombatantView'
-import { PlayerCombatantView } from './playerCombatantView'
-import { DemonBar } from './demonBar'
+import { EnemyCombatantWidget } from './enemyCombatantWidget'
+import { PlayerCombatantWidget } from './playerCombatantWidget'
+import { DemonListWidget } from './demonListWidget'
+import { AbilitiesWidget } from './abilitiesWidget'
 
 const COMBAT_HTML = `
 <div class="combat-zone">
@@ -21,6 +22,8 @@ const COMBAT_HTML = `
 class CombatScene extends Scene {
 
     private combat: Combat
+    abilities: AbilitiesWidget
+    demonList: DemonListWidget
 
     constructor(combat: Combat){
         super('combat')
@@ -38,21 +41,22 @@ class CombatScene extends Scene {
 
         const enemiesEl = this.find('.enemies')
         this.combat.enemyCombatants.forEach((enemyCombatant: EnemyCombatant) => {
-            enemiesEl.append(new EnemyCombatantView(enemyCombatant).element)
+            enemiesEl.append(new EnemyCombatantWidget(enemyCombatant).element)
         })
 
         this.find('.player')
-            .append(new PlayerCombatantView(this.combat.playerCombatant).element)
+            .append(new PlayerCombatantWidget(this.combat.playerCombatant).element)
 
-        const demonsEl = this.find('.demon-list')
-        this.combat.playerCombatant.demonInstances.forEach(demonInstance => {
-            demonsEl.append(new DemonBar(demonInstance).element)
-        })
+        this.demonList = new DemonListWidget(this.combat.playerCombatant)
+        this.find('.demon-list').replaceWith(this.demonList.element)
+
+        this.abilities = new AbilitiesWidget()
+        this.abilities.setDemon(this.combat.playerCombatant.currentDemonInstance)
+        this.find('.abilities').replaceWith(this.abilities.element)
     }
 
     update(): void {
         super.update()
-
     }
 }
 

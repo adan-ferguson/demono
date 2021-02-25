@@ -1,7 +1,7 @@
 import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 import { EnemyArmorType } from 'game/models/enemies/enemy'
-import { Bar } from '../bar'
-import { DemonoView } from '../demonoView'
+import { BarWidget } from '../barWidget'
+import { DemonoWidget } from '../demonoWidget'
 
 const ENEMY_HTML = (name: string, armorType: EnemyArmorType = 'none') => `
 <div class="enemy-card">
@@ -19,9 +19,9 @@ const BUFF_HTML = (iconName: string, value: number) => `
 </span>
 `
 
-class EnemyCombatantView extends DemonoView {
+class EnemyCombatantWidget extends DemonoWidget {
 
-    healthbar: Bar
+    healthbar: BarWidget
 
     constructor(private enemyCombatant: EnemyCombatant){
         super('enemy-combatant')
@@ -34,7 +34,7 @@ class EnemyCombatantView extends DemonoView {
         }
 
         this.element.innerHTML = ENEMY_HTML(enemyCombatant.name, armorType)
-        this.healthbar = new Bar(() => enemyCombatant.health, () => enemyCombatant.startingHealth)
+        this.healthbar = new BarWidget(() => enemyCombatant.health, () => enemyCombatant.startingHealth)
         this.find('.health-bar').append(this.healthbar.element)
     }
 
@@ -55,4 +55,4 @@ class EnemyCombatantView extends DemonoView {
     }
 }
 
-export { EnemyCombatantView }
+export { EnemyCombatantWidget }

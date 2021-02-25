@@ -1,5 +1,9 @@
 import { Serializable } from '../serializable'
+import { DemonAbility } from './abilities/ability'
 import { DemonClass, DemonClassId } from './classes/class'
+import { Loadout } from './loadout';
+import { SerializedEquipment } from './equipment'
+import {DemonAffinity, DemonAffinityId } from './affinities/affinity'
 
 interface DemonStats {
     strength: number,
@@ -11,26 +15,30 @@ interface DemonStats {
 interface SerializedDemon {
     name: string,
     classId: DemonClassId,
-    // elementId: string
+    affinityId: DemonAffinityId,
+    equipment: SerializedEquipment[]
 }
 
 class Demon extends Serializable<SerializedDemon> {
 
     name: string
-    // element: DemonElement
     class: DemonClass
+    affinity: DemonAffinity
+    loadout: Loadout
 
     deserialize(serialized: SerializedDemon): void {
         this.name = serialized.name
         this.class = DemonClass.loadFromId(serialized.classId)
-        // this.element = serialized.element
+        this.affinity = DemonAffinity.loadFromId(serialized.affinityId)
+        this.loadout = Loadout.loadFromSerializedEquipment(serialized.equipment)
     }
 
     serialize(): SerializedDemon {
         return {
             name: this.name,
-            // element: this.element,
-            classId: this.class.id
+            classId: this.class.id,
+            affinityId: this.affinity.id,
+            equipment: this.loadout.equipmentList.map(equipment => equipment.serialize())
         }
     }
 

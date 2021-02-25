@@ -1,10 +1,12 @@
 import { Demon, DemonStats } from '../demons/demon'
+import { DemonAbilityInstance } from './demonAbilityInstance'
 
 class DemonInstance {
 
     demon: Demon
     stats: DemonStats
     maxEnergy: number
+    abilityInstances: DemonAbilityInstance[]
 
     private _energy: number
 
@@ -13,6 +15,9 @@ class DemonInstance {
         this.stats = demon.getStats()
         this.maxEnergy = 100
         this._energy = 50
+        this.abilityInstances = demon.loadout.getAbilities().map(ability => {
+            return new DemonAbilityInstance(ability, this)
+        })
     }
 
     get energy(): number {

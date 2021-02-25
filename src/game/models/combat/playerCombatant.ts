@@ -1,4 +1,4 @@
-import { Demon } from '../demons/demon'
+import { Demon, DemonStats } from '../demons/demon'
 import { Player } from '../player'
 import { DemonInstance } from './demonInstance'
 import { Combatant } from './combatant'
@@ -7,17 +7,17 @@ class PlayerCombatant extends Combatant {
 
     player: Player
     demonInstances: DemonInstance[]
-    private _currentDemonIndex: number
+    readonly currentDemonIndex: number
 
     constructor(player: Player){
         super()
         this.player = player
         this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon))
-        this._currentDemonIndex = 0
+        this.currentDemonIndex = 0
     }
 
     get currentDemonInstance(): DemonInstance {
-        return this.demonInstances[this._currentDemonIndex]
+        return this.demonInstances[this.currentDemonIndex]
     }
 
     get name(): string {
@@ -28,18 +28,8 @@ class PlayerCombatant extends Combatant {
         return this.player.startingHealth
     }
 
-    get magicDef(): number {
-        const def =
-            this.currentDemonInstance.stats.armor * 2 +
-            this.currentDemonInstance.stats.strength
-        return Math.floor(def / 3)
-    }
-
-    get physDef(): number {
-        const def =
-            this.currentDemonInstance.stats.armor * 2 +
-            this.currentDemonInstance.stats.magic
-        return Math.floor(def / 3)
+    get stats(): DemonStats {
+        return this.currentDemonInstance.stats
     }
 }
 

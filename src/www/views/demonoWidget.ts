@@ -1,20 +1,20 @@
 interface Registry {
-    [key: string]: DemonoView
+    [key: string]: DemonoWidget
 }
 
 const demonoRegistry: Registry = {}
 let nextId = 1
 
-abstract class DemonoView {
+abstract class DemonoWidget {
 
-    static getFromRegistry(el: Element): DemonoView {
+    static getFromRegistry<T extends DemonoWidget>(el: Element): T {
         const registryId = el.getAttribute('demono-id')
         if(!registryId){
-            throw 'DemonoView not found.'
+            throw 'DemonoWidget not found.'
         }
-        const demonoElement = demonoRegistry[registryId]
+        const demonoElement = demonoRegistry[registryId] as T
         if(!demonoElement){
-            throw 'DemonoView not found.'
+            throw 'DemonoWidget not found.'
         }
         return demonoElement
     }
@@ -33,7 +33,7 @@ abstract class DemonoView {
 
     update(): void {
         this.getChildDemonoElements().forEach(el => {
-            DemonoView.getFromRegistry(el).update()
+            DemonoWidget.getFromRegistry(el).update()
         })
     }
 
@@ -63,4 +63,4 @@ abstract class DemonoView {
     }
 }
 
-export { DemonoView }
+export { DemonoWidget }

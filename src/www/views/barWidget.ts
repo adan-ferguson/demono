@@ -1,4 +1,4 @@
-import { DemonoView } from './demonoView'
+import { DemonoWidget } from './demonoWidget'
 
 const BAR_HTML = (label = '') => `
 <div class="bar-value"></div>
@@ -15,7 +15,7 @@ interface BarOptions {
 /**
  * A bar showing some sort of meter, like a health bar.
  */
-class Bar extends DemonoView {
+class BarWidget extends DemonoWidget {
 
     private currentValue
     private currentMaxValue
@@ -51,4 +51,4 @@ class Bar extends DemonoView {
     }
 }
 
-export { Bar }
+export { BarWidget }
