@@ -1,5 +1,6 @@
 import { Demon, DemonStats } from '../demons/demon'
 import { DemonAbilityInstance } from './demonAbilityInstance'
+import { PlayerCombatant } from './playerCombatant'
 
 class DemonInstance {
 
@@ -10,7 +11,7 @@ class DemonInstance {
 
     private _energy: number
 
-    constructor(demon: Demon){
+    constructor(demon: Demon, private player: PlayerCombatant){
         this.demon = demon
         this.stats = demon.getStats()
         this.maxEnergy = 100
@@ -26,6 +27,14 @@ class DemonInstance {
 
     set energy(val: number){
         this._energy = Math.min(this.maxEnergy, Math.max(0, val))
+    }
+
+    get isActive(): boolean {
+        return this.player.currentDemonInstance === this
+    }
+
+    getAbility(abilityId: string): DemonAbilityInstance | false {
+        return this.abilityInstances.find(ai => ai.ability.id === abilityId) || false
     }
 }
 

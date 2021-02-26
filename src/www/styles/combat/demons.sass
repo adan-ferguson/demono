@@ -4,17 +4,26 @@ demono.combat .demon-list
   flex-direction: column
   align-items: stretch
 
-  > div
+  .demon-energy
     flex-basis: 20%
     margin: 0 1rem 1rem 0
     position: relative
+    cursor: pointer
 
-    .active
-      border-color: royalblue
-      .bar-value
-        background-color: royalblue
-      .text
-        -webkit-text-stroke-color: #7195ff
+    .bar
+      border-color: currentColor
+    .bar-value
+      background-color: currentColor
+    .text
+      -webkit-text-stroke-color: currentColor
+
+    &.selected
+      color: seagreen
+    //&.active
+    //  color: royalblue
+    &:hover
+      color: lightseagreen
+
 
     .bar
       font-size: 1.2em

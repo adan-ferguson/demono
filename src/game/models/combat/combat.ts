@@ -4,6 +4,8 @@ import { EnemyCombatant } from './enemyCombatant'
 import { Enemy } from '../enemies/enemy'
 import { Player } from '../player'
 import { LiteEvent } from '../liteEvent'
+import { DemonAbilityInstance } from './demonAbilityInstance'
+import { Choice } from 'game/models/combat/choice'
 
 interface CombatUpdate {
     id?: string
@@ -23,6 +25,16 @@ class Combat {
     init(): void{
         this.enemyCombatants.forEach(ec => ec.init())
         this.playerCombatant.init()
+    }
+
+    useAbility(abilityInstance: DemonAbilityInstance, choice: Choice = false): void {
+        if(!abilityInstance.canBeActivated){
+            return
+        }
+        if(!abilityInstance.fulfillsChoiceRequirement(choice)){
+            return
+        }
+        // ?
     }
 }
 

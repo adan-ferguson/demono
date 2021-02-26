@@ -1,3 +1,5 @@
+import { LiteEvent } from "game/models/liteEvent"
+
 interface Registry {
     [key: string]: DemonoWidget
 }

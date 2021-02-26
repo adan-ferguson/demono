@@ -12,7 +12,7 @@ class PlayerCombatant extends Combatant {
     constructor(player: Player){
         super()
         this.player = player
-        this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon))
+        this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon, this))
         this.currentDemonIndex = 0
     }
 

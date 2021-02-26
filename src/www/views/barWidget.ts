@@ -43,7 +43,7 @@ class BarWidget extends DemonoWidget {
         const value = this.value()
         const maxValue = this.maxValue()
 
-        const str = this.showMax ? value + '/' + maxValue : value.toString()
+        const str = this.showMax ? value + ' / ' + maxValue : value.toString()
         this.find('.text.value').textContent = str
 
         const pct = Math.min(100, Math.max(0, 100 * value / maxValue))

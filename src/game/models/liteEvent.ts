@@ -1,4 +1,4 @@
-class LiteEvent<T>{
+class LiteEvent<T = null>{
     private handlers: { (data?: T): void }[] = []
 
     public on(handler: { (data?: T): void }) : void {
