@@ -28,13 +28,10 @@ class Combat {
     }
 
     useAbility(abilityInstance: DemonAbilityInstance, choice: Choice = false): void {
-        if(!abilityInstance.canBeActivated){
+        if(!abilityInstance.canBeActivated || !abilityInstance.fulfillsChoiceRequirement(choice)){
             return
         }
-        if(!abilityInstance.fulfillsChoiceRequirement(choice)){
-            return
-        }
-        // ?
+        const results = abilityInstance.performActions(choice)
     }
 }
 

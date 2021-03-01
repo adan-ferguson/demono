@@ -6,8 +6,7 @@ import { PlayerCombatantWidget } from './playerCombatantWidget'
 import { DemonEnergyWidget } from './demonEnergyWidget'
 import { AbilityWidget } from './abilityWidget'
 import { DemonInstance } from 'game/models/combat/demonInstance'
-import { DemonAbilityId } from 'game/models/demons/abilities/ability'
-import {DemonoWidget} from "../demonoWidget";
+import { DemonoWidget } from '../demonoWidget'
 
 const COMBAT_HTML = `
 <div class="combat-zone">

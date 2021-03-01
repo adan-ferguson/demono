@@ -2,6 +2,7 @@ import { Demon, DemonStats } from '../demons/demon'
 import { Player } from '../player'
 import { DemonInstance } from './demonInstance'
 import { Combatant } from './combatant'
+import { EnemyCombatant } from './enemyCombatant'
 
 class PlayerCombatant extends Combatant {
 
@@ -10,7 +11,7 @@ class PlayerCombatant extends Combatant {
     readonly currentDemonIndex: number
 
     constructor(player: Player){
-        super()
+        super(player.startingHealth)
         this.player = player
         this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon, this))
         this.currentDemonIndex = 0

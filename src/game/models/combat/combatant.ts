@@ -8,12 +8,11 @@ abstract class Combatant {
     private _health: number
     private _maxHealth: number
 
-    init(): void {
-        this._health = this.startingHealth
-        this._maxHealth = this.startingHealth
+    constructor(startingHealth: number){
+        this._health = startingHealth
+        this._maxHealth = startingHealth
     }
 
-    abstract get startingHealth(): number
     abstract get name(): string
 
     get health(): number {
@@ -22,6 +21,10 @@ abstract class Combatant {
 
     get maxHealth(): number {
         return this._maxHealth
+    }
+
+    dealDamage(target: Combatant, amount: number, type: 'phys' | 'magic'): number {
+
     }
 }
 

@@ -1,11 +1,12 @@
-import { DemonInstance } from './demonInstance'
 import { DemonAbility } from '../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from './enemyCombatant'
+import { ActionResult } from '../demons/abilities/action'
+import { Combat } from './combat'
 
 class DemonAbilityInstance {
 
-    constructor(readonly ability: DemonAbility, readonly owner: DemonInstance){
+    constructor(readonly ability: DemonAbility){
         
     }
 
@@ -24,6 +25,12 @@ class DemonAbilityInstance {
             return choice instanceof EnemyCombatant
         }
         return false
+    }
+
+    performActions(combat: Combat, choice: Choice): ActionResult[] {
+        return this.ability.actions.map(action => {
+            return action.perform(combat, choice)
+        })
     }
 }
 
