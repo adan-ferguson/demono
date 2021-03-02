@@ -2,7 +2,6 @@ import { Demon, DemonStats } from '../demons/demon'
 import { Player } from '../player'
 import { DemonInstance } from './demonInstance'
 import { Combatant } from './combatant'
-import { EnemyCombatant } from './enemyCombatant'
 
 class PlayerCombatant extends Combatant {
 
@@ -31,6 +30,14 @@ class PlayerCombatant extends Combatant {
 
     get stats(): DemonStats {
         return this.currentDemonInstance.stats
+    }
+
+    get physDef(): number {
+        return Math.floor((this.stats.strength + this.stats.armor * 2) / 3)
+    }
+
+    get magicDef(): number {
+        return Math.floor((this.stats.magic + this.stats.armor * 2) / 3)
     }
 }
 

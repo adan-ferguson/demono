@@ -2,7 +2,7 @@ import { Combatant } from './combatant'
 import { Enemy } from '../enemies/enemy'
 
 interface EnemyOptions {
-    turnOffset ?: number
+    turnOffset?: number
 }
 
 class EnemyCombatant extends Combatant {

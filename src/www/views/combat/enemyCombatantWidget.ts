@@ -34,7 +34,7 @@ class EnemyCombatantWidget extends DemonoWidget {
         }
 
         this.element.innerHTML = ENEMY_HTML(enemyCombatant.name, armorType)
-        this.healthbar = new BarWidget(() => enemyCombatant.health, () => enemyCombatant.startingHealth)
+        this.healthbar = new BarWidget(() => enemyCombatant.health, () => enemyCombatant.maxHealth)
         this.find('.health-bar').append(this.healthbar.element)
     }
 

@@ -1,7 +1,8 @@
 import { ChoiceRequirement } from 'game/models/combat/choice'
-import { Action } from './action'
+import { Action, ActionDefinition } from './action'
 import * as DemonAbilityDefinitions from './definitionLoader'
 import { Tiered } from './tiered'
+import { AttackAction, AttackDefinition } from './attack'
 
 type DemonAbilityId = keyof typeof DemonAbilityDefinitions
 
@@ -10,7 +11,7 @@ interface DemonAbilityDefinition {
     name: string,
     cost: Tiered<number>,
     choiceRequirement?: ChoiceRequirement,
-    actions: Action[]
+    actions: ActionDefinition[]
 }
 
 class DemonAbility {
@@ -31,7 +32,13 @@ class DemonAbility {
         this.name = def.name
         this.cost = def.cost(this.tier)
         this.choiceRequirement = def.choiceRequirement || false
-        this.actions = def.actions
+        this.actions = []
+
+        def.actions.forEach(actionDef => {
+            if(actionDef as AttackDefinition){
+                this.actions.push(new AttackAction(actionDef as AttackDefinition, tier))
+            }
+        })
     }
 }
 

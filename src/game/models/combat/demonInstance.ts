@@ -17,7 +17,7 @@ class DemonInstance {
         this.maxEnergy = 100
         this._energy = 50
         this.abilityInstances = demon.loadout.getAbilities().map(ability => {
-            return new DemonAbilityInstance(ability, this)
+            return new DemonAbilityInstance(ability)
         })
     }
 

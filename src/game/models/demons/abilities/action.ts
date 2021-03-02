@@ -1,11 +1,22 @@
 import { Choice } from 'game/models/combat/choice'
 import { Combat } from 'game/models/combat/combat'
+import { Combatant } from 'game/models/combat/combatant'
 
 abstract class Action {
-    abstract perform(tier: number, combat: Combat, choice: Choice): ActionResult
+    constructor(protected tier: number){
+
+    }
+    abstract perform(combat: Combat, choice: Choice): ActionResult[]
 }
 
-interface ActionInfo {}
-interface ActionResult {}
+interface ActionDefinition {
+    type: string,
+    target: 'self' | 'enemy' | 'allEnemies',
+}
 
-export { Action, ActionInfo, ActionResult }
+interface ActionResult {
+    source: Combatant,
+    target?: Combatant
+}
+
+export { Action, ActionDefinition, ActionResult }

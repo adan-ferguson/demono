@@ -28,9 +28,11 @@ class DemonAbilityInstance {
     }
 
     performActions(combat: Combat, choice: Choice): ActionResult[] {
-        return this.ability.actions.map(action => {
-            return action.perform(combat, choice)
+        const results: ActionResult[] = []
+        this.ability.actions.forEach(action => {
+            results.push(...action.perform(combat, choice))
         })
+        return results
     }
 }
 

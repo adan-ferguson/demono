@@ -23,15 +23,15 @@ class Combat {
     }
 
     init(): void{
-        this.enemyCombatants.forEach(ec => ec.init())
-        this.playerCombatant.init()
+        // this.enemyCombatants.forEach(ec => ec.init())
+        // this.playerCombatant.init()
     }
 
     useAbility(abilityInstance: DemonAbilityInstance, choice: Choice = false): void {
         if(!abilityInstance.canBeActivated || !abilityInstance.fulfillsChoiceRequirement(choice)){
             return
         }
-        const results = abilityInstance.performActions(choice)
+        const results = abilityInstance.performActions(this, choice)
     }
 }
 
