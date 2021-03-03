@@ -10,15 +10,12 @@ const ABILITY_HTML = (abilityInstance: DemonAbilityInstance) => `
 
 class AbilityWidget extends DemonoWidget {
 
-    clickEvent = new LiteEvent()
+    clicked = new LiteEvent()
     demonInstance: DemonInstance
 
     constructor(readonly abilityInstance: DemonAbilityInstance){
         super('ability')
         this.element.innerHTML = ABILITY_HTML(abilityInstance)
-        this.element.addEventListener('click', () => {
-            this.clickEvent.trigger()
-        })
     }
 
     public setDemon(demonInstance: DemonInstance): void{
@@ -31,11 +28,7 @@ class AbilityWidget extends DemonoWidget {
     }
 
     update(): void {
-        if(this.abilityInstance.canBeActivated){
-            this.element.classList.add('clickable')
-        }else{
-            this.element.classList.remove('clickable')
-        }
+        this.setClass('selectable', this.abilityInstance.canBeActivated)
     }
 }
 

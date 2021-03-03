@@ -5,7 +5,7 @@ import { DemonoWidget } from '../demonoWidget'
 
 class DemonEnergyWidget extends DemonoWidget {
 
-    clickEvent = new LiteEvent()
+    clicked = new LiteEvent()
 
     constructor(readonly demonInstance: DemonInstance){
         super('demon-energy')
@@ -18,7 +18,7 @@ class DemonEnergyWidget extends DemonoWidget {
             })
         this.element.append(energyBar.element)
         this.element.addEventListener('click', () => {
-            this.clickEvent.trigger()
+            this.clicked.trigger()
         })
     }
 

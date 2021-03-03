@@ -2,6 +2,7 @@ import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 import { EnemyArmorType } from 'game/models/enemies/enemy'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
+import {LiteEvent} from "../../../game/models/liteEvent";
 
 const ENEMY_HTML = (name: string, armorType: EnemyArmorType = 'none') => `
 <div class="enemy-card">
@@ -19,11 +20,11 @@ const BUFF_HTML = (iconName: string, value: number) => `
 </span>
 `
 
-class EnemyCombatantWidget extends DemonoWidget {
+class EnemyWidget extends DemonoWidget {
 
     healthbar: BarWidget
 
-    constructor(private enemyCombatant: EnemyCombatant){
+    constructor(public enemyCombatant: EnemyCombatant){
         super('enemy-combatant')
 
         let armorType: EnemyArmorType = 'none'
@@ -55,4 +56,4 @@ class EnemyCombatantWidget extends DemonoWidget {
     }
 }
 
-export { EnemyCombatantWidget }
+export { EnemyWidget }

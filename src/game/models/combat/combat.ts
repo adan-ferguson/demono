@@ -1,9 +1,8 @@
 import { Encounter } from '../encounters/encounter'
 import { PlayerCombatant } from './playerCombatant'
 import { EnemyCombatant } from './enemyCombatant'
-import { Enemy } from '../enemies/enemy'
 import { Player } from '../player'
-import { LiteEvent } from '../liteEvent'
+import { TypedEvent } from '../liteEvent'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { Choice } from 'game/models/combat/choice'
 
@@ -15,7 +14,7 @@ class Combat {
 
     enemyCombatants: EnemyCombatant[]
     playerCombatant: PlayerCombatant
-    onUpdate = new LiteEvent<CombatUpdate>()
+    onUpdate = new TypedEvent<CombatUpdate>()
 
     constructor(encounter: Encounter, player: Player){
         this.enemyCombatants = encounter.createEnemyCombatants()

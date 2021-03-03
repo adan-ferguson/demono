@@ -18,7 +18,7 @@ const PLAYER_HTML = (name: string) => `
 </div>
 `
 
-class PlayerCombatantWidget extends DemonoWidget {
+class PlayerWidget extends DemonoWidget {
 
     healthbar: BarWidget
     energybar: BarWidget
@@ -48,4 +48,4 @@ class PlayerCombatantWidget extends DemonoWidget {
     }
 }
 
-export { PlayerCombatantWidget }
+export { PlayerWidget }
