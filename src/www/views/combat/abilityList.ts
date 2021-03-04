@@ -1,4 +1,4 @@
-import { DemonoList } from '../DemonoList'
+import { DemonoList } from '../demonoList'
 import { AbilityWidget } from './abilityWidget'
 import { DemonAbilityInstance } from 'game/models/combat/demonAbilityInstance'
 
@@ -11,6 +11,8 @@ class AbilityList extends DemonoList<AbilityWidget> {
     }
 
     setContents(abilities: DemonAbilityInstance[]): void {
+        this.map.clear()
+        this.element.innerHTML = ''
         abilities.forEach(ability => {
             const widget = new AbilityWidget(ability)
             this.add(widget)

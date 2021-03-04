@@ -1,5 +1,5 @@
 import { DemonInstance } from 'game/models/combat/demonInstance'
-import { DemonoList } from '../DemonoList'
+import { DemonoList } from '../demonoList'
 import { DemonEnergyWidget } from './demonEnergyWidget'
 
 class DemonEnergyList extends DemonoList<DemonEnergyWidget> {

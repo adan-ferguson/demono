@@ -34,7 +34,7 @@ abstract class DemonoWidget {
         this.element.setAttribute('demono-id', this.registryId)
 
         this.element.addEventListener('click', () => {
-            if(this.element.classList.contains('clickable')){
+            if(this.hasClass('clickable') || this.hasClass('selectable')){
                 this.clicked.trigger()
             }
         })

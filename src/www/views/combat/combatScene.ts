@@ -88,9 +88,6 @@ class CombatScene extends Scene {
     private makeDemonEnergyList(): DemonEnergyList {
         const demonList = new DemonEnergyList()
         demonList.setContents(this.combat.playerCombatant.demonInstances)
-        demonList.listItemClicked.on(dme => {
-            demonList.select(dme)
-        })
         demonList.listItemSelected.on(dme => {
             this.widgets.abilityList.setContents(dme.demonInstance.abilityInstances)
         })

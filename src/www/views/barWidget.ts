@@ -5,6 +5,7 @@ const BAR_HTML = (label = '') => `
 <div class="bar-damage"></div>
 ${label ? `<div class="text label left">${label}</div>` : ''}
 <div class='text value${label ? ' right' : ''}'></div>
+<div class="bar-border"></div>
 `
 
 interface BarOptions {

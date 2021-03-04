@@ -17,19 +17,11 @@ class DemonEnergyWidget extends DemonoWidget {
                 label: demonInstance.demon.name
             })
         this.element.append(energyBar.element)
-        this.element.addEventListener('click', () => {
-            this.clicked.trigger()
-        })
     }
 
     update(): void {
-        if(this.demonInstance.isActive){
-            this.addClass('active')
-            this.removeClass('selectable')
-        }else{
-            this.removeClass('active')
-            this.addClass('selectable')
-        }
+        this.setClass('active', this.demonInstance.isActive)
+        this.addClass('selectable')
         super.update()
     }
 }
