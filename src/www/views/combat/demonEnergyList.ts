@@ -13,6 +13,7 @@ class DemonEnergyList extends DemonoList<DemonEnergyWidget> {
             this.add(new DemonEnergyWidget(demon))
         })
     }
+
 }
 
 export { DemonEnergyList }

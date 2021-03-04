@@ -1,6 +1,6 @@
 demono.combat
 
-  .abilities
+  demono.ability-list
     display: flex
     flex-direction: column
 
@@ -8,9 +8,7 @@ demono.combat
       flex-basis: 12.5%
       border: 0.2rem solid blue
       margin: 1rem
-
-      &.clickable
-        cursor: pointer
-
-        &:hover
-          background-color: aliceblue
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 0 3rem

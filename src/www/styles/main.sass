@@ -26,3 +26,11 @@ main
   background-color: #FFF
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
   font-size: 2rem
+  overflow: hidden
+
+.clickable, .selectable
+  cursor: pointer
+  transition: transform 0.1s ease
+  will-change: transform
+  &:hover
+    transform: scale(1.02)

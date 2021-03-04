@@ -27,8 +27,8 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
             return
         }
 
-        this.removeClassAll('select')
-        widget.addClass('select')
+        this.removeClassAll('selected')
+        widget.addClass('selected')
 
         this.selected = widget
         if(widget){

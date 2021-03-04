@@ -8,7 +8,6 @@ demono.combat .demon-list
     flex-basis: 20%
     margin: 0 1rem 1rem 0
     position: relative
-    cursor: pointer
 
     .bar
       border-color: currentColor
@@ -17,13 +16,10 @@ demono.combat .demon-list
     .text
       -webkit-text-stroke-color: currentColor
 
+    &.active
+      color: palevioletred
     &.selected
       color: seagreen
-    //&.active
-    //  color: royalblue
-    &:hover
-      color: lightseagreen
-
 
     .bar
       font-size: 1.2em

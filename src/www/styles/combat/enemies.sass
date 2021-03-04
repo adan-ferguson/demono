@@ -1,12 +1,12 @@
 demono.combat
-  .enemies
+  demono.enemy-list
     display: flex
     flex-direction: row
     align-items: center
     height: 100%
     justify-content: center
 
-    demono.enemy-combatant
+    demono.enemy
 
       margin: 0 2rem
       display: flex
@@ -39,20 +39,8 @@ demono.combat
           &.magic
             background-image: url('../../assets/mshield.svg')
 
-
-
       .health-bar
         position: relative
         width: 90%
         height: 2.5rem
         margin-top: 1.3rem
-
-      //.stats
-      //  width: 84%
-      //  display: flex
-      //  flex-direction: row
-      //
-      //  .stat
-      //    display: flex
-      //    flex-direction: row
-      //    align-items: center

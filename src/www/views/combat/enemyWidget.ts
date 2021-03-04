@@ -25,7 +25,7 @@ class EnemyWidget extends DemonoWidget {
     healthbar: BarWidget
 
     constructor(public enemyCombatant: EnemyCombatant){
-        super('enemy-combatant')
+        super('enemy')
 
         let armorType: EnemyArmorType = 'none'
         if(enemyCombatant.physDef){

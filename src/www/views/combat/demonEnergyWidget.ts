@@ -24,9 +24,11 @@ class DemonEnergyWidget extends DemonoWidget {
 
     update(): void {
         if(this.demonInstance.isActive){
-            this.element.classList.add('active')
+            this.addClass('active')
+            this.removeClass('selectable')
         }else{
-            this.element.classList.remove('active')
+            this.removeClass('active')
+            this.addClass('selectable')
         }
         super.update()
     }

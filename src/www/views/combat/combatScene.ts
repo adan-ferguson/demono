@@ -1,9 +1,7 @@
 import '../../styles/combat/combat.sass'
 import { Scene } from '../scene'
 import { Combat } from 'game/models/combat/combat'
-import { EnemyWidget } from './enemyWidget'
 import { PlayerWidget } from './playerWidget'
-import { AbilityWidget } from './abilityWidget'
 import { DemonAbilityInstance } from 'game/models/combat/demonAbilityInstance'
 import { MessagingWidget } from './messagingWidget'
 import { EnemyList } from './enemyList'
@@ -83,6 +81,7 @@ class CombatScene extends Scene {
                 this.combat.useAbility(instance)
             }
         })
+        this.find('.ability-list').replaceWith(abilityList.element)
         return abilityList
     }
 
@@ -95,6 +94,7 @@ class CombatScene extends Scene {
         demonList.listItemSelected.on(dme => {
             this.widgets.abilityList.setContents(dme.demonInstance.abilityInstances)
         })
+        this.find('.demon-list').replaceWith(demonList.element)
         return demonList
     }
 
@@ -106,7 +106,7 @@ class CombatScene extends Scene {
                 this.combat.useAbility((this.state as ChooseEnemyState).pendingAbility, enemyWidget.enemyCombatant)
             }
         })
-        this.find('.enemies').replaceWith(enemyList.element)
+        this.find('.enemy-list').replaceWith(enemyList.element)
         return enemyList
     }
 

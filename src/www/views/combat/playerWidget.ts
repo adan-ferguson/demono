@@ -25,7 +25,7 @@ class PlayerWidget extends DemonoWidget {
     demonStats: DemonStatsWidget
 
     constructor(private playerCombatant: PlayerCombatant){
-        super('player-combatant')
+        super('player')
         this.element.innerHTML = PLAYER_HTML(playerCombatant.name)
 
         this.healthbar = new BarWidget(
