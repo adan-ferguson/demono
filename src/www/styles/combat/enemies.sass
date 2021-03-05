@@ -12,6 +12,14 @@ demono.combat
       display: flex
       flex-direction: column
       align-items: center
+      padding: 1.7rem
+
+      &.clickable
+        background-color: #EEE
+        transition: background-color ease 0.3s
+
+        &:hover
+          background-color: powderblue
 
       .enemy-card
         @include boxshadow
@@ -21,6 +29,7 @@ demono.combat
         display: flex
         align-items: center
         justify-content: center
+        background-color: white
 
         .armor-icon
           $size: 1.2em

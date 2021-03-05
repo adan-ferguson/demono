@@ -2,6 +2,7 @@ import { EnemyCombatant, EnemyOptions } from '../combat/enemyCombatant'
 import { Enemy } from '../enemies/enemy'
 import * as EncounterDefinitions from './definitionLoader'
 import * as EnemyDefinitions from '../enemies/definitionLoader'
+import { Combat } from '../combat/combat'
 
 interface EncounterDefinition {
     enemies: {
@@ -23,9 +24,9 @@ class Encounter {
         this.encounterDefinition = encounterDefinition
     }
 
-    createEnemyCombatants(): EnemyCombatant[] {
+    createEnemyCombatants(combat: Combat): EnemyCombatant[] {
         return this.encounterDefinition.enemies.map(enemyData => {
-            return new EnemyCombatant(Enemy.loadFromId(enemyData.id), enemyData.options)
+            return new EnemyCombatant(Enemy.loadFromId(enemyData.id), combat, enemyData.options)
         })
     }
 }

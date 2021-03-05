@@ -1,3 +1,5 @@
+import { Ability } from 'game/models/combat/ability'
+
 interface EnemyAbilityDefinition {
     name: string,
     time: number,
@@ -10,25 +12,24 @@ interface DamageData {
     power: number
 }
 
-class EnemyAbility {
+class EnemyAbility extends Ability {
 
     name: string
-    timeLeft: number
     time: number
     description: string
     damage?: DamageData
 
     constructor(def: EnemyAbilityDefinition){
+        super(getActions(def))
         this.name = def.name
-        this.timeLeft = def.time
         this.time = def.time
         this.description = def.description
         this.damage = def.damage
     }
+}
 
-    applyTurnOffset(offset: number): void {
-        this.timeLeft = Math.max(0, this.timeLeft + offset)
-    }
+function getActions(def: EnemyAbilityDefinition): EnemyAction[]{
+
 }
 
 export { EnemyAbility, EnemyAbilityDefinition }

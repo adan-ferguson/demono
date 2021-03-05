@@ -1,8 +1,8 @@
 import { ChoiceRequirement } from 'game/models/combat/choice'
-import { Action, ActionDefinition } from './action'
+import { Action, ActionDefinition } from '../../combat/action'
 import * as DemonAbilityDefinitions from './definitionLoader'
 import { Tiered } from './tiered'
-import { AttackAction, AttackDefinition } from './attack'
+import { Ability } from 'game/models/combat/ability'
 
 type DemonAbilityId = keyof typeof DemonAbilityDefinitions
 
@@ -14,13 +14,12 @@ interface DemonAbilityDefinition {
     actions: ActionDefinition[]
 }
 
-class DemonAbility {
+class DemonAbility extends Ability {
 
     readonly id: DemonAbilityId
     readonly name: string
     readonly cost: number
     choiceRequirement: ChoiceRequirement
-    actions: Action[]
 
     static loadFromId(id: DemonAbilityId, tier = 1): DemonAbility {
         const def = DemonAbilityDefinitions[id as DemonAbilityId]
@@ -28,18 +27,17 @@ class DemonAbility {
     }
 
     constructor(def: DemonAbilityDefinition, readonly tier: number){
+        super(getActions(def, tier))
         this.id = def.id
         this.name = def.name
         this.cost = def.cost(this.tier)
         this.choiceRequirement = def.choiceRequirement || false
-        this.actions = []
-
-        def.actions.forEach(actionDef => {
-            if(actionDef as AttackDefinition){
-                this.actions.push(new AttackAction(actionDef as AttackDefinition, tier))
-            }
-        })
     }
 }
+
+function getActions(def: DemonAbilityDefinition, tier: number): Action[]{
+    return def.actions.map(def => new PlayerAttackAction(def as AttackDefinition, tier))
+}
+
 
 export { DemonAbility, DemonAbilityId, DemonAbilityDefinition, ChoiceRequirement }

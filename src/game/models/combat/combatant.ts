@@ -1,4 +1,5 @@
-import { DamageInfo, DamageOutcome } from '../demons/abilities/damage'
+import { Combat } from './combat'
+import { DamageInfo, DamageOutcome } from './damage'
 
 /**
  * A Combatant is someone who is participating in a Combat and can
@@ -10,7 +11,7 @@ abstract class Combatant {
     private _health: number
     private _maxHealth: number
 
-    constructor(startingHealth: number){
+    constructor(startingHealth: number, readonly combat: Combat){
         this._health = startingHealth
         this._maxHealth = startingHealth
     }

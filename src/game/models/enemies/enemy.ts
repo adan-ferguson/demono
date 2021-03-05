@@ -33,10 +33,6 @@ class Enemy {
         this.armor = enemyDef.armor || {type: 'none', value: 0}
         this.abilities = enemyDef.abilities.map(abilityDef => new EnemyAbility(abilityDef))
     }
-
-    applyTurnOffset(turnOffset: number): void {
-        this.abilities.forEach(ability => ability.timeLeft += turnOffset)
-    }
 }
 
 export { EnemyDefinition, Enemy, EnemyArmorType }

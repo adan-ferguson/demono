@@ -1,9 +1,10 @@
 import { DemonAbilityDefinition } from '../ability'
-import { AttackDefinition } from '../attack'
+import { AttackDefinition } from '../../../combat/attack'
+import { ActionTarget } from '../../../combat/action'
 
 const attackDefinition: AttackDefinition = {
     type: 'attack',
-    target: 'enemy',
+    target: ActionTarget.Enemy,
     damage: tier => 20 + 10 * tier,
     damageType: 'magic',
     scaling: {

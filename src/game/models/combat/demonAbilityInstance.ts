@@ -1,13 +1,18 @@
 import { DemonAbility } from '../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from './enemyCombatant'
-import { ActionResult } from '../demons/abilities/action'
-import { Combat } from './combat'
+import { Combat, Result } from './combat'
+import { DemonInstance } from './demonInstance'
+import { AbilityInstance } from './abilityInstance'
 
-class DemonAbilityInstance {
+class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
-    constructor(readonly ability: DemonAbility){
-        
+    constructor(ability: DemonAbility, readonly owner: DemonInstance){
+        super(ability)
+    }
+
+    get combat(): Combat {
+        return this.owner.player.combat
     }
 
     get cost(): number {
@@ -27,13 +32,19 @@ class DemonAbilityInstance {
         return false
     }
 
-    performActions(combat: Combat, choice: Choice): ActionResult[] {
-        const results: ActionResult[] = []
-        this.ability.actions.forEach(action => {
-            results.push(...action.perform(combat, choice))
-        })
-        return results
+    canPayCosts(): boolean {
+        return this.owner.energy >= this.cost
     }
+
+    payCosts(): Result[] {
+        this.owner.energy -= this.cost
+        return [{
+            type: 'energyChange',
+            demon: this.owner,
+            amount: this.cost
+        }]
+    }
+
 }
 
 export { DemonAbilityInstance }

@@ -5,10 +5,13 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
 
     public listItemClicked = new TypedEvent<T>()
     public listItemSelected = new TypedEvent<T>()
-    private selected: T
 
     get widgets(): T[] {
         return this.findWidgets<T>()
+    }
+
+    get selected(): T | undefined {
+        return this.findWidgets<T>('.selected')[0]
     }
 
     add(widget: T): void {
@@ -30,7 +33,6 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
         this.removeClassAll('selected')
         widget.addClass('selected')
 
-        this.selected = widget
         if(widget){
             this.listItemSelected.trigger(widget)
         }

@@ -16,15 +16,7 @@ class AbilityWidget extends DemonoWidget {
     constructor(readonly abilityInstance: DemonAbilityInstance){
         super('ability')
         this.element.innerHTML = ABILITY_HTML(abilityInstance)
-    }
-
-    public setDemon(demonInstance: DemonInstance): void{
-        this.demonInstance = demonInstance
-        let html = ''
-        this.demonInstance.abilityInstances.forEach((ability: DemonAbilityInstance) => {
-            html += ABILITY_HTML(ability)
-        })
-        this.element.innerHTML = html
+        this.update()
     }
 
     update(): void {

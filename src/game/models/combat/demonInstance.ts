@@ -1,4 +1,5 @@
 import { Demon, DemonStats } from '../demons/demon'
+import { Result } from './combat'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from './playerCombatant'
 
@@ -11,13 +12,13 @@ class DemonInstance {
 
     private _energy: number
 
-    constructor(demon: Demon, private player: PlayerCombatant){
+    constructor(demon: Demon, readonly player: PlayerCombatant){
         this.demon = demon
         this.stats = demon.getStats()
         this.maxEnergy = 100
         this._energy = 50
         this.abilityInstances = demon.loadout.getAbilities().map(ability => {
-            return new DemonAbilityInstance(ability)
+            return new DemonAbilityInstance(ability, this)
         })
     }
 

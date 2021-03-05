@@ -1,12 +1,13 @@
 import '../../styles/combat/combat.sass'
 import { Scene } from '../scene'
-import { Combat } from 'game/models/combat/combat'
+import { Combat, Result } from 'game/models/combat/combat'
 import { PlayerWidget } from './playerWidget'
 import { DemonAbilityInstance } from 'game/models/combat/demonAbilityInstance'
 import { MessagingWidget } from './messagingWidget'
 import { EnemyList } from './enemyList'
 import { DemonEnergyList } from './demonEnergyList'
 import { AbilityList } from './abilityList'
+import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
 
 const COMBAT_HTML = `
 <div class="combat-zone">
@@ -20,20 +21,18 @@ const COMBAT_HTML = `
 </div>
 `
 
-interface State {
-    type: 'idle' | 'chooseEnemy',
-    pendingAbility?: DemonAbilityInstance
-}
-
-interface ChooseEnemyState extends State {
-    type: 'chooseEnemy',
-    pendingAbility: DemonAbilityInstance
+enum CombatSceneState {
+    WaitingToStart,
+    ChooseAction,
+    ChooseEnemy,
+    Visualizing,
+    Ended
 }
 
 class CombatScene extends Scene {
 
     private combat: Combat
-    state: State
+    state = CombatSceneState.WaitingToStart
     widgets: {
         enemyList: EnemyList,
         messaging: MessagingWidget,
@@ -42,12 +41,9 @@ class CombatScene extends Scene {
         demonEnergyList: DemonEnergyList
     }
 
-    constructor(combat: Combat){
+    constructor(combat: Combat) {
         super('combat')
         this.combat = combat
-        this.state = {
-            type: 'idle'
-        }
     }
 
     begin(): void {
@@ -72,13 +68,10 @@ class CombatScene extends Scene {
         const abilityList = new AbilityList()
         abilityList.listItemSelected.on(ab => {
             const instance = ab.abilityInstance
-            if(instance.ability.choiceRequirement === 'enemy'){
-                this.setState({
-                    type: 'chooseEnemy',
-                    pendingAbility: instance
-                })
-            }else{
-                this.combat.useAbility(instance)
+            if (instance.ability.choiceRequirement === 'enemy') {
+                this.setState(CombatSceneState.ChooseEnemy)
+            } else {
+                this.useAbility(instance)
             }
         })
         this.find('.ability-list').replaceWith(abilityList.element)
@@ -99,12 +92,24 @@ class CombatScene extends Scene {
         const enemyList = new EnemyList()
         enemyList.setContents(this.combat.enemyCombatants)
         enemyList.listItemClicked.on(enemyWidget => {
-            if(this.state as ChooseEnemyState){
-                this.combat.useAbility((this.state as ChooseEnemyState).pendingAbility, enemyWidget.enemyCombatant)
+            debugger
+            const ability = this.widgets.abilityList.selected?.abilityInstance
+            if (ability && this.state === CombatSceneState.ChooseEnemy) {
+                this.useAbility(ability, enemyWidget.enemyCombatant)
             }
         })
         this.find('.enemy-list').replaceWith(enemyList.element)
         return enemyList
+    }
+
+    useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): void {
+        this.combat.useAbility(ability, enemyCombatant).forEach(r => this.visualizeResult(r))
+        // TODO: deal with endings
+        this.state = CombatSceneState.ChooseAction
+    }
+
+    visualizeResult(result: Result): void {
+
     }
 
     private makeMessaging() {
@@ -123,13 +128,13 @@ class CombatScene extends Scene {
         super.update()
     }
 
-    private setState(state: State){
+    private setState(state: CombatSceneState){
         this.state = state
-
-        if(state.type === 'chooseEnemy'){
+        if(state === CombatSceneState.ChooseEnemy){
             this.widgets.messaging.setMessage('Select an enemy')
             this.widgets.enemyList.addClassAll('clickable')
         }
+        //TODO: other states
     }
 }
 
