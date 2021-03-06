@@ -1,4 +1,8 @@
-type DamageType = 'phys' | 'magic' | 'true'
+enum DamageType {
+    Physical,
+    Magic,
+    True
+}
 
 interface DamageInfo {
     type: DamageType,

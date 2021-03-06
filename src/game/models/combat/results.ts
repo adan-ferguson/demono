@@ -1,6 +1,6 @@
 import { Combatant } from './combatant'
 import { DamageOutcome } from './damage'
-import { DemonInstance } from './demonInstance'
+import { DemonInstance } from './demon/demonInstance'
 
 interface DamageResult {
     readonly type: 'damage'

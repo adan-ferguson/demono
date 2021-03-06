@@ -1,6 +1,6 @@
-import { EnemyAbility } from '../enemies/abilities/enemyAbility'
-import { AbilityInstance } from './abilityInstance'
-import { Combat } from './combat'
+import { EnemyAbility } from '../../enemies/abilities/enemyAbility'
+import { AbilityInstance } from '../abilityInstance'
+import { Combat } from '../combat'
 import { EnemyCombatant } from './enemyCombatant'
 
 class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {

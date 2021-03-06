@@ -1,4 +1,4 @@
-import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
+import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 import { EnemyArmorType } from 'game/models/enemies/enemy'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'

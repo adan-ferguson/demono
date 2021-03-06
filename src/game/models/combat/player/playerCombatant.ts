@@ -1,8 +1,8 @@
-import { Demon, DemonStats } from '../demons/demon'
-import { Player } from '../player'
-import { DemonInstance } from './demonInstance'
-import { Combatant } from './combatant'
-import { Combat, Result } from './combat'
+import { Demon, DemonStats } from '../../demons/demon'
+import { Player } from '../../player'
+import { DemonInstance } from '../demon/demonInstance'
+import { Combatant } from '../combatant'
+import { Combat, Result } from '../combat'
 
 class PlayerCombatant extends Combatant {
 

@@ -1,4 +1,4 @@
-import { DemonInstance } from 'game/models/combat/demonInstance'
+import { DemonInstance } from 'game/models/combat/demon/demonInstance'
 import { DemonoList } from '../demonoList'
 import { DemonEnergyWidget } from './demonEnergyWidget'
 

@@ -1,23 +1,29 @@
 import { EnemyDefinition } from '../enemy'
+import { EnemyAbilityDefinition } from '../abilities/enemyAbility'
+import { DamageType } from 'game/models/combat/damage'
+import { EnemyActionSubject } from '../../combat/enemy/enemyAction'
+import { EnemyAttackDefinition } from '../../combat/enemy/enemyAttack'
+
+const bite: EnemyAbilityDefinition = {
+    name: 'Bite',
+    time: 3,
+    description: '$name gives $target a bite.',
+    actions: [{
+        type: 'attack',
+        subject: EnemyActionSubject.Player,
+        damageType: DamageType.Physical,
+        damage: 5
+    } as EnemyAttackDefinition]
+}
 
 const bat: EnemyDefinition = {
     health: 5,
     name: 'Bat',
     armor: {
-        type: 'phys',
+        type: DamageType.Physical,
         value: 1
     },
-    abilities: [
-        {
-            name: 'Bite',
-            time: 3,
-            damage: {
-                type: 'phys',
-                power: 5
-            },
-            description: '$name gives $target a bite.'
-        }
-    ]
+    abilities: [bite]
 }
 
 export { bat }

@@ -2,12 +2,12 @@ import '../../styles/combat/combat.sass'
 import { Scene } from '../scene'
 import { Combat, Result } from 'game/models/combat/combat'
 import { PlayerWidget } from './playerWidget'
-import { DemonAbilityInstance } from 'game/models/combat/demonAbilityInstance'
+import { DemonAbilityInstance } from 'game/models/combat/demon/demonAbilityInstance'
 import { MessagingWidget } from './messagingWidget'
 import { EnemyList } from './enemyList'
 import { DemonEnergyList } from './demonEnergyList'
 import { AbilityList } from './abilityList'
-import { EnemyCombatant } from 'game/models/combat/enemyCombatant'
+import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 
 const COMBAT_HTML = `
 <div class="combat-zone">

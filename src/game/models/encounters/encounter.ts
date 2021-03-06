@@ -1,4 +1,4 @@
-import { EnemyCombatant, EnemyOptions } from '../combat/enemyCombatant'
+import { EnemyCombatant, EnemyOptions } from '../combat/enemy/enemyCombatant'
 import { Enemy } from '../enemies/enemy'
 import * as EncounterDefinitions from './definitionLoader'
 import * as EnemyDefinitions from '../enemies/definitionLoader'

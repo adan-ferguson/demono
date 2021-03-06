@@ -1,7 +1,7 @@
-import { Combatant } from './combatant'
-import { Enemy } from '../enemies/enemy'
+import { Combatant } from '../combatant'
+import { Enemy } from '../../enemies/enemy'
 import { EnemyAbilityInstance } from './enemyAbilityInstance'
-import {Combat, Result } from './combat'
+import { Combat, Result } from '../combat'
 
 interface EnemyOptions {
     turnOffset?: number
@@ -16,7 +16,7 @@ class EnemyCombatant extends Combatant {
         super(enemy.health, combat)
         this.enemy = enemy
         this.abilities = enemy.abilities.map(ability => {
-            const eai = new EnemyAbilityInstance(ability)
+            const eai = new EnemyAbilityInstance(ability, this)
             eai.timeLeft += options.turnOffset || 0
             return eai
         })

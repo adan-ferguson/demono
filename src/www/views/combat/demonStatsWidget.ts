@@ -1,5 +1,5 @@
 import { DemonoWidget } from '../demonoWidget'
-import { PlayerCombatant } from 'game/models/combat/playerCombatant'
+import { PlayerCombatant } from 'game/models/combat/player/playerCombatant'
 import { DemonStats } from 'game/models/demons/demon'
 
 const HTML = (stats: DemonStats) => `

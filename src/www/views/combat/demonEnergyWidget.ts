@@ -1,4 +1,4 @@
-import { DemonInstance } from 'game/models/combat/demonInstance'
+import { DemonInstance } from 'game/models/combat/demon/demonInstance'
 import { LiteEvent } from 'game/models/liteEvent'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'

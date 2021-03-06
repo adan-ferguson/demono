@@ -1,23 +1,22 @@
 import { DemonAbilityDefinition } from '../ability'
-import { AttackDefinition } from '../../../combat/attack'
-import { ActionTarget } from '../../../combat/action'
-
-const attackDefinition: AttackDefinition = {
-    type: 'attack',
-    target: ActionTarget.Enemy,
-    damage: tier => 20 + 10 * tier,
-    damageType: 'magic',
-    scaling: {
-        magic: (tier: number) => 0.3 + 0.1 * tier
-    }
-}
+import { PlayerAttackDefinition } from '../../../combat/player/playerAttack'
+import { PlayerActionSubject } from 'game/models/combat/player/playerAction'
+import { DamageType } from 'game/models/combat/damage'
 
 const fireball: DemonAbilityDefinition = {
     id: 'fireball',
     name: 'Fireball',
     cost: tier => 30 + tier * 10,
     choiceRequirement: 'enemy',
-    actions: [attackDefinition]
+    actions: [{
+        type: 'attack',
+        subject: PlayerActionSubject.Enemy,
+        damage: tier => 20 + 10 * tier,
+        damageType: DamageType.Magic,
+        scaling: {
+            magic: (tier: number) => 0.3 + 0.1 * tier
+        }
+    } as PlayerAttackDefinition]
 }
 
 export { fireball }

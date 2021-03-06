@@ -1,22 +1,11 @@
-import { Combat, Result } from 'game/models/combat/combat'
+import { Result } from 'game/models/combat/combat'
+import { Choice } from './choice'
 import { Combatant } from './combatant'
 
 abstract class Action {
-    abstract perform(combat: Combat, source: Combatant, targets: Combatant[]): Result[]
+    abstract perform(source: Combatant, choice?: Choice): Result[]
 }
 
-enum ActionTarget {
-    Self,
-    Enemy,
-    Enemies,
-    Ally,
-    Allies,
-    Everyone
+export {
+    Action
 }
-
-interface ActionDefinition {
-    type: string,
-    target: ActionTarget
-}
-
-export { Action, ActionTarget, ActionDefinition }

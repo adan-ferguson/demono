@@ -1,7 +1,7 @@
-import { Demon, DemonStats } from '../demons/demon'
-import { Result } from './combat'
+import { Demon, DemonStats } from '../../demons/demon'
+import { Result } from '../combat'
 import { DemonAbilityInstance } from './demonAbilityInstance'
-import { PlayerCombatant } from './playerCombatant'
+import { PlayerCombatant } from '../player/playerCombatant'
 
 class DemonInstance {
 

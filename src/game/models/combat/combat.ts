@@ -1,8 +1,8 @@
 import { Encounter } from '../encounters/encounter'
-import { PlayerCombatant } from './playerCombatant'
-import { EnemyCombatant } from './enemyCombatant'
+import { PlayerCombatant } from './player/playerCombatant'
+import { EnemyCombatant } from './enemy/enemyCombatant'
 import { Player } from '../player'
-import { DemonAbilityInstance } from './demonAbilityInstance'
+import { DemonAbilityInstance } from './demon/demonAbilityInstance'
 import { Choice } from 'game/models/combat/choice'
 import { Result } from './results'
 
@@ -32,7 +32,7 @@ class Combat {
         // this.playerCombatant.init()
     }
 
-    useAbility(abilityInstance: DemonAbilityInstance, choice: Choice = false): Result[] {
+    useAbility(abilityInstance: DemonAbilityInstance, choice: Choice = null): Result[] {
 
         if(!abilityInstance.canBeActivated ||
             !abilityInstance.fulfillsChoiceRequirement(choice) ||

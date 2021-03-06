@@ -1,6 +1,6 @@
 import { DemonoList } from '../demonoList'
 import { AbilityWidget } from './abilityWidget'
-import { DemonAbilityInstance } from 'game/models/combat/demonAbilityInstance'
+import { DemonAbilityInstance } from 'game/models/combat/demon/demonAbilityInstance'
 
 class AbilityList extends DemonoList<AbilityWidget> {
 

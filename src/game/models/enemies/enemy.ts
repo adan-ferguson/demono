@@ -1,10 +1,9 @@
+import { DamageType } from '../combat/damage'
 import { EnemyAbility, EnemyAbilityDefinition } from './abilities/enemyAbility'
 import * as EnemyDefinitions from './definitionLoader'
 
-type EnemyArmorType = 'none' | 'phys' | 'magic'
-
 interface Armor {
-    type: EnemyArmorType,
+    type: DamageType,
     value: number
 }
 
@@ -25,14 +24,14 @@ class Enemy {
     name: string
     health: number
     abilities: EnemyAbility[]
-    armor: Armor
+    armor?: Armor
 
     constructor(enemyDef: EnemyDefinition){
         this.name = enemyDef.name
         this.health = enemyDef.health
-        this.armor = enemyDef.armor || {type: 'none', value: 0}
+        this.armor = enemyDef.armor
         this.abilities = enemyDef.abilities.map(abilityDef => new EnemyAbility(abilityDef))
     }
 }
 
-export { EnemyDefinition, Enemy, EnemyArmorType }
+export { EnemyDefinition, Enemy, Armor }

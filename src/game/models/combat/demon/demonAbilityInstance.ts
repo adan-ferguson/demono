@@ -1,18 +1,19 @@
-import { DemonAbility } from '../demons/abilities/ability'
+import { DemonAbility } from '../../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
-import { EnemyCombatant } from './enemyCombatant'
-import { Combat, Result } from './combat'
+import { EnemyCombatant } from '../enemy/enemyCombatant'
+import { Result } from '../combat'
 import { DemonInstance } from './demonInstance'
-import { AbilityInstance } from './abilityInstance'
+import { AbilityInstance } from '../abilityInstance'
+import { Combatant } from '../combatant'
 
 class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
-    constructor(ability: DemonAbility, readonly owner: DemonInstance){
+    constructor(ability: DemonAbility, readonly demon: DemonInstance){
         super(ability)
     }
 
-    get combat(): Combat {
-        return this.owner.player.combat
+    get owner(): Combatant {
+        return this.demon.player
     }
 
     get cost(): number {
@@ -24,8 +25,8 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 
     fulfillsChoiceRequirement(choice: Choice): boolean {
-        if(this.ability.choiceRequirement === false){
-            return choice === false
+        if(this.ability.choiceRequirement === null){
+            return choice === null
         }else if(this.ability.choiceRequirement === 'enemy'){
             return choice instanceof EnemyCombatant
         }
@@ -33,14 +34,14 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 
     canPayCosts(): boolean {
-        return this.owner.energy >= this.cost
+        return this.demon.energy >= this.cost
     }
 
     payCosts(): Result[] {
-        this.owner.energy -= this.cost
+        this.demon.energy -= this.cost
         return [{
             type: 'energyChange',
-            demon: this.owner,
+            demon: this.demon,
             amount: this.cost
         }]
     }
