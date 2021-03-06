@@ -1,28 +1,15 @@
-import { Combatant } from './combatant'
-import { DamageOutcome } from './damage'
 import { DemonInstance } from './demon/demonInstance'
 
-interface DamageResult {
-    readonly type: 'damage'
-    readonly outcome: DamageOutcome,
-    readonly source: Combatant,
-    readonly target: Combatant
+interface Result {
+    readonly type: string
 }
 
-interface EnergyChangeResult {
-    readonly type: 'energyChange'
-    readonly demon: DemonInstance,
-    readonly amount: number
-}
-
-interface PlayerWinResult {
+interface PlayerWinResult extends Result {
     readonly type: 'playerwin'
 }
 
-interface PlayerLoseResult {
+interface PlayerLoseResult extends Result {
     readonly type: 'playerlose'
 }
-
-type Result = DamageResult | EnergyChangeResult | PlayerWinResult | PlayerLoseResult
 
 export { Result }

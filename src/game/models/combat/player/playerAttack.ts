@@ -1,6 +1,6 @@
 import { PlayerCombatant } from './playerCombatant'
 import { DemonStats } from '../../demons/demon'
-import { DamageType } from '../damage'
+import {DamageResult, DamageType} from '../damage'
 import { Tiered } from '../../demons/abilities/tiered'
 import { PlayerAction, PlayerActionDefinition } from './playerAction'
 import { Choice } from '../choice'
@@ -49,7 +49,7 @@ class PlayerAttackAction extends PlayerAction {
                 source: player,
                 target: t,
                 outcome: player.dealDamage(t, damageInfo)
-            })
+            } as DamageResult)
         })
 
         return result

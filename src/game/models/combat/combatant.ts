@@ -1,5 +1,5 @@
-import { Combat } from './combat'
-import { DamageInfo, DamageOutcome } from './damage'
+import {Combat} from './combat'
+import {DamageInfo, DamageOutcome, DamageType} from './damage'
 
 /**
  * A Combatant is someone who is participating in a Combat and can
@@ -54,9 +54,9 @@ abstract class Combatant {
         }
 
         let armor = 0
-        if(info.type === 'phys'){
+        if(info.type === DamageType.Physical){
             armor = this.physDef
-        }else if(info.type === 'magic'){
+        }else if(info.type === DamageType.Magic){
             armor = this.magicDef
         }
 

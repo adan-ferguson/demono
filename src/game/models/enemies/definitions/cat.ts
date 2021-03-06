@@ -1,4 +1,4 @@
-import { EnemyArmorType, EnemyDefinition } from '../enemy'
+import { EnemyDefinition } from '../enemy'
 import { EnemyAbilityDefinition } from '../abilities/enemyAbility'
 import { EnemyActionSubject } from 'game/models/combat/enemy/enemyAction'
 import { DamageType } from 'game/models/combat/damage'

@@ -1,6 +1,6 @@
 import { Choice } from '../choice'
 import { Result } from '../combat'
-import { DamageType } from '../damage'
+import { DamageResult, DamageType } from '../damage'
 import { EnemyAction, EnemyActionDefinition } from './enemyAction'
 import { EnemyCombatant } from './enemyCombatant'
 
@@ -30,7 +30,7 @@ class EnemyAttackAction extends EnemyAction {
                 source: enemy,
                 target: t,
                 outcome: enemy.dealDamage(t, damageInfo)
-            })
+            } as DamageResult)
         })
 
         return result

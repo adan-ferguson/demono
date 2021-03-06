@@ -6,6 +6,12 @@ import { DemonInstance } from './demonInstance'
 import { AbilityInstance } from '../abilityInstance'
 import { Combatant } from '../combatant'
 
+interface EnergyChangeResult extends Result {
+    readonly type: 'energyChange'
+    readonly demon: DemonInstance,
+    readonly amount: number
+}
+
 class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
     constructor(ability: DemonAbility, readonly demon: DemonInstance){
@@ -43,7 +49,7 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
             type: 'energyChange',
             demon: this.demon,
             amount: this.cost
-        }]
+        } as EnergyChangeResult]
     }
 
 }

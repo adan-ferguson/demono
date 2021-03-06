@@ -2,6 +2,7 @@ import { Combatant } from '../combatant'
 import { Enemy } from '../../enemies/enemy'
 import { EnemyAbilityInstance } from './enemyAbilityInstance'
 import { Combat, Result } from '../combat'
+import { DamageType } from '../damage'
 
 interface EnemyOptions {
     turnOffset?: number
@@ -27,11 +28,11 @@ class EnemyCombatant extends Combatant {
     }
 
     get magicDef(): number {
-        return this.enemy.armor.type === 'magic' ? this.enemy.armor.value : 0
+        return this.enemy.armor?.type === DamageType.Magic ? this.enemy.armor.value : 0
     }
 
     get physDef(): number {
-        return this.enemy.armor.type === 'phys' ? this.enemy.armor.value : 0
+        return this.enemy.armor?.type === DamageType.Physical ? this.enemy.armor.value : 0
     }
 
     takeTurn(): Result[] {
