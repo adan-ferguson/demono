@@ -41,8 +41,7 @@ class Combat {
         }
 
         const results: Result[] = []
-        results.push(...abilityInstance.payCosts())
-        results.push(...abilityInstance.performActions(choice))
+        results.push(...abilityInstance.activate(choice))
         this.updateState()
         results.push(...this.doEnemyTurn())
         this.updateState()

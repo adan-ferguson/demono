@@ -4,14 +4,22 @@ import { EnemyWidget } from './enemyWidget'
 
 class EnemyList extends DemonoList<EnemyWidget> {
 
+    private map = new Map<EnemyCombatant, EnemyWidget>()
+
     constructor(){
         super('enemy-list')
     }
 
     setContents(enemies: EnemyCombatant[]): void {
         enemies.forEach(enemyCombatant => {
-            this.add(new EnemyWidget(enemyCombatant))
+            const widget = new EnemyWidget(enemyCombatant)
+            this.add(widget)
+            this.map.set(enemyCombatant, widget)
         })
+    }
+
+    getFromEnemy(enemy: EnemyCombatant): undefined | EnemyWidget {
+        return this.map.get(enemy)
     }
 }
 

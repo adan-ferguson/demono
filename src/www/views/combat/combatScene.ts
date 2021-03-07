@@ -8,6 +8,8 @@ import { EnemyList } from './enemyList'
 import { DemonEnergyList } from './demonEnergyList'
 import { AbilityList } from './abilityList'
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
+import {DamageResult} from "../../../game/models/combat/damage";
+import {PlayerCombatant} from "../../../game/models/combat/player/playerCombatant";
 
 const COMBAT_HTML = `
 <div class="combat-zone">
@@ -103,13 +105,22 @@ class CombatScene extends Scene {
     }
 
     useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): void {
-        this.combat.useAbility(ability, enemyCombatant).forEach(r => this.visualizeResult(r))
+        const results = this.combat.useAbility(ability, enemyCombatant)
+        results.forEach(r => this.visualizeResult(r))
         // TODO: deal with endings
         this.state = CombatSceneState.ChooseAction
     }
 
-    visualizeResult(result: Result): void {
-
+    private visualizeResult(result: Result): void {
+        const damageResult = result as DamageResult
+        if(damageResult){
+            if(damageResult.target instanceof PlayerCombatant){
+                this.widgets.player.visualizeDamage(damageResult.outcome)
+            }else if(damageResult.target instanceof EnemyCombatant){
+                this.widgets.enemyList.getFromEnemy(damageResult.target)?.visualizeDamage(damageResult.outcome)
+            }
+        }
+        throw 'Could not visual result of type ' + result.type
     }
 
     private makeMessaging() {

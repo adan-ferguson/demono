@@ -18,12 +18,11 @@ interface BarOptions {
  */
 class BarWidget extends DemonoWidget {
 
-    private currentValue
     private currentMaxValue
     showMax = false
     label = ''
 
-    constructor(private value: () => number, private maxValue: () => number, options: BarOptions = {}){
+    constructor(maxValue: number, options: BarOptions = {}){
         super('bar')
         if(options.showMax !== undefined){
             this.showMax = options.showMax
@@ -31,8 +30,7 @@ class BarWidget extends DemonoWidget {
         if(options.label !== undefined){
             this.label = options.label
         }
-        this.currentValue = value()
-        this.currentMaxValue = maxValue()
+        this.currentMaxValue = maxValue
         this.makeContents()
     }
 
@@ -40,9 +38,9 @@ class BarWidget extends DemonoWidget {
         this.element.innerHTML = BAR_HTML(this.label)
     }
 
-    update(): void {
-        const value = this.value()
-        const maxValue = this.maxValue()
+    setValue(val: number, animate = false): void {
+        const value = val
+        const maxValue = this.currentMaxValue
 
         const str = this.showMax ? value + ' / ' + maxValue : value.toString()
         this.find('.text.value').textContent = str

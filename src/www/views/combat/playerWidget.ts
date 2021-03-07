@@ -2,6 +2,7 @@ import { PlayerCombatant } from 'game/models/combat/player/playerCombatant'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
 import { DemonStatsWidget } from './demonStatsWidget'
+import {CombatantWidget} from "./combatantWidget";
 
 const PLAYER_HTML = (name: string) => `
 <div class="something">
@@ -18,7 +19,7 @@ const PLAYER_HTML = (name: string) => `
 </div>
 `
 
-class PlayerWidget extends DemonoWidget {
+class PlayerWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
     energybar: BarWidget

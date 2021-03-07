@@ -1,6 +1,8 @@
+import { DamageOutcome } from 'game/models/combat/damage'
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
+import { CombatantWidget } from './combatantWidget'
 
 const ENEMY_HTML = (name: string, armorType = 'none') => `
 <div class="enemy-card">
@@ -18,29 +20,33 @@ const BUFF_HTML = (iconName: string, value: number) => `
 </span>
 `
 
-
-class EnemyWidget extends DemonoWidget {
+class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
 
-    constructor(public enemyCombatant: EnemyCombatant){
+    constructor(public enemyCombatant: EnemyCombatant) {
         super('enemy')
 
         let armorType = 'none'
-        if(enemyCombatant.physDef){
+        if (enemyCombatant.physDef) {
             armorType = 'phys'
-        }else if(enemyCombatant.magicDef){
+        } else if (enemyCombatant.magicDef) {
             armorType = 'magic'
         }
 
         this.element.innerHTML = ENEMY_HTML(enemyCombatant.name, armorType)
-        this.healthbar = new BarWidget(() => enemyCombatant.health, () => enemyCombatant.maxHealth)
+        this.healthbar = new BarWidget(enemyCombatant.maxHealth)
         this.find('.health-bar').append(this.healthbar.element)
     }
 
     update(): void {
         this.updateBuffsList()
+        this.healthbar.setValue(this.enemyCombatant.health)
         super.update()
+    }
+
+    visualizeDamage(damage: DamageOutcome): void {
+        this.healthbar.setValue(damage.targetRemainingHealth, true)
     }
 
     private updateBuffsList(): void {

@@ -17,6 +17,7 @@ interface DamageOutcome {
     type: DamageType,
     damage: number,
     blocked: number,
+    targetRemainingHealth: number
     // other things
 }
 
