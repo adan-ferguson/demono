@@ -8,15 +8,13 @@ const fireball: DemonAbilityDefinition = {
     name: 'Fireball',
     cost: tier => 30 + tier * 10,
     choiceRequirement: 'enemy',
-    actions: [{
-        type: 'attack',
-        subject: PlayerActionSubject.Enemy,
+    actions: [new PlayerAttackDefinition(PlayerActionSubject.Enemy, {
         damage: tier => 20 + 10 * tier,
         damageType: DamageType.Magic,
         scaling: {
             magic: (tier: number) => 0.3 + 0.1 * tier
         }
-    } as PlayerAttackDefinition]
+    })]
 }
 
 export { fireball }

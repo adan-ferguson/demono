@@ -3,6 +3,15 @@ import { Result } from '../combat'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 
+interface EnergyChangeResultArgs {
+    demon: DemonInstance,
+    amount: number
+}
+
+class EnergyChangeResult extends Result {
+    constructor(readonly def: EnergyChangeResultArgs){super()}
+}
+
 class DemonInstance {
 
     demon: Demon
@@ -39,4 +48,4 @@ class DemonInstance {
     }
 }
 
-export { DemonInstance }
+export { DemonInstance, EnergyChangeResult }

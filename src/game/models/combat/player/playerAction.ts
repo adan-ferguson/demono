@@ -1,6 +1,6 @@
 import { Choice } from '../choice'
 import { Combatant } from '../combatant'
-import { Result } from '../results'
+import { Result } from '../result'
 import { PlayerCombatant } from './playerCombatant'
 import { EnemyCombatant } from '../enemy/enemyCombatant'
 
@@ -12,8 +12,8 @@ enum PlayerActionSubject {
     Anyone
 }
 
-interface PlayerActionDefinition {
-    subject: PlayerActionSubject
+abstract class PlayerActionDefinition {
+    constructor(readonly subject: PlayerActionSubject){}
 }
 
 abstract class PlayerAction {

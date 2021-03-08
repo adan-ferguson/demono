@@ -1,5 +1,5 @@
 import { Choice } from '../choice'
-import { Result } from '../results'
+import { Result } from '../result'
 import { EnemyCombatant } from './enemyCombatant'
 import { Combatant } from '../combatant'
 
@@ -12,8 +12,8 @@ enum EnemyActionSubject {
     Anyone
 }
 
-interface EnemyActionDefinition {
-    subject: EnemyActionSubject
+abstract class EnemyActionDefinition {
+    constructor(readonly subject: EnemyActionSubject){}
 }
 
 abstract class EnemyAction {

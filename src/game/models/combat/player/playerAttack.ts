@@ -1,17 +1,22 @@
 import { PlayerCombatant } from './playerCombatant'
 import { DemonStats } from '../../demons/demon'
-import {DamageResult, DamageType} from '../damage'
-import { Tiered } from '../../demons/abilities/tiered'
-import { PlayerAction, PlayerActionDefinition } from './playerAction'
+import { PlayerAction, PlayerActionDefinition, PlayerActionSubject } from './playerAction'
 import { Choice } from '../choice'
 import { Result } from '../combat'
+import { Tiered } from '../../demons/abilities/tiered'
+import { DamageResult, DamageType } from '../damage'
 
-interface PlayerAttackDefinition extends PlayerActionDefinition {
-    type: 'attack'
-    damage: Tiered<number>,
-    damageType: DamageType,
-    scaling?: {
+interface PlayerAttackDefinitionArgs {
+    readonly damage: Tiered<number>,
+    readonly damageType: DamageType,
+    readonly scaling: {
         [keys in keyof DemonStats]?: Tiered<number>
+    }
+}
+
+class PlayerAttackDefinition extends PlayerActionDefinition {
+    constructor(readonly subject: PlayerActionSubject, readonly args: PlayerAttackDefinitionArgs) {
+        super(subject)
     }
 }
 
@@ -22,8 +27,8 @@ class PlayerAttackAction extends PlayerAction {
     }
 
     getDamage(player: PlayerCombatant): number {
-        let val = this.def.damage(this.tier)
-        const scaling = this.def.scaling
+        let val = this.def.args.damage(this.tier)
+        const scaling = this.def.args.scaling
         if(scaling){
             Object.keys(scaling).forEach((statName: keyof DemonStats) => {
                 const scalingFunc = scaling[statName]
@@ -39,17 +44,13 @@ class PlayerAttackAction extends PlayerAction {
 
         const result: Result[] = []
         const damageInfo = {
-            type: this.def.damageType,
+            type: this.def.args.damageType,
             damage: this.getDamage(player)
         }
 
-        this.getTargets(player, choice).forEach(t => {
-            result.push({
-                type: 'damage',
-                source: player,
-                target: t,
-                outcome: player.dealDamage(t, damageInfo)
-            } as DamageResult)
+        this.getTargets(player, choice).forEach(target => {
+            const outcome = player.dealDamage(target, damageInfo)
+            result.push(new DamageResult({ source: player, target, outcome }))
         })
 
         return result

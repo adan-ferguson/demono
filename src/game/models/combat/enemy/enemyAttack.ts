@@ -1,13 +1,18 @@
 import { Choice } from '../choice'
 import { Result } from '../combat'
-import { DamageResult, DamageType } from '../damage'
-import { EnemyAction, EnemyActionDefinition } from './enemyAction'
+import { EnemyAction, EnemyActionDefinition, EnemyActionSubject } from './enemyAction'
 import { EnemyCombatant } from './enemyCombatant'
+import { DamageType } from '../damage'
 
-interface EnemyAttackDefinition extends EnemyActionDefinition {
-    type: 'attack',
-    damageType: DamageType,
-    damage: number,
+interface EnemyAttackDefinitionArgs {
+    readonly damageType: DamageType
+    readonly damage: number
+}
+
+class EnemyAttackDefinition extends EnemyActionDefinition {
+    constructor(subject: EnemyActionSubject, readonly args: EnemyAttackDefinitionArgs){
+        super(subject)
+    }
 }
 
 class EnemyAttackAction extends EnemyAction {
@@ -20,8 +25,8 @@ class EnemyAttackAction extends EnemyAction {
 
         const result: Result[] = []
         const damageInfo = {
-            type: this.def.damageType,
-            damage: this.def.damage
+            type: this.def.args.damageType,
+            damage: this.def.args.damage
         }
 
         this.getTargets(enemy, choice).forEach(t => {
@@ -30,11 +35,11 @@ class EnemyAttackAction extends EnemyAction {
                 source: enemy,
                 target: t,
                 outcome: enemy.dealDamage(t, damageInfo)
-            } as DamageResult)
+            })
         })
 
         return result
     }
 }
 
-export { EnemyAttackDefinition, EnemyAttackAction }
+export { EnemyAttackAction, EnemyAttackDefinition }

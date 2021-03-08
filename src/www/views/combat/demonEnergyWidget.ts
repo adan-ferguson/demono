@@ -11,18 +11,13 @@ class DemonEnergyWidget extends DemonoWidget {
         super('demon-energy')
         this.element.innerHTML = ''
         const energyBar = new BarWidget(
-            () => demonInstance.energy,
-            () => demonInstance.maxEnergy, {
+            demonInstance.maxEnergy, {
                 showMax: true,
                 label: demonInstance.demon.name
             })
+        energyBar.setValue(demonInstance.energy)
         this.element.append(energyBar.element)
-    }
-
-    update(): void {
         this.setClass('active', this.demonInstance.isActive)
-        this.addClass('selectable')
-        super.update()
     }
 }
 

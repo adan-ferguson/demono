@@ -18,6 +18,4 @@ abstract class AbilityInstance<T extends Ability> {
     }
 }
 
-
-
 export { AbilityInstance }

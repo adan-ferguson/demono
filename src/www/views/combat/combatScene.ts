@@ -1,6 +1,6 @@
 import '../../styles/combat/combat.sass'
 import { Scene } from '../scene'
-import { Combat, Result } from 'game/models/combat/combat'
+import { Combat } from 'game/models/combat/combat'
 import { PlayerWidget } from './playerWidget'
 import { DemonAbilityInstance } from 'game/models/combat/demon/demonAbilityInstance'
 import { MessagingWidget } from './messagingWidget'
@@ -8,8 +8,10 @@ import { EnemyList } from './enemyList'
 import { DemonEnergyList } from './demonEnergyList'
 import { AbilityList } from './abilityList'
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
-import {DamageResult} from "../../../game/models/combat/damage";
-import {PlayerCombatant} from "../../../game/models/combat/player/playerCombatant";
+import { PlayerCombatant } from '../../../game/models/combat/player/playerCombatant'
+import { Combatant } from 'game/models/combat/combatant'
+import { CombatantWidget } from './combatantWidget'
+import { Visualizer } from './visualizer'
 
 const COMBAT_HTML = `
 <div class="combat-zone">
@@ -42,10 +44,12 @@ class CombatScene extends Scene {
         abilityList: AbilityList,
         demonEnergyList: DemonEnergyList
     }
+    visualizer: Visualizer
 
     constructor(combat: Combat) {
         super('combat')
         this.combat = combat
+        this.visualizer = new Visualizer(this)
     }
 
     begin(): void {
@@ -94,7 +98,6 @@ class CombatScene extends Scene {
         const enemyList = new EnemyList()
         enemyList.setContents(this.combat.enemyCombatants)
         enemyList.listItemClicked.on(enemyWidget => {
-            debugger
             const ability = this.widgets.abilityList.selected?.abilityInstance
             if (ability && this.state === CombatSceneState.ChooseEnemy) {
                 this.useAbility(ability, enemyWidget.enemyCombatant)
@@ -106,21 +109,21 @@ class CombatScene extends Scene {
 
     useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): void {
         const results = this.combat.useAbility(ability, enemyCombatant)
-        results.forEach(r => this.visualizeResult(r))
+        results.forEach(async r => {
+            this.widgets.messaging.addResult(r)
+            await this.visualizer.visualizeResult(r)
+        })
         // TODO: deal with endings
         this.state = CombatSceneState.ChooseAction
     }
 
-    private visualizeResult(result: Result): void {
-        const damageResult = result as DamageResult
-        if(damageResult){
-            if(damageResult.target instanceof PlayerCombatant){
-                this.widgets.player.visualizeDamage(damageResult.outcome)
-            }else if(damageResult.target instanceof EnemyCombatant){
-                this.widgets.enemyList.getFromEnemy(damageResult.target)?.visualizeDamage(damageResult.outcome)
-            }
+    public getWidgetFromCombatant(target: Combatant): undefined | CombatantWidget {
+        if (target instanceof PlayerCombatant) {
+            return this.widgets.player
+        } else if(target instanceof EnemyCombatant) {
+            return this.widgets.enemyList.getFromEnemy(target)
         }
-        throw 'Could not visual result of type ' + result.type
+        return undefined
     }
 
     private makeMessaging() {
@@ -133,10 +136,6 @@ class CombatScene extends Scene {
         const player = new PlayerWidget(this.combat.playerCombatant)
         this.find('.player').replaceWith(player.element)
         return player
-    }
-
-    update(): void {
-        super.update()
     }
 
     private setState(state: CombatSceneState){

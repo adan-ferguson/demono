@@ -38,13 +38,14 @@ abstract class Combatant {
 
     takeDamage(info: DamageInfo): DamageOutcome {
         const blocked = this.block(info)
-        const outcome = {
-            damage: info.damage - blocked,
-            blocked: blocked,
-            type: info.type
+        const damage = info.damage - blocked
+        this.health -= damage
+        return {
+            damage,
+            blocked,
+            type: info.type,
+            targetRemainingHealth: this.health
         }
-        this.health -= outcome.damage
-        return outcome
     }
 
     private block(info: DamageInfo): number {

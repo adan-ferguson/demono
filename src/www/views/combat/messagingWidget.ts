@@ -1,3 +1,4 @@
+import { Result } from 'game/models/combat/combat'
 import { DemonoWidget } from '../demonoWidget'
 
 class MessagingWidget extends DemonoWidget {
@@ -8,6 +9,10 @@ class MessagingWidget extends DemonoWidget {
 
     setMessage(message: string): void {
         this.element.textContent = message
+    }
+
+    addResult(r: Result): void {
+
     }
 }
 

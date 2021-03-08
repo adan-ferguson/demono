@@ -1,5 +1,5 @@
-import { Result } from './combat'
 import { Combatant } from './combatant'
+import { Result } from './result'
 
 enum DamageType {
     Physical,
@@ -21,11 +21,14 @@ interface DamageOutcome {
     // other things
 }
 
-interface DamageResult extends Result {
-    readonly type: 'damage'
-    readonly outcome: DamageOutcome,
-    readonly source: Combatant,
-    readonly target: Combatant
+interface DamageResultDef {
+    source: Combatant,
+    target: Combatant,
+    outcome: DamageOutcome
+}
+
+class DamageResult extends Result {
+    constructor(readonly args: DamageResultDef){super()}
 }
 
 export { DamageInfo, DamageType, DamageOutcome, DamageResult }

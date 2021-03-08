@@ -2,20 +2,14 @@ import { DemonAbility } from '../../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from '../enemy/enemyCombatant'
 import { Result } from '../combat'
-import { DemonInstance } from './demonInstance'
+import { DemonInstance, EnergyChangeResult } from './demonInstance'
 import { AbilityInstance } from '../abilityInstance'
 import { Combatant } from '../combatant'
-import {Ability} from "../ability";
 
-interface EnergyChangeResult extends Result {
-    readonly type: 'energyChange'
-    readonly demon: DemonInstance,
-    readonly amount: number
-}
-
-interface ActivateAbilityResult extends Result {
-    readonly type: 'activateAbility',
-    readonly ability: Ability
+class ActivateAbilityResult extends Result {
+    constructor(readonly ability: DemonAbilityInstance){
+        super()
+    }
 }
 
 class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
@@ -47,10 +41,7 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
     activate(choice: Choice): Result[] {
         const results: Result[] = []
-        results.push({
-            type: 'activateAbility',
-            ability: this.ability
-        } as ActivateAbilityResult)
+        results.push(new ActivateAbilityResult(this))
         results.push(...this.payCosts())
         results.push(...this.performActions(choice))
         return results
@@ -62,12 +53,13 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
     private payCosts(): Result[] {
         this.demon.energy -= this.cost
-        return [{
-            type: 'energyChange',
-            demon: this.demon,
-            amount: this.cost
-        } as EnergyChangeResult]
+        return [
+            new EnergyChangeResult({
+                demon: this.demon,
+                amount: this.cost
+            })
+        ]
     }
 }
 
-export { DemonAbilityInstance }
+export { DemonAbilityInstance, ActivateAbilityResult }

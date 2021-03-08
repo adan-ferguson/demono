@@ -36,13 +36,8 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
         this.element.innerHTML = ENEMY_HTML(enemyCombatant.name, armorType)
         this.healthbar = new BarWidget(enemyCombatant.maxHealth)
-        this.find('.health-bar').append(this.healthbar.element)
-    }
-
-    update(): void {
-        this.updateBuffsList()
         this.healthbar.setValue(this.enemyCombatant.health)
-        super.update()
+        this.find('.health-bar').append(this.healthbar.element)
     }
 
     visualizeDamage(damage: DamageOutcome): void {

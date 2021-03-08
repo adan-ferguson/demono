@@ -4,7 +4,7 @@ import { EnemyCombatant } from './enemy/enemyCombatant'
 import { Player } from '../player'
 import { DemonAbilityInstance } from './demon/demonAbilityInstance'
 import { Choice } from 'game/models/combat/choice'
-import { Result } from './results'
+import { Result } from './result'
 
 enum CombatState {
     Running,
