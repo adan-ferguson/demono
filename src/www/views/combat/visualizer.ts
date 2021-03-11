@@ -2,6 +2,7 @@ import { Result } from 'game/models/combat/result'
 import { DamageResult } from 'game/models/combat/damage'
 import { CombatScene } from './combatScene'
 import { ActivateAbilityResult } from 'game/models/combat/demon/demonAbilityInstance'
+import { EnergyChangeResult } from '../../../game/models/combat/demon/demonInstance'
 
 class Visualizer {
 
@@ -19,16 +20,28 @@ class Visualizer {
             return await this.visualizeActivateAbility(result)
         }
 
-        throw 'Could not visualize result.'
+        if (result instanceof EnergyChangeResult) {
+            return await this.visualizeEnergyChange(result)
+        }
+
+        console.error('Unsupported result', result)
     }
 
-    private async visualizeDamageResult(damageResult: DamageResult): Promise<void> {
-        this.combatScene.getWidgetFromCombatant(damageResult.args.target)?.visualizeDamage(damageResult.args.outcome)
+    private async visualizeEnergyChange(result: EnergyChangeResult): Promise<void> {
+        const widget = this.combatScene.widgets.demonEnergyList.getFromDemonInstance(result.demon)
+        widget?.visualizeEnergyChange(result.amount)
+        await wait(1000)
     }
 
-    private async visualizeActivateAbility(activateAbilityResult: ActivateAbilityResult): Promise<void> {
-
+    private async visualizeDamageResult(result: DamageResult): Promise<void> {
+        this.combatScene.getWidgetFromCombatant(result.target)?.visualizeDamage(result.outcome)
+        await wait(1000)
     }
+
+    private async visualizeActivateAbility(result: ActivateAbilityResult): Promise<void> {}
 }
+
+const wait = (ms: number) => new Promise(r => setTimeout(r, ms))
+
 
 export { Visualizer }

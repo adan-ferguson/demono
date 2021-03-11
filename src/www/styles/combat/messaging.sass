@@ -1,5 +1,17 @@
 demono.combat
   demono.messaging
-    display: flex
-    align-items: center
-    justify-content: center
+    position: relative
+
+    > *
+      @include fullsize
+      display: none
+
+    &[mode='display']
+      .display
+        display: flex
+        align-items: center
+        justify-content: center
+
+    &[mode='log']
+      .log
+        display: inline-block

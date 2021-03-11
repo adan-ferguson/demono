@@ -3,13 +3,30 @@ import { Result } from '../combat'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 
+enum EnergyChangeType {
+    Cost,
+    Regeneration,
+    FromAbility
+}
+
 interface EnergyChangeResultArgs {
     demon: DemonInstance,
-    amount: number
+    amount: number,
+    type: EnergyChangeType
 }
 
 class EnergyChangeResult extends Result {
-    constructor(readonly def: EnergyChangeResultArgs){super()}
+
+    readonly demon: DemonInstance
+    readonly amount: number
+    readonly type: EnergyChangeType
+
+    constructor(def: EnergyChangeResultArgs){
+        super()
+        this.demon = def.demon
+        this.amount = def.amount
+        this.type = def.type
+    }
 }
 
 class DemonInstance {
@@ -48,4 +65,4 @@ class DemonInstance {
     }
 }
 
-export { DemonInstance, EnergyChangeResult }
+export { DemonInstance, EnergyChangeResult, EnergyChangeType }

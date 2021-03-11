@@ -28,7 +28,17 @@ interface DamageResultDef {
 }
 
 class DamageResult extends Result {
-    constructor(readonly args: DamageResultDef){super()}
+
+    readonly source: Combatant
+    readonly target: Combatant
+    readonly outcome: DamageOutcome
+
+    constructor(args: DamageResultDef){
+        super()
+        this.source = args.source
+        this.target = args.target
+        this.outcome = args.outcome
+    }
 }
 
 export { DamageInfo, DamageType, DamageOutcome, DamageResult }

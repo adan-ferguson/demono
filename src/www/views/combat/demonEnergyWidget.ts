@@ -6,18 +6,24 @@ import { DemonoWidget } from '../demonoWidget'
 class DemonEnergyWidget extends DemonoWidget {
 
     clicked = new LiteEvent()
+    energyBar: BarWidget
 
     constructor(readonly demonInstance: DemonInstance){
         super('demon-energy')
         this.element.innerHTML = ''
-        const energyBar = new BarWidget(
+        this.energyBar = new BarWidget(
             demonInstance.maxEnergy, {
                 showMax: true,
                 label: demonInstance.demon.name
             })
-        energyBar.setValue(demonInstance.energy)
-        this.element.append(energyBar.element)
+        this.energyBar.setValue(demonInstance.energy)
+        this.element.append(this.energyBar.element)
         this.setClass('active', this.demonInstance.isActive)
+        this.addClass('selectable')
+    }
+
+    visualizeEnergyChange(delta: number): void {
+        this.energyBar.changeValue(delta, true)
     }
 }
 

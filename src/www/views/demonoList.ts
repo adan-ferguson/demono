@@ -30,7 +30,7 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
             return
         }
 
-        this.removeClassAll('selected')
+        this.deselectAll()
         widget.addClass('selected')
 
         if(widget){
@@ -43,6 +43,10 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
         if(widgets.length > index){
             this.select(widgets[index])
         }
+    }
+
+    deselectAll(): void {
+        this.removeClassAll('selected')
     }
 
     addClassAll(className: string): void {

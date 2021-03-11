@@ -16,10 +16,6 @@ class AbilityWidget extends DemonoWidget {
     constructor(readonly abilityInstance: DemonAbilityInstance){
         super('ability')
         this.element.innerHTML = ABILITY_HTML(abilityInstance)
-        this.update()
-    }
-
-    update(): void {
         this.setClass('selectable', this.abilityInstance.canBeActivated)
     }
 }

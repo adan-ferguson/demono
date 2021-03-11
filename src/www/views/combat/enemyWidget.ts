@@ -24,6 +24,7 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
 
+
     constructor(public enemyCombatant: EnemyCombatant) {
         super('enemy')
 

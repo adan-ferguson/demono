@@ -107,13 +107,15 @@ class CombatScene extends Scene {
         return enemyList
     }
 
-    useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): void {
+    async useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): Promise<void> {
         const results = this.combat.useAbility(ability, enemyCombatant)
-        results.forEach(async r => {
-            this.widgets.messaging.addResult(r)
+        for(let i = 0; i < results.length; i++){
+            const r = results[i]
+            this.widgets.messaging.addResultToLog(r)
             await this.visualizer.visualizeResult(r)
-        })
+        }
         // TODO: deal with endings
+        this.widgets.abilityList.deselectAll()
         this.state = CombatSceneState.ChooseAction
     }
 
@@ -141,7 +143,7 @@ class CombatScene extends Scene {
     private setState(state: CombatSceneState){
         this.state = state
         if(state === CombatSceneState.ChooseEnemy){
-            this.widgets.messaging.setMessage('Select an enemy')
+            this.widgets.messaging.displayMessage('Select an enemy')
             this.widgets.enemyList.addClassAll('clickable')
         }
         //TODO: other states
