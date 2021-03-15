@@ -14,11 +14,9 @@ demono.bar
     @include fullsize
     background-color: red
     width: 0
-    transition: width 1s ease
-    display: none
 
   &.animate .bar-damage
-    display: inline-block
+    transition: width 1s ease
 
   .text
     @include fullsize
@@ -33,7 +31,7 @@ demono.bar
     justify-content: center
 
     &.value
-      font-family: 'NumberFont', SansSerif
+      font-family: 'NumberFont', SansSerif, serif
 
     &.left
       justify-content: flex-start

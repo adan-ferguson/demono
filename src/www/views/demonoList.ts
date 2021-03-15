@@ -17,6 +17,7 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
 
     add(widget: T): void {
         this.element.append(widget.element)
+        this._widgets.push(widget)
         widget.clicked.on(() => {
             this.listItemClicked.trigger(widget)
             if(widget.hasClass('selectable')){
@@ -55,6 +56,11 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
 
     removeClassAll(className: string): void {
         this.widgets.forEach(w => w.removeClass(className))
+    }
+
+    clearList(): void {
+        this.element.innerHTML = ''
+        this._widgets = []
     }
 }
 

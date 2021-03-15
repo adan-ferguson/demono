@@ -39,6 +39,7 @@ class BarWidget extends DemonoWidget {
     }
 
     setValue(val: number, animate = false): void {
+        this.setClass('animate', animate)
         this.value = Math.max(0, Math.min(this.maxValue, val))
 
         const str = this.showMax ? this.value + ' / ' + this.maxValue : this.value.toString()
@@ -46,7 +47,6 @@ class BarWidget extends DemonoWidget {
 
         const pct = 100 * this.value / this.maxValue
 
-        this.setClass('animate', animate)
         requestAnimationFrame(() => {
             this.find('.bar-value').style.width = `${pct}%`
             this.find('.bar-damage').style.width = `${pct}%`

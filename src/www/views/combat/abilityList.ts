@@ -12,7 +12,7 @@ class AbilityList extends DemonoList<AbilityWidget> {
 
     setContents(abilities: DemonAbilityInstance[]): void {
         this.map.clear()
-        this.element.innerHTML = ''
+        this.clearList()
         abilities.forEach(ability => {
             const widget = new AbilityWidget(ability)
             this.add(widget)
