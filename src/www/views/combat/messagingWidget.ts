@@ -8,11 +8,13 @@ import { LogWidget } from './logWidget'
 const HTML = `
 <div class='display'></div>
 <div class='log'></div>
+<button class='toggle-log'>Log</button>
 `
 
 class MessagingWidget extends DemonoWidget {
 
     private log: LogWidget
+    private logVisible: boolean
 
     constructor() {
         super('messaging')
@@ -20,6 +22,16 @@ class MessagingWidget extends DemonoWidget {
         this.log = new LogWidget()
         this.find('.log').replaceWith(this.log.element)
         this.setMode('hidden')
+        this.logVisible = false
+
+        this.find('.toggle-log').addEventListener('click', () => {
+            this.logVisible = !this.logVisible
+            this.setMode(this.logVisible ? 'log' : 'hidden')
+        })
+    }
+
+    hideDisplay(): void {
+        this.setMode(this.logVisible ? 'log' : 'hidden')
     }
 
     displayMessage(message: string): void {
@@ -27,13 +39,12 @@ class MessagingWidget extends DemonoWidget {
         this.setMode('display')
     }
 
-    setMode(mode: 'display' | 'log' | 'hidden'): void {
-        this.element.setAttribute('mode', mode)
-    }
-
     addResultToLog(result: Result): void {
         this.log.addResult(result)
-        this.setMode('log')
+    }
+
+    private setMode(mode: 'display' | 'log' | 'hidden'): void {
+        this.element.setAttribute('mode', mode)
     }
 }
 

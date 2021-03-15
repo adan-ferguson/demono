@@ -14,7 +14,11 @@ demono.bar
     @include fullsize
     background-color: red
     width: 0
-    transition: width 0.3s ease
+    transition: width 1s ease
+    display: none
+
+  &.animate .bar-damage
+    display: inline-block
 
   .text
     @include fullsize

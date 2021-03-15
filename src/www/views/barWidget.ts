@@ -1,8 +1,8 @@
 import { DemonoWidget } from './demonoWidget'
 
 const BAR_HTML = (label = '') => `
-<div class="bar-value"></div>
 <div class="bar-damage"></div>
+<div class="bar-value"></div>
 ${label ? `<div class="text label left">${label}</div>` : ''}
 <div class='text value${label ? ' right' : ''}'></div>
 <div class="bar-border"></div>
@@ -45,7 +45,12 @@ class BarWidget extends DemonoWidget {
         this.find('.text.value').textContent = str
 
         const pct = 100 * this.value / this.maxValue
-        this.find('.bar-value').style.width = `${pct}%`
+
+        this.setClass('animate', animate)
+        requestAnimationFrame(() => {
+            this.find('.bar-value').style.width = `${pct}%`
+            this.find('.bar-damage').style.width = `${pct}%`
+        })
     }
 
     changeValue(delta: number, animate = false): void {

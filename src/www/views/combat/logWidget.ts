@@ -38,7 +38,7 @@ class LogWidget extends DemonoWidget {
     }
 
     addActivateAbilityResult(result: ActivateAbilityResult): void {
-        this.addRow(`You used ${result.ability.ability.name}.`)
+        this.addRow(`${result.ability.demon.demon.name} used ${result.ability.ability.name}.`)
     }
 
     addDamageResult(result: DamageResult): void {

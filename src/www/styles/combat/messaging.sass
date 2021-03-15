@@ -2,7 +2,7 @@ demono.combat
   demono.messaging
     position: relative
 
-    > *
+    > .log, > .display
       @include fullsize
       display: none
 
@@ -15,3 +15,8 @@ demono.combat
     &[mode='log']
       .log
         display: inline-block
+
+    .toggle-log
+      position: absolute
+      left: 0
+      bottom: 0

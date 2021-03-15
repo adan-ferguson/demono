@@ -1,48 +1,17 @@
 import { LiteEvent } from 'game/models/liteEvent'
 
-interface Registry {
-    [key: string]: DemonoWidget
-}
-
-const demonoRegistry: Registry = {}
-let nextId = 1
-
 abstract class DemonoWidget {
 
-    static getFromRegistry<T extends DemonoWidget = DemonoWidget>(el: Element): T | null{
-        const registryId = el.getAttribute('demono-id')
-        if(!registryId){
-            return null
-        }
-        const demonoElement = demonoRegistry[registryId] as T
-        if(!demonoElement){
-            return null
-        }
-        return demonoElement
-    }
-
     element: Element
-    registryId: string
     clicked = new LiteEvent()
 
     constructor(className: string){
         this.element = document.createElement('demono')
         this.element.classList.add(...className.trim().split(' '))
-
-        this.registryId = 'd' + nextId++
-        demonoRegistry[this.registryId] = this
-        this.element.setAttribute('demono-id', this.registryId)
-
         this.element.addEventListener('click', () => {
             if(this.hasClass('clickable') || this.hasClass('selectable')){
                 this.clicked.trigger()
             }
-        })
-    }
-
-    update(): void {
-        this.getChildDemonoElements().forEach(el => {
-            DemonoWidget.getFromRegistry(el)?.update()
         })
     }
 
@@ -58,16 +27,6 @@ abstract class DemonoWidget {
     protected findAll(querySelector: string): HTMLElement[] {
         const result = this.element.querySelectorAll<HTMLElement>(querySelector)
         return [...result]
-    }
-
-    protected findWidgets<T extends DemonoWidget = DemonoWidget>(querySelector = 'demono'): T[] {
-        return this
-            .findAll(querySelector)
-            .map(el => DemonoWidget.getFromRegistry<T>(el))
-            .filter(notNull)
-        function notNull(val: T | null): val is T {
-            return val !== null
-        }
     }
 
     protected getChildDemonoElements(): Element[] {

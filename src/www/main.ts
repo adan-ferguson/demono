@@ -45,7 +45,7 @@ function loadPlayer(){
                 affinityId: 'fire',
                 equipment: [{
                     name: 'Sword',
-                    abilities: ['fireball']
+                    abilities: ['fireball','sear','slash']
                 }]
             },
             {

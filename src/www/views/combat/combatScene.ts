@@ -26,8 +26,7 @@ const COMBAT_HTML = `
 `
 
 enum CombatSceneState {
-    WaitingToStart,
-    ChooseAction,
+    Idle,
     ChooseEnemy,
     Visualizing,
     Ended
@@ -36,7 +35,7 @@ enum CombatSceneState {
 class CombatScene extends Scene {
 
     private combat: Combat
-    state = CombatSceneState.WaitingToStart
+    state = CombatSceneState.Idle
     widgets: {
         enemyList: EnemyList,
         messaging: MessagingWidget,
@@ -50,13 +49,20 @@ class CombatScene extends Scene {
         super('combat')
         this.combat = combat
         this.visualizer = new Visualizer(this)
+        this.element.addEventListener('click', e => {
+            if(e.target instanceof Element) {
+                const closest = e.target.closest('.clickable,.selectable')
+                if (!closest) {
+                    this.resetState()
+                }
+            }
+        })
     }
 
     begin(): void {
         this.populate()
         this.combat.init()
         this.widgets.demonEnergyList.selectIndex(0)
-        this.update()
     }
 
     private populate(): void {
@@ -89,6 +95,7 @@ class CombatScene extends Scene {
         demonList.setContents(this.combat.playerCombatant.demonInstances)
         demonList.listItemSelected.on(dme => {
             this.widgets.abilityList.setContents(dme.demonInstance.abilityInstances)
+            this.resetState()
         })
         this.find('.demon-list').replaceWith(demonList.element)
         return demonList
@@ -115,8 +122,7 @@ class CombatScene extends Scene {
             await this.visualizer.visualizeResult(r)
         }
         // TODO: deal with endings
-        this.widgets.abilityList.deselectAll()
-        this.state = CombatSceneState.ChooseAction
+        this.setState(CombatSceneState.Idle)
     }
 
     public getWidgetFromCombatant(target: Combatant): undefined | CombatantWidget {
@@ -145,8 +151,21 @@ class CombatScene extends Scene {
         if(state === CombatSceneState.ChooseEnemy){
             this.widgets.messaging.displayMessage('Select an enemy')
             this.widgets.enemyList.addClassAll('clickable')
+        }else if(state === CombatSceneState.Idle){
+            this.widgets.messaging.hideDisplay()
+            this.widgets.enemyList.removeClassAll('clickable')
+            this.widgets.abilityList.deselectAll()
         }
-        //TODO: other states
+    }
+
+    private resetState(){
+        if(this.state === CombatSceneState.Idle ||
+            this.state === CombatSceneState.Ended ||
+            this.state === CombatSceneState.Visualizing ||
+            this.combat.finished){
+            return
+        }
+        this.setState(CombatSceneState.Idle)
     }
 }
 
