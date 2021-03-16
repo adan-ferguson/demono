@@ -2,7 +2,7 @@ import { LiteEvent } from 'game/models/liteEvent'
 
 abstract class DemonoWidget {
 
-    element: Element
+    element: HTMLElement
     clicked = new LiteEvent()
 
     constructor(className: string){

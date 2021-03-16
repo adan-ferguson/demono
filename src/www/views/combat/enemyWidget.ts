@@ -2,6 +2,7 @@ import { DamageOutcome } from 'game/models/combat/damage'
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
+import {FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 import { CombatantWidget } from './combatantWidget'
 
 const ENEMY_HTML = (name: string, armorType = 'none') => `
@@ -43,6 +44,16 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
     visualizeDamage(damage: DamageOutcome): void {
         this.healthbar.setValue(damage.targetRemainingHealth, true)
+        this.flyingText(-damage.damage + '', 'red')
+    }
+
+    private flyingText(message: string, color = 'black'){
+        new FlyingTextEffect({
+            message,
+            color,
+            direction: FlyingTextDirection.Down,
+            origin: this.healthbar.element.getBoundingClientRect()
+        }).run()
     }
 
     private updateBuffsList(): void {
