@@ -3,10 +3,8 @@ import { DemonoWidget } from '../demonoWidget'
 import { EnemyAbilityInstance } from 'game/models/combat/enemy/enemyAbilityInstance'
 
 const HTML = (timeleft: number) => `
-<span class="time-ability">
-    <span class="time-icon"></span>
-    <span class="time-number">${timeleft}</span>
-</span>
+<span class="time-icon"></span>
+<span class="time-number">${timeleft}</span>
 `
 
 class UpcomingAbilitiesWidget extends DemonoWidget {
