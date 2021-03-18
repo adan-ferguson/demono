@@ -30,7 +30,6 @@ class Visualizer {
     private async visualizeEnergyChange(result: EnergyChangeResult): Promise<void> {
         const widget = this.combatScene.widgets.demonEnergyList.getFromDemonInstance(result.demon)
         widget?.visualizeEnergyChange(result.amount)
-        await wait(1000)
     }
 
     private async visualizeDamageResult(result: DamageResult): Promise<void> {

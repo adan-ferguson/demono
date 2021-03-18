@@ -12,6 +12,8 @@ import { PlayerCombatant } from '../../../game/models/combat/player/playerCombat
 import { Combatant } from 'game/models/combat/combatant'
 import { CombatantWidget } from './combatantWidget'
 import { Visualizer } from './visualizer'
+import { LogModal } from './logModal'
+import { InfoModal } from './infoModal'
 
 const COMBAT_HTML = `
 <div class="combat-zone">
@@ -42,6 +44,10 @@ class CombatScene extends Scene {
         player: PlayerWidget,
         abilityList: AbilityList,
         demonEnergyList: DemonEnergyList
+    }
+    modals: {
+        info: InfoModal,
+        log: LogModal
     }
     visualizer: Visualizer
 
@@ -74,6 +80,10 @@ class CombatScene extends Scene {
             demonEnergyList: this.makeDemonEnergyList(),
             abilityList: this.makeAbilityList()
         }
+        this.modals = {
+            info: new InfoModal(),
+            log: new LogModal()
+        }
     }
 
     private makeAbilityList(): AbilityList {
@@ -86,6 +96,9 @@ class CombatScene extends Scene {
                 this.useAbility(instance)
             }
         })
+        abilityList.listItemRightClicked.on(ab => {
+            this.modals.info.showAbility(ab.abilityInstance)
+        })
         this.find('.ability-list').replaceWith(abilityList.element)
         return abilityList
     }
@@ -96,6 +109,9 @@ class CombatScene extends Scene {
         demonList.listItemSelected.on(dme => {
             this.widgets.abilityList.setContents(dme.demonInstance.abilityInstances)
             this.resetState()
+        })
+        demonList.listItemRightClicked.on(demon => {
+            this.modals.info.showDemon(demon.demonInstance)
         })
         this.find('.demon-list').replaceWith(demonList.element)
         return demonList
@@ -110,6 +126,9 @@ class CombatScene extends Scene {
                 this.useAbility(ability, enemyWidget.enemyCombatant)
             }
         })
+        enemyList.listItemRightClicked.on(enemy => {
+            this.modals.info.showEnemy(enemy.enemyCombatant)
+        })
         this.find('.enemy-list').replaceWith(enemyList.element)
         return enemyList
     }
@@ -118,7 +137,7 @@ class CombatScene extends Scene {
         const results = this.combat.useAbility(ability, enemyCombatant)
         for(let i = 0; i < results.length; i++){
             const r = results[i]
-            this.widgets.messaging.addResultToLog(r)
+            this.modals.log.addResult(r)
             await this.visualizer.visualizeResult(r)
         }
         // TODO: deal with endings

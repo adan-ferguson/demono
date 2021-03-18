@@ -4,6 +4,7 @@ abstract class DemonoWidget {
 
     element: HTMLElement
     clicked = new LiteEvent()
+    rightclicked = new LiteEvent()
 
     constructor(className: string){
         this.element = document.createElement('demono')
@@ -11,6 +12,12 @@ abstract class DemonoWidget {
         this.element.addEventListener('click', () => {
             if(this.hasClass('clickable') || this.hasClass('selectable')){
                 this.clicked.trigger()
+            }
+        })
+        this.element.addEventListener('contextmenu', e => {
+            if(this.hasClass('rightclickable')){
+                e.preventDefault()
+                this.rightclicked.trigger()
             }
         })
     }

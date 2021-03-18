@@ -37,8 +37,8 @@ abstract class Combatant {
     }
 
     takeDamage(info: DamageInfo): DamageOutcome {
-        const blocked = this.block(info)
-        const damage = info.damage - blocked
+        const blocked = Math.round(this.block(info))
+        const damage = Math.round(info.damage - blocked)
         this.health -= damage
         return {
             damage,

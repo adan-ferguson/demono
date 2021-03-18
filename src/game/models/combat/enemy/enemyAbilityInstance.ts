@@ -17,7 +17,7 @@ class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {
     }
 
     set timeLeft(value: number){
-        this._timeLeft += value
+        this._timeLeft = value
         this._timeLeft = Math.max(0, this._timeLeft)
     }
 

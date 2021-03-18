@@ -23,7 +23,7 @@ class FlyingTextEffect extends DemonoEffect {
     constructor(args: FlyingTextEffectArgs){
         super('flying-text-effect', {
             x: args.origin.x + args.origin.width / 2,
-            y: args.origin.y + args.origin.height * 2
+            y: args.origin.y + args.origin.height / 2
         })
         this.element.innerHTML = EFFECT_HTML(args)
         this.direction = args.direction

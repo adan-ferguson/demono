@@ -37,18 +37,21 @@ class EnemyCombatant extends Combatant {
 
     takeTurn(): Result[] {
         const result: Result[] = []
-        if(this.health){
-            //TODO: tick buffs
-            this.abilities.forEach(ability => {
-                if(this.combat.finished){
-                    return
-                }
-                ability.timeLeft--
-                if(ability.ready){
-                    result.push(...ability.performActions())
-                }
-            })
+        if(!this.health) {
+            return []
         }
+
+        //TODO: tick buffs
+        this.abilities.forEach(ability => {
+            if(this.combat.finished){
+                return
+            }
+            ability.timeLeft--
+            if(ability.ready){
+                result.push(...ability.performActions())
+            }
+        })
+
         return result
     }
 }

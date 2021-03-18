@@ -2,10 +2,12 @@ import { DamageOutcome } from 'game/models/combat/damage'
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
-import {FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
+import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 import { CombatantWidget } from './combatantWidget'
+import { UpcomingAbilitiesWidget } from './upcomingAbilitiesWidget'
 
 const ENEMY_HTML = (name: string, armorType = 'none') => `
+<div class="upcoming-abilities"></div>
 <div class="enemy-card">
     <span class="name">${name}</span>
     <span class="armor-icon ${armorType}"></span>
@@ -24,7 +26,7 @@ const BUFF_HTML = (iconName: string, value: number) => `
 class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
-
+    upcomingAbilities: UpcomingAbilitiesWidget
 
     constructor(public enemyCombatant: EnemyCombatant) {
         super('enemy')
@@ -38,8 +40,11 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
         this.element.innerHTML = ENEMY_HTML(enemyCombatant.name, armorType)
         this.healthbar = new BarWidget(enemyCombatant.maxHealth)
-        this.healthbar.setValue(this.enemyCombatant.health)
+        this.healthbar.setValue(enemyCombatant.health)
         this.find('.health-bar').append(this.healthbar.element)
+
+        this.upcomingAbilities = new UpcomingAbilitiesWidget(enemyCombatant.abilities)
+        this.find('.upcoming-abilities').replaceWith(this.upcomingAbilities.element)
     }
 
     visualizeDamage(damage: DamageOutcome): void {
@@ -54,6 +59,11 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
             direction: FlyingTextDirection.Down,
             origin: this.healthbar.element.getBoundingClientRect()
         }).run()
+    }
+
+    private updateUpcomingAbilities(){
+        this.upcomingAbilities.update()
+        // TODO: update pct health notches
     }
 
     private updateBuffsList(): void {

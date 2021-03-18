@@ -5,6 +5,8 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
 
     public listItemClicked = new TypedEvent<T>()
     public listItemSelected = new TypedEvent<T>()
+    public listItemRightClicked = new TypedEvent<T>()
+
     private _widgets: T[] = []
 
     get widgets(): T[] {
@@ -23,6 +25,9 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
             if(widget.hasClass('selectable')){
                 this.select(widget)
             }
+        })
+        widget.rightclicked.on(() => {
+            this.listItemRightClicked.trigger(widget)
         })
     }
 
