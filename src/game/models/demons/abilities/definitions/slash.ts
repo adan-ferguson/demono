@@ -8,7 +8,7 @@ const slash: DemonAbilityDefinition = {
     name: 'Slash',
     cost: tier => 30 + tier * 10,
     choiceRequirement: 'enemy',
-    classification: 'phys-attack',
+    classification: 'physattack',
     actions: [new PlayerAttackDefinition(PlayerActionSubject.Enemy, {
         damage: tier => 20 + 10 * tier,
         damageType: DamageType.Magic,

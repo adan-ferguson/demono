@@ -1,8 +1,8 @@
 import { Choice } from '../choice'
-import { Result } from '../combat'
 import { EnemyAction, EnemyActionDefinition, EnemyActionSubject } from './enemyAction'
 import { EnemyCombatant } from './enemyCombatant'
 import { DamageResult, DamageType } from '../damage'
+import { Result } from '../result'
 
 interface EnemyAttackDefinitionArgs {
     readonly damageType: DamageType

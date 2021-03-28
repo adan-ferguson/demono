@@ -7,7 +7,7 @@ import { EnemyAttackDefinition } from '../../combat/enemy/enemyAttack'
 const bite: EnemyAbilityDefinition = {
     name: 'Bite',
     time: 3,
-    classification: 'phys-attack',
+    classification: 'physattack',
     description: '$name gives $target a bite.',
     actions: [new EnemyAttackDefinition(EnemyActionSubject.Player, {
         damageType: DamageType.Physical,

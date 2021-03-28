@@ -1,7 +1,7 @@
 import { Demon, DemonStats } from '../../demons/demon'
-import { Result } from '../combat'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
+import { Result } from '../result'
 
 enum EnergyChangeType {
     Cost,

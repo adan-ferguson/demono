@@ -2,7 +2,8 @@ import { Demon, DemonStats } from '../../demons/demon'
 import { Player } from '../../player'
 import { DemonInstance } from '../demon/demonInstance'
 import { Combatant } from '../combatant'
-import { Combat, Result } from '../combat'
+import { Combat } from '../combat'
+import { Result } from '../result'
 
 class PlayerCombatant extends Combatant {
 

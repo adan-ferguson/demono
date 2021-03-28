@@ -1,8 +1,10 @@
 import { Combatant } from '../combatant'
 import { Enemy } from '../../enemies/enemy'
 import { EnemyAbilityInstance, EnemyAbilityTickResult } from './enemyAbilityInstance'
-import { Combat, Result } from '../combat'
+import { Combat } from '../combat'
 import { DamageType } from '../damage'
+import { Result } from '../result'
+import { ActivateAbilityResult } from '../abilityInstance'
 
 interface EnemyOptions {
     turnOffset?: number
@@ -49,6 +51,7 @@ class EnemyCombatant extends Combatant {
             ability.timeLeft--
             result.push(new EnemyAbilityTickResult(ability))
             if(ability.ready){
+                result.push(new ActivateAbilityResult({ ability }))
                 result.push(...ability.performActions())
             }
         })

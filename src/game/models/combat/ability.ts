@@ -1,6 +1,6 @@
 import { Action } from './action'
 
-type AbilityClassification = 'phys-attack' | 'magic-attack' | 'defensive' | 'utility'
+type AbilityClassification = 'physattack' | 'magic-attack' | 'defensive' | 'utility'
 
 abstract class Ability {
     constructor(readonly actions: Action[]){}

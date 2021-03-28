@@ -3,6 +3,12 @@ import { EncounterDefinition } from '../encounter'
 const test: EncounterDefinition = {
     enemies: [
         {
+            id: 'dat',
+            options: {
+                turnOffset: -2
+            }
+        },
+        {
             id: 'bat'
         },
         {
@@ -11,12 +17,6 @@ const test: EncounterDefinition = {
                 turnOffset: -1
             }
         },
-        {
-            id: 'dat',
-            options: {
-                turnOffset: -2
-            }
-        }
     ]
 }
 

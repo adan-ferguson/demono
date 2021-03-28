@@ -2,9 +2,9 @@ import { PlayerCombatant } from './playerCombatant'
 import { DemonStats } from '../../demons/demon'
 import { PlayerAction, PlayerActionDefinition, PlayerActionSubject } from './playerAction'
 import { Choice } from '../choice'
-import { Result } from '../combat'
 import { Tiered } from '../../demons/abilities/tiered'
 import { DamageResult, DamageType } from '../damage'
+import { Result } from '../result'
 
 interface PlayerAttackDefinitionArgs {
     readonly damage: Tiered<number>,

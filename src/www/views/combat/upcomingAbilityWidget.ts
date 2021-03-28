@@ -2,7 +2,7 @@ import { DemonoWidget } from '../demonoWidget'
 import { EnemyAbilityInstance } from 'game/models/combat/enemy/enemyAbilityInstance'
 
 const HTML = (classification: string) => `
-<span class="classification-icon" style="background-image: url('../../assets/${classification + '.svg'}')"></span>
+<span class="classification-icon ${classification}"></span>
 <span class="time-left"></span>
 `
 

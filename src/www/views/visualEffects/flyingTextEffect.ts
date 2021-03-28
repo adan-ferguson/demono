@@ -2,36 +2,43 @@ import '../../styles/effects/flyingText.sass'
 import { DemonoEffect } from './demonoEffect'
 
 enum FlyingTextDirection {
-    Down = 'down'
+    Down = 'down',
+    Up = 'up'
 }
 
 interface FlyingTextEffectArgs {
     message: string
-    color: string
+    color?: string
     direction: FlyingTextDirection
-    origin: DOMRect
+    origin: DOMRect,
+    duration?: number,
+    distance?: number
 }
 
-const EFFECT_HTML = (args: FlyingTextEffectArgs) => `
-<span style='color:${args.color};'>${args.message}</span>
+const EFFECT_HTML = (color: string, message: string) => `
+<span style='color:${color};'>${message}</span>
 `
 
 class FlyingTextEffect extends DemonoEffect {
 
     readonly direction: FlyingTextDirection
+    readonly distance: number
 
     constructor(args: FlyingTextEffectArgs){
         super('flying-text-effect', {
             x: args.origin.x + args.origin.width / 2,
             y: args.origin.y + args.origin.height / 2
-        })
-        this.element.innerHTML = EFFECT_HTML(args)
+        }, args.duration || undefined)
+        this.element.innerHTML = EFFECT_HTML(args.color || 'black', args.message)
         this.direction = args.direction
+        this.distance = args.distance || 5
     }
 
-    start(): void{
+    protected start(): void{
         const currentTransform = getComputedStyle(this.element).transform
-        this.element.style.transform = currentTransform + ' translateY(3rem)'
+        const distance = this.distance * (this.direction === FlyingTextDirection.Down ? 1 : -1)
+        const translateStr = ` translateY(${distance}rem)`
+        this.element.style.transform = currentTransform + translateStr
         this.element.style.opacity = '0'
     }
 }

@@ -2,21 +2,9 @@ import { DemonAbility } from '../../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from '../enemy/enemyCombatant'
 import { DemonInstance, EnergyChangeResult, EnergyChangeType } from './demonInstance'
-import { AbilityInstance } from '../abilityInstance'
+import { AbilityInstance, ActivateAbilityResult } from '../abilityInstance'
 import { Combatant } from '../combatant'
 import { Result } from '../result'
-
-interface ActivateAbilityResultArgs {
-    ability: DemonAbilityInstance
-}
-
-class ActivateAbilityResult extends Result {
-    readonly ability: DemonAbilityInstance
-    constructor(def: ActivateAbilityResultArgs){
-        super()
-        this.ability = def.ability
-    }
-}
 
 class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
@@ -69,4 +57,4 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 }
 
-export { DemonAbilityInstance, ActivateAbilityResult }
+export { DemonAbilityInstance }

@@ -4,6 +4,7 @@ import { CombatScene } from './combatScene'
 import { ActivateAbilityResult } from 'game/models/combat/demon/demonAbilityInstance'
 import { EnergyChangeResult } from 'game/models/combat/demon/demonInstance'
 import { EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
+import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 
 class Visualizer {
 
@@ -48,7 +49,19 @@ class Visualizer {
 
     private async visualizeEnemyAbilityTickResult(result: EnemyAbilityTickResult): Promise<void> {
         const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.ability.owner)
-        widget?.upcomingAbilities.getByAbility(result.ability)?.setTimeLeft(result.timeLeft)
+        const abilityWidget = widget?.upcomingAbilities.getByAbility(result.ability)
+
+        if(!abilityWidget){
+            return
+        }
+
+        abilityWidget.setTimeLeft(result.timeLeft)
+        new FlyingTextEffect({
+            message: '-1',
+            direction: FlyingTextDirection.Up,
+            origin: abilityWidget.element.getBoundingClientRect(),
+            duration: 1500
+        }).run()
         await wait(200)
     }
 }

@@ -71,4 +71,4 @@ class Combat {
     }
 }
 
-export { Combat, Result }
+export { Combat }

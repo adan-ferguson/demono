@@ -1,6 +1,7 @@
 import { EnemyAbility } from '../../enemies/abilities/enemyAbility'
 import { AbilityInstance } from '../abilityInstance'
-import { Combat, Result } from '../combat'
+import { Combat } from '../combat'
+import { Result } from '../result'
 import { EnemyCombatant } from './enemyCombatant'
 
 class EnemyAbilityTickResult extends Result {
