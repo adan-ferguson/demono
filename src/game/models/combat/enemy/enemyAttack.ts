@@ -2,7 +2,7 @@ import { Choice } from '../choice'
 import { Result } from '../combat'
 import { EnemyAction, EnemyActionDefinition, EnemyActionSubject } from './enemyAction'
 import { EnemyCombatant } from './enemyCombatant'
-import { DamageType } from '../damage'
+import { DamageResult, DamageType } from '../damage'
 
 interface EnemyAttackDefinitionArgs {
     readonly damageType: DamageType
@@ -30,12 +30,11 @@ class EnemyAttackAction extends EnemyAction {
         }
 
         this.getTargets(enemy, choice).forEach(t => {
-            result.push({
-                type: 'damage',
+            result.push(new DamageResult({
                 source: enemy,
                 target: t,
                 outcome: enemy.dealDamage(t, damageInfo)
-            })
+            }))
         })
 
         return result

@@ -2,7 +2,7 @@ import { ChoiceRequirement } from 'game/models/combat/choice'
 import { Action } from '../../combat/action'
 import * as DemonAbilityDefinitions from './definitionLoader'
 import { Tiered } from './tiered'
-import { Ability } from 'game/models/combat/ability'
+import { Ability, AbilityClassification } from 'game/models/combat/ability'
 import { PlayerAttackAction, PlayerAttackDefinition } from 'game/models/combat/player/playerAttack'
 import { PlayerActionDefinition } from 'game/models/combat/player/playerAction'
 
@@ -13,6 +13,7 @@ interface DemonAbilityDefinition {
     name: string,
     cost: Tiered<number>,
     choiceRequirement?: ChoiceRequirement,
+    classification: AbilityClassification,
     actions: PlayerActionDefinition[]
 }
 
@@ -23,6 +24,7 @@ class DemonAbility extends Ability {
     readonly cost: number
     readonly description: string
     readonly choiceRequirement: ChoiceRequirement
+    readonly _classification: AbilityClassification
 
     static loadFromId(id: DemonAbilityId, tier = 1): DemonAbility {
         const def = DemonAbilityDefinitions[id as DemonAbilityId]
@@ -35,6 +37,11 @@ class DemonAbility extends Ability {
         this.name = def.name
         this.cost = def.cost(this.tier)
         this.choiceRequirement = def.choiceRequirement || null
+        this._classification = def.classification
+    }
+
+    get classification(): AbilityClassification {
+        return this._classification
     }
 }
 

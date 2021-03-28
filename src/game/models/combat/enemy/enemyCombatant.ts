@@ -1,6 +1,6 @@
 import { Combatant } from '../combatant'
 import { Enemy } from '../../enemies/enemy'
-import { EnemyAbilityInstance } from './enemyAbilityInstance'
+import { EnemyAbilityInstance, EnemyAbilityTickResult } from './enemyAbilityInstance'
 import { Combat, Result } from '../combat'
 import { DamageType } from '../damage'
 
@@ -47,6 +47,7 @@ class EnemyCombatant extends Combatant {
                 return
             }
             ability.timeLeft--
+            result.push(new EnemyAbilityTickResult(ability))
             if(ability.ready){
                 result.push(...ability.performActions())
             }

@@ -2,7 +2,8 @@ import { Result } from 'game/models/combat/result'
 import { DamageResult } from 'game/models/combat/damage'
 import { CombatScene } from './combatScene'
 import { ActivateAbilityResult } from 'game/models/combat/demon/demonAbilityInstance'
-import { EnergyChangeResult } from '../../../game/models/combat/demon/demonInstance'
+import { EnergyChangeResult } from 'game/models/combat/demon/demonInstance'
+import { EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
 
 class Visualizer {
 
@@ -12,16 +13,20 @@ class Visualizer {
 
     public async visualizeResult(result: Result): Promise<void> {
 
-        if (result instanceof DamageResult) {
+        if(result instanceof DamageResult){
             return await this.visualizeDamageResult(result)
         }
 
-        if (result instanceof ActivateAbilityResult) {
+        if(result instanceof ActivateAbilityResult){
             return await this.visualizeActivateAbility(result)
         }
 
-        if (result instanceof EnergyChangeResult) {
+        if(result instanceof EnergyChangeResult){
             return await this.visualizeEnergyChange(result)
+        }
+
+        if(result instanceof EnemyAbilityTickResult){
+            return await this.visualizeEnemyAbilityTickResult(result)
         }
 
         console.error('Unsupported result', result)
@@ -37,7 +42,15 @@ class Visualizer {
         await wait(1000)
     }
 
-    private async visualizeActivateAbility(result: ActivateAbilityResult): Promise<void> {}
+    private async visualizeActivateAbility(result: ActivateAbilityResult): Promise<void> {
+        this.combatScene.widgets.messaging.displayMessage(result.ability.owner.name + ' used ' + result.ability.ability.name)
+    }
+
+    private async visualizeEnemyAbilityTickResult(result: EnemyAbilityTickResult): Promise<void> {
+        const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.ability.owner)
+        widget?.upcomingAbilities.getByAbility(result.ability)?.setTimeLeft(result.timeLeft)
+        await wait(200)
+    }
 }
 
 const wait = (ms: number) => new Promise(r => setTimeout(r, ms))

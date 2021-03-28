@@ -1,3 +1,4 @@
+import '../../styles/combat/messaging.sass'
 import { DemonoWidget } from '../demonoWidget'
 
 class MessagingWidget extends DemonoWidget {
@@ -6,12 +7,12 @@ class MessagingWidget extends DemonoWidget {
         super('messaging')
     }
 
-    hideDisplay(): void {
-        this.removeClass('shown')
+    clear(): void {
+        this.element.innerHTML = ''
     }
 
     displayMessage(message: string): void {
-        this.find('.display').textContent = message
+        this.element.textContent = message
         this.addClass('shown')
     }
 }

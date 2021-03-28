@@ -1,7 +1,15 @@
 import { EnemyAbility } from '../../enemies/abilities/enemyAbility'
 import { AbilityInstance } from '../abilityInstance'
-import { Combat } from '../combat'
+import { Combat, Result } from '../combat'
 import { EnemyCombatant } from './enemyCombatant'
+
+class EnemyAbilityTickResult extends Result {
+    readonly timeLeft: number
+    constructor(readonly ability: EnemyAbilityInstance){
+        super()
+        this.timeLeft = ability.timeLeft
+    }
+}
 
 class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {
 
@@ -30,4 +38,4 @@ class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {
     }
 }
 
-export { EnemyAbilityInstance }
+export { EnemyAbilityInstance, EnemyAbilityTickResult }

@@ -8,6 +8,7 @@ const sear: DemonAbilityDefinition = {
     name: 'Sear',
     cost: tier => 30 + tier * 10,
     choiceRequirement: 'enemy',
+    classification: 'magic-attack',
     actions: [new PlayerAttackDefinition(PlayerActionSubject.Enemy, {
         damage: tier => 20 + 10 * tier,
         damageType: DamageType.Magic,

@@ -160,7 +160,7 @@ class CombatScene extends Scene {
     }
 
     private makePlayer(): PlayerWidget {
-        const player = new PlayerWidget(this.combat.playerCombatant)
+        const player = new PlayerWidget(this, this.combat.playerCombatant)
         this.find('.player').replaceWith(player.element)
         return player
     }
@@ -171,7 +171,7 @@ class CombatScene extends Scene {
             this.widgets.messaging.displayMessage('Select an enemy')
             this.widgets.enemyList.addClassAll('clickable')
         }else if(state === CombatSceneState.Idle){
-            this.widgets.messaging.hideDisplay()
+            this.widgets.messaging.clear()
             this.widgets.enemyList.removeClassAll('clickable')
             this.widgets.abilityList.deselectAll()
         }

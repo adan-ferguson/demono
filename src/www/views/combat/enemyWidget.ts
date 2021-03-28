@@ -4,7 +4,7 @@ import { BarWidget } from '../barWidget'
 import { DemonoWidget } from '../demonoWidget'
 import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 import { CombatantWidget } from './combatantWidget'
-import { UpcomingAbilitiesWidget } from './upcomingAbilitiesWidget'
+import { UpcomingAbilitiesList } from './upcomingAbilitiesList'
 
 const ENEMY_HTML = (name: string, armorType = 'none') => `
 <div class="upcoming-abilities"></div>
@@ -26,7 +26,7 @@ const BUFF_HTML = (iconName: string, value: number) => `
 class EnemyWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
-    upcomingAbilities: UpcomingAbilitiesWidget
+    upcomingAbilities: UpcomingAbilitiesList
 
     constructor(public enemyCombatant: EnemyCombatant) {
         super('enemy')
@@ -43,7 +43,8 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
         this.healthbar.setValue(enemyCombatant.health)
         this.find('.health-bar').append(this.healthbar.element)
 
-        this.upcomingAbilities = new UpcomingAbilitiesWidget(enemyCombatant.abilities)
+        this.upcomingAbilities = new UpcomingAbilitiesList()
+        this.upcomingAbilities.setContents(enemyCombatant.abilities)
         this.find('.upcoming-abilities').replaceWith(this.upcomingAbilities.element)
     }
 
@@ -59,11 +60,6 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
             direction: FlyingTextDirection.Down,
             origin: this.healthbar.element.getBoundingClientRect()
         }).run()
-    }
-
-    private updateUpcomingAbilities(){
-        this.upcomingAbilities.update()
-        // TODO: update pct health notches
     }
 
     private updateBuffsList(): void {

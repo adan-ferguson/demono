@@ -17,8 +17,8 @@ class DemonoList<T extends DemonoWidget> extends DemonoWidget {
         return this._widgets.filter(w => w.hasClass('selected'))[0]
     }
 
-    add(widget: T): void {
-        this.element.append(widget.element)
+    add(widget: T, addTo = this.element): void {
+        addTo.append(widget.element)
         this._widgets.push(widget)
         widget.clicked.on(() => {
             this.listItemClicked.trigger(widget)

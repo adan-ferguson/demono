@@ -8,6 +8,9 @@
     "target": "es6",
     "jsx": "react",
     "allowJs": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "game/*" : ["./game/*"]
+    }
   }
 }
