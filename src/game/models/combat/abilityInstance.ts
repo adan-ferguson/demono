@@ -8,10 +8,10 @@ interface ActivateAbilityResultArgs {
 }
 
 class ActivateAbilityResult extends Result {
-    readonly ability: AbilityInstance<Ability>
+    readonly abilityInstance: AbilityInstance<Ability>
     constructor(def: ActivateAbilityResultArgs){
         super()
-        this.ability = def.ability
+        this.abilityInstance = def.ability
     }
 }
 

@@ -1,5 +1,5 @@
+import { ActivateAbilityResult } from 'game/models/combat/abilityInstance'
 import { DamageResult } from 'game/models/combat/damage'
-import { ActivateAbilityResult } from 'game/models/combat/demon/demonAbilityInstance'
 import { EnergyChangeResult, EnergyChangeType } from 'game/models/combat/demon/demonInstance'
 import { Result } from 'game/models/combat/result'
 import { Modal } from '../modal'
@@ -34,11 +34,11 @@ class LogModal extends  Modal {
         if(result.type !== EnergyChangeType.FromAbility){
             return
         }
-        this.addRow(`${result.demon.demon.name} ${result.amount > 0 ? 'gained' : 'lost'} ${result.amount} energy.`)
+        this.addRow(`${result.demon.demon.name} ${result.delta > 0 ? 'gained' : 'lost'} ${result.delta} energy.`)
     }
 
     private addActivateAbilityResult(result: ActivateAbilityResult): void {
-        this.addRow(`${result.ability.demon.demon.name} used ${result.ability.ability.name}.`)
+        this.addRow(`${result.abilityInstance.owner.name} used ${result.abilityInstance.ability.name}.`)
     }
 
     private addDamageResult(result: DamageResult): void {

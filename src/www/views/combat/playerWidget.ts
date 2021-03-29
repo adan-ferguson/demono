@@ -1,10 +1,11 @@
-import { PlayerCombatant } from 'game/models/combat/player/playerCombatant'
-import { BarWidget } from '../barWidget'
-import { DemonoWidget } from '../demonoWidget'
-import { DemonStatsWidget } from './demonStatsWidget'
-import { CombatantWidget } from './combatantWidget'
-import { DamageOutcome } from 'game/models/combat/damage'
-import { CombatScene } from './combatScene'
+import {PlayerCombatant} from 'game/models/combat/player/playerCombatant'
+import {BarWidget} from '../barWidget'
+import {DemonoWidget} from '../demonoWidget'
+import {DemonStatsWidget} from './demonStatsWidget'
+import {CombatantWidget} from './combatantWidget'
+import {DamageOutcome} from 'game/models/combat/damage'
+import {CombatScene} from './combatScene'
+import {FlyingTextDirection, FlyingTextEffect} from "../visualEffects/flyingTextEffect";
 
 const PLAYER_HTML = (name: string) => `
 <div class="something">
@@ -43,7 +44,7 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
             {
                 showMax: true
             })
-        this.healthbar.setValue(playerCombatant.currentDemonInstance.energy)
+        this.energybar.setValue(playerCombatant.currentDemonInstance.energy)
         this.find('.energy-bar').append(this.energybar.element)
 
         this.demonStats = new DemonStatsWidget(playerCombatant)
@@ -56,6 +57,21 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
 
     visualizeDamage(damage: DamageOutcome): void {
         this.healthbar.setValue(damage.targetRemainingHealth, true)
+        new FlyingTextEffect({
+            message: damage.damage.toString(),
+            color: 'red',
+            direction: FlyingTextDirection.Up,
+            origin: this.healthbar.element.getBoundingClientRect()
+        }).run()
+    }
+
+    visualizeEnergyChange(delta: number): void {
+        this.energybar.changeValue(delta, true)
+        new FlyingTextEffect({
+            message: delta.toString(),
+            direction: FlyingTextDirection.Down,
+            origin: this.energybar.element.getBoundingClientRect()
+        }).run()
     }
 }
 

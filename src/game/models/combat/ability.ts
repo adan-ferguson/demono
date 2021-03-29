@@ -5,6 +5,7 @@ type AbilityClassification = 'physattack' | 'magic-attack' | 'defensive' | 'util
 abstract class Ability {
     constructor(readonly actions: Action[]){}
     abstract get classification(): AbilityClassification
+    abstract get name(): string
 }
 
 export { Ability, AbilityClassification }

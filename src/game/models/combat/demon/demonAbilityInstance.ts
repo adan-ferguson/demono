@@ -50,7 +50,7 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
         return [
             new EnergyChangeResult({
                 demon: this.demon,
-                amount: -this.cost,
+                delta: -this.cost,
                 type: EnergyChangeType.Cost
             })
         ]

@@ -11,20 +11,20 @@ enum EnergyChangeType {
 
 interface EnergyChangeResultArgs {
     demon: DemonInstance,
-    amount: number,
+    delta: number,
     type: EnergyChangeType
 }
 
 class EnergyChangeResult extends Result {
 
     readonly demon: DemonInstance
-    readonly amount: number
+    readonly delta: number
     readonly type: EnergyChangeType
 
     constructor(def: EnergyChangeResultArgs){
         super()
         this.demon = def.demon
-        this.amount = def.amount
+        this.delta = def.delta
         this.type = def.type
     }
 }

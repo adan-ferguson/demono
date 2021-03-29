@@ -11,7 +11,7 @@ abstract class DemonoEffect extends DemonoWidget {
 
     constructor(className: string, readonly origin: Coords, readonly duration = 2000){
         super(className)
-        this.element.style.transition = `all ${duration/1000}s ease`
+        this.element.style.transition = `all ${duration/1000}s ease-out`
         this.setPosition(this.origin)
     }
 
@@ -33,4 +33,4 @@ abstract class DemonoEffect extends DemonoWidget {
     protected abstract start(): void
 }
 
-export { DemonoEffect }
+export { DemonoEffect, Coords }

@@ -1,10 +1,10 @@
 import { Result } from 'game/models/combat/result'
 import { DamageResult } from 'game/models/combat/damage'
 import { CombatScene } from './combatScene'
-import { ActivateAbilityResult } from 'game/models/combat/demon/demonAbilityInstance'
 import { EnergyChangeResult } from 'game/models/combat/demon/demonInstance'
 import { EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
 import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
+import { ActivateAbilityResult } from 'game/models/combat/abilityInstance'
 
 class Visualizer {
 
@@ -35,7 +35,8 @@ class Visualizer {
 
     private async visualizeEnergyChange(result: EnergyChangeResult): Promise<void> {
         const widget = this.combatScene.widgets.demonEnergyList.getFromDemonInstance(result.demon)
-        widget?.visualizeEnergyChange(result.amount)
+        widget?.visualizeEnergyChange(result.delta)
+        this.combatScene.widgets.player.visualizeEnergyChange(result.delta)
     }
 
     private async visualizeDamageResult(result: DamageResult): Promise<void> {
@@ -44,7 +45,7 @@ class Visualizer {
     }
 
     private async visualizeActivateAbility(result: ActivateAbilityResult): Promise<void> {
-        this.combatScene.widgets.messaging.displayMessage(result.ability.owner.name + ' used ' + result.ability.ability.name)
+        this.combatScene.widgets.messaging.displayMessage(result.abilityInstance.owner.name + ' used ' + result.abilityInstance.ability.name)
     }
 
     private async visualizeEnemyAbilityTickResult(result: EnemyAbilityTickResult): Promise<void> {
