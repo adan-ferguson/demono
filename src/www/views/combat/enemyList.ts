@@ -1,6 +1,7 @@
 import { EnemyCombatant } from 'game/models/combat/enemy/enemyCombatant'
 import { DemonoList } from '../demonoList'
 import { EnemyWidget } from './enemyWidget'
+import '../../styles/combat/enemies.sass'
 
 class EnemyList extends DemonoList<EnemyWidget> {
 

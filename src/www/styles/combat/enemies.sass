@@ -1,3 +1,5 @@
+@import '../common/mixins'
+
 demono.combat
   demono.enemy-list
     display: flex
@@ -13,10 +15,18 @@ demono.combat
       flex-direction: column
       align-items: center
       padding: 1.7rem
+      opacity: 1
+      width: 20rem
+      transition: all 1s ease, background-color 0.3s ease
+
+      &.fadeout
+        opacity: 0
+        width: 0
+        padding: 0
+        margin: 0
 
       &.clickable
         background-color: #EEE
-        transition: background-color ease 0.3s
 
         &:hover
           background-color: powderblue
@@ -24,7 +34,7 @@ demono.combat
       .enemy-card
         @include boxshadow
         position: relative
-        width: 16rem
+        width: calc(100% - 4rem)
         height: 6rem
         display: flex
         align-items: center

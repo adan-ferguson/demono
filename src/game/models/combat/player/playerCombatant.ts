@@ -5,6 +5,10 @@ import { Combatant } from '../combatant'
 import { Combat } from '../combat'
 import { Result } from '../result'
 
+class PlayerDefeatedResult extends Result {
+
+}
+
 class PlayerCombatant extends Combatant {
 
     player: Player

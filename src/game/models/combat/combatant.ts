@@ -1,5 +1,12 @@
-import {Combat} from './combat'
-import {DamageInfo, DamageOutcome, DamageType} from './damage'
+import { Combat } from './combat'
+import { DamageInfo, DamageOutcome, DamageType } from './damage'
+import { Result } from './result'
+
+class DefeatedResult extends Result {
+    constructor(readonly combatant: Combatant){
+        super()
+    }
+}
 
 /**
  * A Combatant is someone who is participating in a Combat and can
@@ -65,4 +72,4 @@ abstract class Combatant {
     }
 }
 
-export { Combatant }
+export { Combatant, DefeatedResult }

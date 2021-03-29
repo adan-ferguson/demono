@@ -5,6 +5,7 @@ import { EnergyChangeResult } from 'game/models/combat/demon/demonInstance'
 import { EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
 import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 import { ActivateAbilityResult } from 'game/models/combat/abilityInstance'
+import { DefeatedResult } from 'game/models/combat/combatant'
 
 class Visualizer {
 
@@ -28,6 +29,10 @@ class Visualizer {
 
         if(result instanceof EnemyAbilityTickResult){
             return await this.visualizeEnemyAbilityTickResult(result)
+        }
+
+        if(result instanceof DefeatedResult){
+            return await this.visualizeDefeatedResult(result)
         }
 
         console.error('Unsupported result', result)
@@ -64,6 +69,10 @@ class Visualizer {
             duration: 1500
         }).run()
         await wait(200)
+    }
+
+    private async visualizeDefeatedResult(result: DefeatedResult): Promise<void> {
+        this.combatScene.getWidgetFromCombatant(result.combatant)?.visualizeDefeat()
     }
 }
 

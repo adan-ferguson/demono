@@ -5,6 +5,7 @@ import { Choice } from '../choice'
 import { Tiered } from '../../demons/abilities/tiered'
 import { DamageResult, DamageType } from '../damage'
 import { Result } from '../result'
+import { DefeatedResult } from '../combatant'
 
 interface PlayerAttackDefinitionArgs {
     readonly damage: Tiered<number>,
@@ -51,6 +52,9 @@ class PlayerAttackAction extends PlayerAction {
         this.getTargets(player, choice).forEach(target => {
             const outcome = player.dealDamage(target, damageInfo)
             result.push(new DamageResult({ source: player, target, outcome }))
+            if(target.health <= 0){
+                result.push(new DefeatedResult(target))
+            }
         })
 
         return result

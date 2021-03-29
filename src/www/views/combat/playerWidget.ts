@@ -1,11 +1,11 @@
-import {PlayerCombatant} from 'game/models/combat/player/playerCombatant'
-import {BarWidget} from '../barWidget'
-import {DemonoWidget} from '../demonoWidget'
-import {DemonStatsWidget} from './demonStatsWidget'
-import {CombatantWidget} from './combatantWidget'
-import {DamageOutcome} from 'game/models/combat/damage'
-import {CombatScene} from './combatScene'
-import {FlyingTextDirection, FlyingTextEffect} from "../visualEffects/flyingTextEffect";
+import { PlayerCombatant } from 'game/models/combat/player/playerCombatant'
+import { BarWidget } from '../barWidget'
+import { DemonoWidget } from '../demonoWidget'
+import { DemonStatsWidget } from './demonStatsWidget'
+import { CombatantWidget } from './combatantWidget'
+import { DamageOutcome } from 'game/models/combat/damage'
+import { CombatScene } from './combatScene'
+import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 
 const PLAYER_HTML = (name: string) => `
 <div class="something">
@@ -72,6 +72,10 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
             direction: FlyingTextDirection.Down,
             origin: this.energybar.element.getBoundingClientRect()
         }).run()
+    }
+
+    visualizeDefeat(): void {
+        // TODO: this
     }
 }
 

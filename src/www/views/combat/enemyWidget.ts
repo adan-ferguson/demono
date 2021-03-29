@@ -53,6 +53,13 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
         this.flyingText(-damage.damage + '', 'red')
     }
 
+    visualizeDefeat(): void {
+        this.addClass('fadeout')
+        setTimeout(() => {
+            this.destroy()
+        }, 1000)
+    }
+
     private flyingText(message: string, color = 'black'){
         new FlyingTextEffect({
             message,
@@ -71,6 +78,10 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
         //     statsHTML += BUFF_HTML('mshield', this.enemyCombatant.magicDef)
         // }
         // this.find('.stats').innerHTML = statsHTML
+    }
+
+    private destroy(): void {
+        this.element.remove()
     }
 }
 
