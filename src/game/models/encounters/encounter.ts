@@ -8,24 +8,30 @@ interface EncounterDefinition {
     enemies: {
         id: keyof typeof EnemyDefinitions,
         options?: EnemyOptions
-    }[]
+    }[],
+    level: number
 }
 
 class Encounter {
+
+    enemies: {
+        id: keyof typeof EnemyDefinitions;
+        options?: EnemyOptions | undefined
+    }[]
+    level: number
 
     static loadFromId(id: string): Encounter {
         const def = EncounterDefinitions[id as keyof typeof EncounterDefinitions]
         return new Encounter(def)
     }
 
-    private encounterDefinition: EncounterDefinition
-
     constructor(encounterDefinition: EncounterDefinition){
-        this.encounterDefinition = encounterDefinition
+        this.enemies = encounterDefinition.enemies
+        this.level = encounterDefinition.level
     }
 
     createEnemyCombatants(combat: Combat): EnemyCombatant[] {
-        return this.encounterDefinition.enemies.map(enemyData => {
+        return this.enemies.map(enemyData => {
             return new EnemyCombatant(Enemy.loadFromId(enemyData.id), combat, enemyData.options)
         })
     }

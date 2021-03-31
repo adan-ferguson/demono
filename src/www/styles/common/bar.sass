@@ -10,13 +10,21 @@ demono.bar
     background-color: black
     width: 0
 
-  .bar-damage
+  .bar-change
     @include fullsize
-    background-color: red
     width: 0
 
-  &.animate .bar-damage
-    transition: width 1s ease-out
+  &.animate
+    .bar-change
+      transition: width 1s ease-out
+      background-color: red
+
+    &.gaining
+      .bar-value
+        transition: width 1.5s linear
+      .bar-change
+        transition: none
+        background-color: #DDD
 
   .text
     @include fullsize

@@ -1,7 +1,7 @@
 import { DemonoWidget } from './demonoWidget'
 
 const BAR_HTML = (label = '') => `
-<div class="bar-damage"></div>
+<div class="bar-change"></div>
 <div class="bar-value"></div>
 ${label ? `<div class="text label left">${label}</div>` : ''}
 <div class='text value${label ? ' right' : ''}'></div>
@@ -40,6 +40,7 @@ class BarWidget extends DemonoWidget {
 
     setValue(val: number, animate = false): void {
         this.setClass('animate', animate)
+        this.setClass('gaining', val > this.value)
         this.value = Math.max(0, Math.min(this.maxValue, val))
 
         const str = this.showMax ? this.value + ' / ' + this.maxValue : this.value.toString()
@@ -49,7 +50,7 @@ class BarWidget extends DemonoWidget {
 
         requestAnimationFrame(() => {
             this.find('.bar-value').style.width = `${pct}%`
-            this.find('.bar-damage').style.width = `${pct}%`
+            this.find('.bar-change').style.width = `${pct}%`
         })
     }
 

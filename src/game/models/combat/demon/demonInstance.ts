@@ -11,21 +11,28 @@ enum EnergyChangeType {
 
 interface EnergyChangeResultArgs {
     demon: DemonInstance,
-    delta: number,
+    before: number,
+    after: number,
     type: EnergyChangeType
 }
 
 class EnergyChangeResult extends Result {
 
     readonly demon: DemonInstance
-    readonly delta: number
+    readonly before: number
+    readonly after: number
     readonly type: EnergyChangeType
 
     constructor(def: EnergyChangeResultArgs){
         super()
         this.demon = def.demon
-        this.delta = def.delta
+        this.before = def.before
+        this.after = def.after
         this.type = def.type
+    }
+
+    get delta(): number {
+        return this.after - this.before
     }
 }
 
@@ -53,7 +60,7 @@ class DemonInstance {
     }
 
     set energy(val: number){
-        this._energy = Math.min(this.maxEnergy, Math.max(0, val))
+        this._energy = Math.round(Math.min(this.maxEnergy, Math.max(0, val)))
     }
 
     get isActive(): boolean {
@@ -62,6 +69,18 @@ class DemonInstance {
 
     getAbility(abilityId: string): DemonAbilityInstance | false {
         return this.abilityInstances.find(ai => ai.ability.id === abilityId) || false
+    }
+
+    tick(): Result[] {
+        const averageSpeed = 10 + 1 * this.player.combat.encounter.level
+        const before = this.energy
+        this.energy += 20 * this.stats.speed / averageSpeed
+        return [new EnergyChangeResult({
+            demon: this,
+            before: before,
+            after: this.energy,
+            type: EnergyChangeType.Regeneration
+        })]
     }
 }
 

@@ -46,11 +46,13 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 
     private payCosts(): Result[] {
+        const before = this.demon.energy
         this.demon.energy -= this.cost
         return [
             new EnergyChangeResult({
                 demon: this.demon,
-                delta: -this.cost,
+                before: before,
+                after: this.demon.energy,
                 type: EnergyChangeType.Cost
             })
         ]

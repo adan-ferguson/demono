@@ -16,7 +16,6 @@ const PLAYER_HTML = (name: string) => `
         ${name}
     </div>
     <div class="health-bar"></div>
-    <div class="energy-bar"></div>
 </div>
 <div class="current-demon-stats">
 </div>
@@ -25,7 +24,6 @@ const PLAYER_HTML = (name: string) => `
 class PlayerWidget extends DemonoWidget implements CombatantWidget {
 
     healthbar: BarWidget
-    energybar: BarWidget
     demonStats: DemonStatsWidget
 
     constructor(readonly combatScene: CombatScene, private playerCombatant: PlayerCombatant){
@@ -38,14 +36,6 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
             })
         this.healthbar.setValue(playerCombatant.health)
         this.find('.health-bar').append(this.healthbar.element)
-
-        this.energybar = new BarWidget(
-            playerCombatant.currentDemonInstance.maxEnergy,
-            {
-                showMax: true
-            })
-        this.energybar.setValue(playerCombatant.currentDemonInstance.energy)
-        this.find('.energy-bar').append(this.energybar.element)
 
         this.demonStats = new DemonStatsWidget(playerCombatant)
         this.find('.current-demon-stats').append(this.demonStats.element)
@@ -62,15 +52,6 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
             color: 'red',
             direction: FlyingTextDirection.Up,
             origin: this.healthbar.element.getBoundingClientRect()
-        }).run()
-    }
-
-    visualizeEnergyChange(delta: number): void {
-        this.energybar.changeValue(delta, true)
-        new FlyingTextEffect({
-            message: delta.toString(),
-            direction: FlyingTextDirection.Down,
-            origin: this.energybar.element.getBoundingClientRect()
         }).run()
     }
 

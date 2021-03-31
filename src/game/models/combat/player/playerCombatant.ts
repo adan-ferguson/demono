@@ -49,7 +49,9 @@ class PlayerCombatant extends Combatant {
     beginTurn(): Result[] {
         const results: Result[] = []
         // TODO: tick
-        // TODO: regenerate energy
+        this.demonInstances.forEach(di => {
+            results.push(...di.tick())
+        })
         return results
     }
 }

@@ -18,7 +18,7 @@ class Combat {
     playerCombatant: PlayerCombatant
     state: CombatState = CombatState.Running
 
-    constructor(encounter: Encounter, player: Player){
+    constructor(readonly encounter: Encounter, player: Player){
         this.enemyCombatants = encounter.createEnemyCombatants(this)
         this.playerCombatant = new PlayerCombatant(player, this)
     }
