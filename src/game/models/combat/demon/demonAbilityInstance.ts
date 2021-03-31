@@ -21,7 +21,7 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 
     get canBeActivated(): boolean {
-        return true
+        return this.canPayCosts()
     }
 
     fulfillsChoiceRequirement(choice: Choice): boolean {

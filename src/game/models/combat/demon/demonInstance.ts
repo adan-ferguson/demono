@@ -74,7 +74,7 @@ class DemonInstance {
     tick(): Result[] {
         const averageSpeed = 10 + 1 * this.player.combat.encounter.level
         const before = this.energy
-        this.energy += 20 * this.stats.speed / averageSpeed
+        this.energy += 12 * this.stats.speed / averageSpeed
         return [new EnergyChangeResult({
             demon: this,
             before: before,

@@ -19,6 +19,13 @@ class AbilityList extends DemonoList<AbilityWidget> {
             this.map.set(ability, widget)
         })
     }
+
+    update(): void {
+        this.deselectAll()
+        this.map.forEach(aw => {
+            aw.update()
+        })
+    }
 }
 
 export { AbilityList }

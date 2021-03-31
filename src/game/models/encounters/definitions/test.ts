@@ -1,7 +1,7 @@
 import { EncounterDefinition } from '../encounter'
 
 const test: EncounterDefinition = {
-    level: 1,
+    level: 0,
     enemies: [
         {
             id: 'dat',

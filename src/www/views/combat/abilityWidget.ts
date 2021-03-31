@@ -17,6 +17,10 @@ class AbilityWidget extends DemonoWidget {
         super('ability')
         this.element.innerHTML = ABILITY_HTML(abilityInstance)
         this.addClass('rightclickable')
+        this.update()
+    }
+
+    update(): void {
         this.setClass('selectable', this.abilityInstance.canBeActivated)
     }
 }

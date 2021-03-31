@@ -135,6 +135,7 @@ class CombatScene extends Scene {
 
     async useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): Promise<void> {
         const results = this.combat.useAbility(ability, enemyCombatant)
+        this.widgets.abilityList.update()
         for(let i = 0; i < results.length; i++){
             const r = results[i]
             this.modals.log.addResult(r)
@@ -173,7 +174,6 @@ class CombatScene extends Scene {
         }else if(state === CombatSceneState.Idle){
             this.widgets.messaging.clear()
             this.widgets.enemyList.removeClassAll('clickable')
-            this.widgets.abilityList.deselectAll()
         }
     }
 
