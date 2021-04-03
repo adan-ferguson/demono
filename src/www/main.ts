@@ -45,32 +45,64 @@ function loadPlayer(){
                 affinityId: 'fire',
                 equipment: [{
                     name: 'Sword',
-                    abilities: ['fireball','sear','slash']
+                    abilities: ['fireball'],
+                    stats: {
+                        strength: 2
+                    }
                 }]
             },
             {
                 name: 'Bbbbb',
                 classId: 'brawler',
                 affinityId: 'fire',
-                equipment: []
+                equipment: [{
+                    name: 'Sword',
+                    abilities: ['sear','slash'],
+                    stats: {
+                        magic: 2,
+                        speed: -1
+                    }
+                }]
             },
             {
                 name: 'Ccccccc',
                 classId: 'brawler',
                 affinityId: 'fire',
-                equipment: []
+                equipment: [{
+                    name: 'Sword',
+                    abilities: ['fireball','fireball'],
+                    stats: {
+                        armor: 4,
+                        speed: 1
+                    }
+                }]
             },
             {
                 name: 'Ddddd',
                 classId: 'brawler',
                 affinityId: 'fire',
-                equipment: []
+                equipment: [{
+                    name: 'Sword',
+                    abilities: ['fireball','sear'],
+                    stats: {
+                        strength: 2
+                    }
+                },{
+                    name: 'Sword',
+                    abilities: ['sear','slash'],
+                    stats: {
+                        strength: 2
+                    }
+                }]
             },
             {
                 name: 'Eeeeeeeee',
                 classId: 'brawler',
                 affinityId: 'fire',
-                equipment: []
+                equipment: [{
+                    name: 'Sword',
+                    abilities: ['fireball','sear','slash']
+                }]
             }
         ]
     })

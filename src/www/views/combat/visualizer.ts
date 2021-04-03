@@ -86,8 +86,13 @@ class Visualizer {
         this.combatScene.widgets.messaging.displayMessage(result.abilityInstance.owner.name + ' used ' + result.abilityInstance.ability.name)
         await wait(500)
 
-        const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.abilityInstance.owner)
-        const abilityWidget = widget?.upcomingAbilities.getByAbility(result.abilityInstance)?.setTimeLeft(result.timeLeftAfter)
+        this.combatScene
+            .widgets
+            .enemyList
+            .getFromEnemy(result.abilityInstance.owner)
+            ?.upcomingAbilities
+            .getByAbility(result.abilityInstance)
+            ?.setTimeLeft(result.timeLeftAfter)
     }
 
     private async visualizeEnemyAbilityTickResult(result: EnemyAbilityTickResult): Promise<void> {

@@ -44,10 +44,10 @@ class Demon extends Serializable<SerializedDemon> {
 
     getStats(): DemonStats {
         return {
-            strength: 10,
-            magic: 10,
-            armor: 10,
-            speed: 10
+            strength: 10 + this.loadout.stats.strength,
+            magic: 10 + this.loadout.stats.magic,
+            armor: 10 + this.loadout.stats.armor,
+            speed: 10 + this.loadout.stats.speed
         }
     }
 }

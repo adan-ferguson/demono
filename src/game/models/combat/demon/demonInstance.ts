@@ -50,7 +50,7 @@ class DemonInstance {
         this.stats = demon.getStats()
         this.maxEnergy = 100
         this._energy = 50
-        this.abilityInstances = demon.loadout.getAbilities().map(ability => {
+        this.abilityInstances = demon.loadout.abilities.map(ability => {
             return new DemonAbilityInstance(ability, this)
         })
     }
@@ -74,7 +74,7 @@ class DemonInstance {
     tick(): Result[] {
         const averageSpeed = 10 + 1 * this.player.combat.encounter.level
         const before = this.energy
-        this.energy += 12 * this.stats.speed / averageSpeed
+        this.energy += 10 * this.stats.speed / averageSpeed
         return [new EnergyChangeResult({
             demon: this,
             before: before,
