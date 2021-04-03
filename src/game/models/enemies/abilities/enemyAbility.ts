@@ -1,4 +1,4 @@
-import {Ability, AbilityClassification} from 'game/models/combat/ability'
+import { Ability, AbilityClassification } from 'game/models/combat/ability'
 import { EnemyAction, EnemyActionDefinition } from 'game/models/combat/enemy/enemyAction'
 import { EnemyAttackAction, EnemyAttackDefinition } from '../../combat/enemy/enemyAttack'
 

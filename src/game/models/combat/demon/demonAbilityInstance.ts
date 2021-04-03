@@ -2,9 +2,15 @@ import { DemonAbility } from '../../demons/abilities/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from '../enemy/enemyCombatant'
 import { DemonInstance, EnergyChangeResult, EnergyChangeType } from './demonInstance'
-import { AbilityInstance, ActivateAbilityResult } from '../abilityInstance'
+import { AbilityInstance } from '../abilityInstance'
 import { Combatant } from '../combatant'
 import { Result } from '../result'
+
+class DemonAbilityActivateResult extends Result {
+    constructor(readonly abilityInstance: DemonAbilityInstance){
+        super()
+    }
+}
 
 class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
@@ -35,7 +41,7 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
 
     activate(choice: Choice): Result[] {
         const results: Result[] = []
-        results.push(new ActivateAbilityResult({ ability: this }))
+        results.push(new DemonAbilityActivateResult(this))
         results.push(...this.payCosts())
         results.push(...this.performActions(choice))
         return results
@@ -59,4 +65,4 @@ class DemonAbilityInstance extends AbilityInstance<DemonAbility> {
     }
 }
 
-export { DemonAbilityInstance }
+export { DemonAbilityInstance, DemonAbilityActivateResult }

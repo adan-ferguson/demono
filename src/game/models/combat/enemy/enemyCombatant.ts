@@ -1,13 +1,18 @@
 import { Combatant } from '../combatant'
 import { Enemy } from '../../enemies/enemy'
-import { EnemyAbilityInstance, EnemyAbilityTickResult } from './enemyAbilityInstance'
+import {EnemyAbilityActivateResult, EnemyAbilityInstance, EnemyAbilityTickResult } from './enemyAbilityInstance'
 import { Combat } from '../combat'
 import { DamageType } from '../damage'
 import { Result } from '../result'
-import { ActivateAbilityResult } from '../abilityInstance'
 
 interface EnemyOptions {
     turnOffset?: number
+}
+
+class EnemyBeginTurnResult extends Result {
+    constructor(readonly enemy: EnemyCombatant){
+        super()
+    }
 }
 
 class EnemyCombatant extends Combatant {
@@ -44,6 +49,7 @@ class EnemyCombatant extends Combatant {
         }
 
         //TODO: tick buffs
+        result.push(new EnemyBeginTurnResult(this))
         this.abilities.forEach(ability => {
             if(this.combat.finished){
                 return
@@ -51,7 +57,8 @@ class EnemyCombatant extends Combatant {
             ability.timeLeft--
             result.push(new EnemyAbilityTickResult(ability))
             if(ability.ready){
-                result.push(new ActivateAbilityResult({ ability }))
+                ability.timeLeft += ability.ability.time
+                result.push(new EnemyAbilityActivateResult(ability))
                 result.push(...ability.performActions())
             }
         })
@@ -60,4 +67,4 @@ class EnemyCombatant extends Combatant {
     }
 }
 
-export { EnemyCombatant, EnemyOptions }
+export { EnemyCombatant, EnemyOptions, EnemyBeginTurnResult }

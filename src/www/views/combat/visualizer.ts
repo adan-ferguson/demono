@@ -2,10 +2,12 @@ import { Result } from 'game/models/combat/result'
 import { DamageResult } from 'game/models/combat/damage'
 import { CombatScene } from './combatScene'
 import { EnergyChangeResult } from 'game/models/combat/demon/demonInstance'
-import { EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
+import { EnemyAbilityActivateResult, EnemyAbilityTickResult } from 'game/models/combat/enemy/enemyAbilityInstance'
 import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
-import { ActivateAbilityResult } from 'game/models/combat/abilityInstance'
 import { DefeatedResult } from 'game/models/combat/combatant'
+import { DemonAbilityActivateResult } from 'game/models/combat/demon/demonAbilityInstance'
+import { EnemyBeginTurnResult } from 'game/models/combat/enemy/enemyCombatant'
+import { PlayerBeginTurnResult } from 'game/models/combat/player/playerCombatant'
 
 class Visualizer {
 
@@ -19,8 +21,12 @@ class Visualizer {
             return await this.visualizeDamageResult(result)
         }
 
-        if(result instanceof ActivateAbilityResult){
-            return await this.visualizeActivateAbility(result)
+        if(result instanceof DemonAbilityActivateResult){
+            return await this.visualizeDemonAbilityActivate(result)
+        }
+
+        if(result instanceof EnemyAbilityActivateResult){
+            return await this.visualizeEnemyAbilityActivate(result)
         }
 
         if(result instanceof EnergyChangeResult){
@@ -35,7 +41,30 @@ class Visualizer {
             return await this.visualizeDefeatedResult(result)
         }
 
+        if(result instanceof EnemyBeginTurnResult){
+            return await this.visualizeEnemyBeginTurnResult(result)
+        }
+
+        if(result instanceof PlayerBeginTurnResult){
+            return await this.visualizePlayerBeginTurnResult(result)
+        }
+
         console.error('Unsupported result', result)
+    }
+
+    private async visualizeEnemyBeginTurnResult(result: EnemyBeginTurnResult): Promise<void> {
+        await this.endEnemyTurn()
+        this.combatScene.widgets.enemyList.getFromEnemy(result.enemy)?.addClass('highlight')
+    }
+
+    private async visualizePlayerBeginTurnResult(result: PlayerBeginTurnResult): Promise<void> {
+        await this.endEnemyTurn()
+    }
+
+    private async endEnemyTurn(): Promise<void> {
+        await wait(250)
+        this.combatScene.widgets.enemyList.removeClassAll('highlight')
+        this.combatScene.widgets.messaging.clear()
     }
 
     private async visualizeEnergyChange(result: EnergyChangeResult): Promise<void> {
@@ -45,16 +74,25 @@ class Visualizer {
 
     private async visualizeDamageResult(result: DamageResult): Promise<void> {
         this.combatScene.getWidgetFromCombatant(result.target)?.visualizeDamage(result.outcome)
-        await wait(1000)
+        await wait(300)
     }
 
-    private async visualizeActivateAbility(result: ActivateAbilityResult): Promise<void> {
+    private async visualizeDemonAbilityActivate(result: DemonAbilityActivateResult): Promise<void> {
         this.combatScene.widgets.messaging.displayMessage(result.abilityInstance.owner.name + ' used ' + result.abilityInstance.ability.name)
+        await wait(500)
+    }
+
+    private async visualizeEnemyAbilityActivate(result: EnemyAbilityActivateResult): Promise<void> {
+        this.combatScene.widgets.messaging.displayMessage(result.abilityInstance.owner.name + ' used ' + result.abilityInstance.ability.name)
+        await wait(500)
+
+        const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.abilityInstance.owner)
+        const abilityWidget = widget?.upcomingAbilities.getByAbility(result.abilityInstance)?.setTimeLeft(result.timeLeftAfter)
     }
 
     private async visualizeEnemyAbilityTickResult(result: EnemyAbilityTickResult): Promise<void> {
-        const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.ability.owner)
-        const abilityWidget = widget?.upcomingAbilities.getByAbility(result.ability)
+        const widget = this.combatScene.widgets.enemyList.getFromEnemy(result.abilityInstance.owner)
+        const abilityWidget = widget?.upcomingAbilities.getByAbility(result.abilityInstance)
 
         if(!abilityWidget){
             return
@@ -67,11 +105,12 @@ class Visualizer {
             origin: abilityWidget.element.getBoundingClientRect(),
             duration: 1500
         }).run()
-        await wait(200)
+        await wait(250)
     }
 
     private async visualizeDefeatedResult(result: DefeatedResult): Promise<void> {
         this.combatScene.getWidgetFromCombatant(result.combatant)?.visualizeDefeat()
+        await wait(500)
     }
 }
 

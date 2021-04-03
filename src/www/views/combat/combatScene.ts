@@ -59,6 +59,7 @@ class CombatScene extends Scene {
             if(e.target instanceof Element) {
                 const closest = e.target.closest('.clickable,.selectable')
                 if (!closest) {
+                    this.widgets.abilityList.deselectAll()
                     this.resetState()
                 }
             }
@@ -135,13 +136,13 @@ class CombatScene extends Scene {
 
     async useAbility(ability: DemonAbilityInstance, enemyCombatant?: EnemyCombatant): Promise<void> {
         const results = this.combat.useAbility(ability, enemyCombatant)
-        this.widgets.abilityList.update()
         for(let i = 0; i < results.length; i++){
             const r = results[i]
             this.modals.log.addResult(r)
             await this.visualizer.visualizeResult(r)
         }
         // TODO: deal with endings
+        this.widgets.abilityList.update()
         this.setState(CombatSceneState.Idle)
     }
 

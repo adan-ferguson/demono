@@ -3,18 +3,6 @@ import { Choice } from './choice'
 import { Combatant } from './combatant'
 import { Result } from './result'
 
-interface ActivateAbilityResultArgs {
-    ability: AbilityInstance<Ability>
-}
-
-class ActivateAbilityResult extends Result {
-    readonly abilityInstance: AbilityInstance<Ability>
-    constructor(def: ActivateAbilityResultArgs){
-        super()
-        this.abilityInstance = def.ability
-    }
-}
-
 abstract class AbilityInstance<T extends Ability> {
 
     constructor(readonly ability: T){}
@@ -30,4 +18,4 @@ abstract class AbilityInstance<T extends Ability> {
     }
 }
 
-export { AbilityInstance, ActivateAbilityResult }
+export { AbilityInstance }

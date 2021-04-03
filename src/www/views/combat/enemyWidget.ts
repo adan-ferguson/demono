@@ -5,6 +5,7 @@ import { DemonoWidget } from '../demonoWidget'
 import { FlyingTextDirection, FlyingTextEffect } from '../visualEffects/flyingTextEffect'
 import { CombatantWidget } from './combatantWidget'
 import { UpcomingAbilitiesList } from './upcomingAbilitiesList'
+import { EnemyAbilityInstance } from 'game/models/combat/enemy/enemyAbilityInstance'
 
 const ENEMY_HTML = (name: string, armorType = 'none') => `
 <div class="upcoming-abilities"></div>
@@ -58,6 +59,10 @@ class EnemyWidget extends DemonoWidget implements CombatantWidget {
         setTimeout(() => {
             this.destroy()
         }, 1000)
+    }
+
+    abilityActivated(abilityInstance: EnemyAbilityInstance): void {
+
     }
 
     private flyingText(message: string, color = 'black'){

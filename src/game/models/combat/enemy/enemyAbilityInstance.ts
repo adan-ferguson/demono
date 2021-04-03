@@ -6,9 +6,17 @@ import { EnemyCombatant } from './enemyCombatant'
 
 class EnemyAbilityTickResult extends Result {
     readonly timeLeft: number
-    constructor(readonly ability: EnemyAbilityInstance){
+    constructor(readonly abilityInstance: EnemyAbilityInstance){
         super()
-        this.timeLeft = ability.timeLeft
+        this.timeLeft = abilityInstance.timeLeft
+    }
+}
+
+class EnemyAbilityActivateResult extends Result {
+    constructor(
+        readonly abilityInstance: EnemyAbilityInstance,
+        readonly timeLeftAfter = abilityInstance.timeLeft){
+        super()
     }
 }
 
@@ -39,4 +47,4 @@ class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {
     }
 }
 
-export { EnemyAbilityInstance, EnemyAbilityTickResult }
+export { EnemyAbilityInstance, EnemyAbilityTickResult, EnemyAbilityActivateResult }

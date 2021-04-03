@@ -26,6 +26,10 @@ class AbilityList extends DemonoList<AbilityWidget> {
             aw.update()
         })
     }
+
+    getFromAbility(abilityInstance: DemonAbilityInstance): AbilityWidget | undefined {
+        return this.map.get(abilityInstance)
+    }
 }
 
 export { AbilityList }

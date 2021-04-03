@@ -1,8 +1,9 @@
-import { ActivateAbilityResult } from 'game/models/combat/abilityInstance'
 import { DamageResult } from 'game/models/combat/damage'
 import { EnergyChangeResult, EnergyChangeType } from 'game/models/combat/demon/demonInstance'
 import { Result } from 'game/models/combat/result'
 import { Modal } from '../modal'
+import { EnemyAbilityActivateResult } from 'game/models/combat/enemy/enemyAbilityInstance'
+import { DemonAbilityActivateResult } from 'game/models/combat/demon/demonAbilityInstance'
 
 class LogModal extends  Modal {
 
@@ -15,13 +16,25 @@ class LogModal extends  Modal {
             return this.addDamageResult(result)
         }
 
-        if (result instanceof ActivateAbilityResult) {
-            return this.addActivateAbilityResult(result)
+        if (result instanceof DemonAbilityActivateResult) {
+            return this.addDemonAbilityActivateResult(result)
+        }
+
+        if (result instanceof EnemyAbilityActivateResult) {
+            return this.addEnemyAbilityActivateResult(result)
         }
 
         if (result instanceof EnergyChangeResult) {
             return this.addEnergyChangeResult(result)
         }
+    }
+
+    addEnemyAbilityActivateResult(result: EnemyAbilityActivateResult): void {
+        this.addRow(`${result.abilityInstance.owner.name} used ${result.abilityInstance.ability.name}.`)
+    }
+
+    addDemonAbilityActivateResult(result: DemonAbilityActivateResult): void {
+        this.addRow(`${result.abilityInstance.owner.name} used ${result.abilityInstance.ability.name}.`)
     }
 
     private addRow(row: string){
@@ -35,10 +48,6 @@ class LogModal extends  Modal {
             return
         }
         this.addRow(`${result.demon.demon.name} ${result.delta > 0 ? 'gained' : 'lost'} ${result.delta} energy.`)
-    }
-
-    private addActivateAbilityResult(result: ActivateAbilityResult): void {
-        this.addRow(`${result.abilityInstance.owner.name} used ${result.abilityInstance.ability.name}.`)
     }
 
     private addDamageResult(result: DamageResult): void {

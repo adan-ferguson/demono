@@ -5,8 +5,10 @@ import { Combatant } from '../combatant'
 import { Combat } from '../combat'
 import { Result } from '../result'
 
-class PlayerDefeatedResult extends Result {
-
+class PlayerBeginTurnResult extends Result {
+    constructor(readonly player: PlayerCombatant){
+        super()
+    }
 }
 
 class PlayerCombatant extends Combatant {
@@ -49,6 +51,7 @@ class PlayerCombatant extends Combatant {
     beginTurn(): Result[] {
         const results: Result[] = []
         // TODO: tick
+        results.push(new PlayerBeginTurnResult(this))
         this.demonInstances.forEach(di => {
             results.push(...di.tick())
         })
@@ -56,4 +59,4 @@ class PlayerCombatant extends Combatant {
     }
 }
 
-export { PlayerCombatant }
+export { PlayerCombatant, PlayerBeginTurnResult }
