@@ -17,7 +17,7 @@ const PLAYER_HTML = (name: string) => `
     </div>
     <div class="health-bar"></div>
 </div>
-<div class="current-demon-stats">
+<div class="demon-stats">
 </div>
 `
 
@@ -38,7 +38,7 @@ class PlayerWidget extends DemonoWidget implements CombatantWidget {
         this.find('.health-bar').append(this.healthbar.element)
 
         this.demonStats = new DemonStatsWidget(playerCombatant)
-        this.find('.current-demon-stats').append(this.demonStats.element)
+        this.find('.demon-stats').replaceWith(this.demonStats.element)
 
         this.find('.log-button').addEventListener('click', () => {
             this.combatScene.modals.log.show()

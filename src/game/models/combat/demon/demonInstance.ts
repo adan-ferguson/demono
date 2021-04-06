@@ -1,4 +1,4 @@
-import { Demon, DemonStats } from '../../demons/demon'
+import { Demon, DemonStats, ExtendedStats } from '../../demons/demon'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 import { Result } from '../result'
@@ -39,17 +39,16 @@ class EnergyChangeResult extends Result {
 class DemonInstance {
 
     demon: Demon
-    stats: DemonStats
+    stats: ExtendedStats
     maxEnergy: number
     abilityInstances: DemonAbilityInstance[]
 
-    private _energy: number
+    private _energy = 500
 
     constructor(demon: Demon, readonly player: PlayerCombatant){
         this.demon = demon
         this.stats = demon.getStats()
-        this.maxEnergy = 100
-        this._energy = 50
+        this.maxEnergy = 1000
         this.abilityInstances = demon.loadout.abilities.map(ability => {
             return new DemonAbilityInstance(ability, this)
         })
@@ -74,7 +73,7 @@ class DemonInstance {
     tick(): Result[] {
         const averageSpeed = 10 + 1 * this.player.combat.encounter.level
         const before = this.energy
-        this.energy += 10 * this.stats.speed / averageSpeed
+        this.energy += 100 * this.stats.speed / averageSpeed
         return [new EnergyChangeResult({
             demon: this,
             before: before,

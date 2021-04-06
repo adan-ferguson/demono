@@ -12,6 +12,10 @@ interface DemonStats {
     speed: number
 }
 
+interface ExtendedStats extends DemonStats {
+    [key: string]: number
+}
+
 interface SerializedDemon {
     name: string,
     classId: DemonClassId,
@@ -42,7 +46,7 @@ class Demon extends Serializable<SerializedDemon> {
         }
     }
 
-    getStats(): DemonStats {
+    getStats(): ExtendedStats {
         return {
             strength: 10 + this.loadout.stats.strength,
             magic: 10 + this.loadout.stats.magic,
@@ -52,4 +56,4 @@ class Demon extends Serializable<SerializedDemon> {
     }
 }
 
-export { Demon, DemonStats, SerializedDemon }
+export { Demon, DemonStats, SerializedDemon, ExtendedStats }
