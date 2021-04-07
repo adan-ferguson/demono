@@ -1,4 +1,5 @@
 import '../../styles/combat/combat.sass'
+
 import { Scene } from '../scene'
 import { Combat } from 'game/models/combat/combat'
 import { PlayerWidget } from './playerWidget'
