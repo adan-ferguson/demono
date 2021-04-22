@@ -43,12 +43,12 @@ class DemonInstance {
     maxEnergy: number
     abilityInstances: DemonAbilityInstance[]
 
-    private _energy = 500
+    private _energy = 50
 
     constructor(demon: Demon, readonly player: PlayerCombatant){
         this.demon = demon
         this.stats = demon.getStats()
-        this.maxEnergy = 1000
+        this.maxEnergy = 100
         this.abilityInstances = demon.loadout.abilities.map(ability => {
             return new DemonAbilityInstance(ability, this)
         })
@@ -59,7 +59,7 @@ class DemonInstance {
     }
 
     set energy(val: number){
-        this._energy = Math.round(Math.min(this.maxEnergy, Math.max(0, val)))
+        this._energy = Math.min(this.maxEnergy, Math.max(0, val))
     }
 
     get isActive(): boolean {
@@ -71,13 +71,13 @@ class DemonInstance {
     }
 
     tick(): Result[] {
-        const averageSpeed = 10 + 1 * this.player.combat.encounter.level
+        const averageSpeed = 5 + 1.5 * this.player.combat.encounter.level
         const before = this.energy
-        this.energy += 100 * this.stats.speed / averageSpeed
+        this.energy += 10 * this.stats.speed / averageSpeed
         return [new EnergyChangeResult({
             demon: this,
-            before: before,
-            after: this.energy,
+            before: Math.floor(before),
+            after: Math.floor(this.energy),
             type: EnergyChangeType.Regeneration
         })]
     }

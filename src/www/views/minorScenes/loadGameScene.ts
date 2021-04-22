@@ -7,11 +7,11 @@ import { DemonoList } from '../demonoList'
 import { TypedEvent } from 'game/models/liteEvent'
 
 const EMPTY_SLOT_HTML = `
-<div class='slot clickable empty-slot'>New Game</div>
+<div class='slot empty-slot'>New Game</div>
 `
 
 const FILLED_SLOT_HTML = (player: Player) => `
-<div class='slot clickable'>${player.name} (lvl ${player.level})</div>
+<div class='slot'>${player.name} (lvl ${player.level})</div>
 `
 
 class LoadGameScene extends Scene {
@@ -30,22 +30,13 @@ class LoadGameScene extends Scene {
             const slot = this.players.indexOf(player)
             this.slotSelected.trigger(slot)
         })
-
-        let html = ''
-        for(let i = 0; i < 3; i++){
-            if(this.players[i].name){
-                html += FILLED_SLOT_HTML(this.players[i])
-            }else{
-                html += EMPTY_SLOT_HTML
-            }
-        }
-        this.element.innerHTML = html
     }
 }
 
 class PlayerSlot extends DemonoWidget {
     constructor(readonly player: Player){
         super('player-slot')
+        this.addClass('clickable')
         this.element.innerHTML = player.isNew() ? EMPTY_SLOT_HTML : FILLED_SLOT_HTML(player)
     }
 }

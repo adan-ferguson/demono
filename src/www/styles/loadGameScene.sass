@@ -1,16 +1,18 @@
 @import 'common/mixins'
 
 demono.load-game-scene
-  @include fullsize
-  display: flex
-  flex-direction: column
-  padding: 12rem 20rem
-  align-items: stretch
-  justify-content: space-evenly
 
-  .slot
-    flex-basis: 20%
-    border: 0.4rem solid #777
-    padding-left: 10rem
+  .player-list
+    @include fullsize
     display: flex
-    align-items: center
+    flex-direction: column
+    padding: 12rem 30rem
+    align-items: stretch
+    justify-content: space-evenly
+
+    .player-slot
+      flex-basis: 20%
+      border: 0.4rem solid #777
+      padding-left: 10rem
+      display: flex
+      align-items: center

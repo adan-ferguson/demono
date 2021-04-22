@@ -20,7 +20,7 @@ class PlayerCombatant extends Combatant {
     constructor(player: Player, readonly combat: Combat){
         super(player.startingHealth, combat)
         this.player = player
-        this.demonInstances = player.demons.map((demon: Demon) => new DemonInstance(demon, this))
+        this.demonInstances = player.demonLoadouts.map((demon: Demon) => new DemonInstance(demon, this))
         this.currentDemonIndex = 0
     }
 
