@@ -1,5 +1,5 @@
 import { EnemyDefinition } from '../enemy'
-import { EnemyAbilityDefinition } from '../abilities/enemyAbility'
+import { EnemyAbilityDefinition } from '../ability'
 import { EnemyActionSubject } from 'game/models/combat/enemy/enemyAction'
 import { DamageType } from 'game/models/combat/damage'
 import { EnemyAttackDefinition } from 'game/models/combat/enemy/enemyAttack'

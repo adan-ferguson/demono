@@ -1,19 +1,18 @@
 import { Demon, SerializedDemon } from './demons/demon'
-import { Serializable } from './serializable'
+import {Demon} from "game/models/demons/demon";
 
 interface SerializedPlayer {
     name: string,
     experience: number,
-    demonSquads: SerializedDemonSquad[]
-    demonLoadouts: SerializedDemonLoadout[],
-    loot: SerializedLoot[],
-    inventory: SerializedInventory
+    demonSquads: DemonSquadDef[]
+    demonLoadouts: DemonLoadoutDef[],
+    collection: CollectionDef
 }
 
-class Player extends Serializable<SerializedPlayer> {
+class Player {
 
     experience: number
-    demonLoadouts: DemonLoadout[]
+    demonLoadouts: Demon[]
     demonSquads: DemonSquad[]
     loot: Loot[]
     name: string
@@ -37,14 +36,22 @@ class Player extends Serializable<SerializedPlayer> {
     deserialize(serialized: SerializedPlayer): void {
         this.name = serialized.name
         this.experience = serialized.experience
-        this.demonLoadouts = serialized.demonLoadouts.map(loadoutDef => new DemonLoadout(loadoutDef))
-        this.demonSquads = serialized.demonSquads.map(squadDef => new DemonSquad(squadDef))
         this.loot = serialized.loot.map(lootDef => new Loot(lootDef))
         this.inventory = new Inventory(serialized.inventory)
+        this.demonLoadouts = serialized.demonLoadouts.map(loadoutDef => new Demon(this, loadoutDef))
+        this.demonSquads = serialized.demonSquads.map(squadDef => new DemonSquad(this, squadDef))
     }
 
     isNew(): boolean {
         return this.name ? false : true
+    }
+
+    getDemonLoadoutByID(id: string): Demon {
+        const loadout =  this.demonLoadouts.find(loadout => loadout.id === id)
+        if(!loadout){
+            throw 'Undefined demon loadout, id: ' + id
+        }
+        return loadout
     }
 }
 

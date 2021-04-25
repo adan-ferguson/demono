@@ -1,4 +1,4 @@
-import { DemonAbility } from '../../demons/abilities/ability'
+import { DemonAbility } from '../../demons/ability'
 import { Choice } from 'game/models/combat/choice'
 import { EnemyCombatant } from '../enemy/enemyCombatant'
 import { DemonInstance, EnergyChangeResult, EnergyChangeType } from './demonInstance'

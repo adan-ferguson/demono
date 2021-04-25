@@ -1,6 +1,6 @@
 import { Ability, AbilityClassification } from 'game/models/combat/ability'
 import { EnemyAction, EnemyActionDefinition } from 'game/models/combat/enemy/enemyAction'
-import { EnemyAttackAction, EnemyAttackDefinition } from '../../combat/enemy/enemyAttack'
+import { EnemyAttackAction, EnemyAttackDefinition } from '../combat/enemy/enemyAttack'
 
 interface EnemyAbilityDefinition {
     name: string,
@@ -10,7 +10,7 @@ interface EnemyAbilityDefinition {
     actions: EnemyActionDefinition[]
 }
 
-class EnemyAbility extends Ability {
+class Ability extends Ability {
 
     readonly name: string
     readonly time: number
@@ -39,4 +39,4 @@ function getActions(def: EnemyAbilityDefinition): EnemyAction[]{
     })
 }
 
-export { EnemyAbility, EnemyAbilityDefinition }
+export { Ability, EnemyAbilityDefinition }

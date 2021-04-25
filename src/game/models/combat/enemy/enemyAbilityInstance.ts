@@ -1,4 +1,4 @@
-import { EnemyAbility } from '../../enemies/abilities/enemyAbility'
+import { Ability } from '../../enemies/ability'
 import { AbilityInstance } from '../abilityInstance'
 import { Combat } from '../combat'
 import { Result } from '../result'
@@ -20,11 +20,11 @@ class EnemyAbilityActivateResult extends Result {
     }
 }
 
-class EnemyAbilityInstance extends AbilityInstance<EnemyAbility> {
+class EnemyAbilityInstance extends AbilityInstance<Ability> {
 
     private _timeLeft: number
 
-    constructor(ability: EnemyAbility, readonly owner: EnemyCombatant){
+    constructor(ability: Ability, readonly owner: EnemyCombatant){
         super(ability)
         this._timeLeft = ability.time
     }

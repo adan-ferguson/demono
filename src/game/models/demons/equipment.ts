@@ -1,25 +1,20 @@
 import { Serializable } from '../serializable'
-import { DemonAbilityId } from './abilities/ability'
+import { DemonAbilityId } from './ability'
 import { DemonStats } from './demon'
 
-interface SerializedEquipment {
+interface DemonEquipmentDef {
     name: string
     abilities: DemonAbilityId[],
-    stats?: {
-        strength?: number,
-        magic?: number,
-        armor?: number,
-        speed?: number
-    }
+    stats?: ExtendedStats
 }
 
-class Equipment extends Serializable<SerializedEquipment> {
+class Equipment {
 
     name: string;
     abilities: DemonAbilityId[]
     stats: DemonStats
 
-    deserialize(definition: SerializedEquipment): void {
+    constructor(def: DemonEquipmentDef) {
         this.name = definition.name
         this.abilities = definition.abilities
         this.stats = Object.assign({
@@ -30,7 +25,7 @@ class Equipment extends Serializable<SerializedEquipment> {
         }, definition.stats || {})
     }
 
-    serialize(): SerializedEquipment {
+    serialize(): DemonEquipmentDef {
         return {
             name: this.name,
             abilities: this.abilities

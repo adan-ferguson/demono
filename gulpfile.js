@@ -1,43 +1,31 @@
 const fs = require('fs')
-const glob = require('glob')
 const path = require('path')
 const { watch } = require('gulp')
 
-const MODELS_PATH = './src/game/models'
-const DEFINITIONS_FOLDERS = [
-    'demons/classes',
-    'demons/affinities',
-    'demons/abilities',
-    'encounters',
-    'enemies'
-]
+const DATA_PATH = './src/game/data'
 
-function compileData(folderName, cb){
-    let contents = ''
-    let names = []
-    glob(toGlob(folderName), (error, files) => {
-        try {
-            files.forEach((filename) => {
-                let name = path.basename(filename).replace(/\.[^/.]+$/, '')
-                names.push(name)
-                contents += `import { ${name} } from './definitions/${name}'\n`
-            })
-            contents += `export { ${names.join(',')} }`
-            fs.writeFileSync(`${MODELS_PATH}/${folderName}/definitionLoader.ts`, contents)
-            console.log(`Definition Loader for ${folderName} compiled.`)
-        }catch(ex){
-            console.error(ex)
-        }
-        cb()
+function compileData(cb) {
+    const categories = fs.readdirSync(DATA_PATH)
+    categories.forEach(cat => {
+        compileCategory(cat)
     })
+    cb()
 }
 
-function toGlob(folderName){
-    return `${MODELS_PATH}/${folderName}/definitions/*.ts`
+function compileCategory(categoryName) {
+    let contents = ''
+    let names = []
+    const files = fs.readdirSync(path.join(DATA_PATH, categoryName, 'definitions'))
+    files.forEach(filename => {
+        let name = filename.replace(/\.[^/.]+$/, '')
+        names.push(name)
+        contents += `import { ${name} } from './definitions/${name}'\n`
+    })
+    contents += `export { ${names.join(',')} }`
+    fs.writeFileSync(path.join(DATA_PATH, categoryName, 'definitionLoader.ts'), contents)
+    console.log(`Definition Loader for ${categoryName} compiled.`)
 }
 
 exports.default = () => {
-    DEFINITIONS_FOLDERS.forEach(folderName => {
-        watch(toGlob(folderName), { ignoreInitial: false }, cb => compileData(folderName, cb))
-    })
+    watch(`${DATA_PATH}/**/*.ts`, { ignoreInitial: false }, cb => compileData(cb))
 }

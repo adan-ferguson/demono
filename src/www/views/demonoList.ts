@@ -1,4 +1,4 @@
-import { TypedEvent } from 'game/models/liteEvent'
+import { TypedEvent } from 'game/liteEvent'
 import { DemonoWidget } from './demonoWidget'
 
 class DemonoList<T extends DemonoWidget> extends DemonoWidget {

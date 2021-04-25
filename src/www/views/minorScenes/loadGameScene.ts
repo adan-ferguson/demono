@@ -4,7 +4,7 @@ import { Scene } from '../scene'
 import { Player } from 'game/models/player'
 import { DemonoWidget } from '../demonoWidget'
 import { DemonoList } from '../demonoList'
-import { TypedEvent } from 'game/models/liteEvent'
+import { TypedEvent } from 'game/liteEvent'
 
 const EMPTY_SLOT_HTML = `
 <div class='slot empty-slot'>New Game</div>

@@ -1,4 +1,4 @@
-import { DemonClassDefinition } from '../class'
+import { DemonClassDefinition } from 'game/models/demons/class'
 
 const brawler: DemonClassDefinition = {
     id: 'brawler',

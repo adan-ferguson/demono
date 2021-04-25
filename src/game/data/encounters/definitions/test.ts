@@ -1,4 +1,4 @@
-import { EncounterDefinition } from '../encounter'
+import { EncounterDefinition } from 'game/models/encounter'
 
 const test: EncounterDefinition = {
     level: 0,

@@ -1,5 +1,5 @@
 import { Scene } from '../scene'
-import { LiteEvent } from 'game/models/liteEvent'
+import { LiteEvent } from 'game/liteEvent'
 import { Player } from 'game/models/player'
 
 const HTML = `

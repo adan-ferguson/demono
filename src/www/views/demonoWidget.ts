@@ -1,4 +1,4 @@
-import { LiteEvent } from 'game/models/liteEvent'
+import { LiteEvent } from 'game/liteEvent'
 
 abstract class DemonoWidget {
 
