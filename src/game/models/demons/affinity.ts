@@ -1,18 +1,18 @@
-import { Stats } from './stats'
-import * as DemonAffinityDefinitions from './affinities/definitionLoader'
+import { SimpleStats } from '../stats'
+import * as DemonAffinityDefinitions from 'game/data/affinities/definitionLoader'
 type DemonAffinityType = keyof typeof DemonAffinityDefinitions
 
 interface DemonAffinityDefinition {
     id: DemonAffinityType,
     name: string,
-    baseStats: Stats
+    baseStats: SimpleStats
 }
 
 class DemonAffinity {
 
     id: DemonAffinityType
     name: string
-    baseStats: Stats
+    baseStats: SimpleStats
 
     static loadFromId(id: DemonAffinityType): DemonAffinity {
         const def = DemonAffinityDefinitions[id as DemonAffinityType]

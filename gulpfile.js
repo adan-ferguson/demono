@@ -27,5 +27,5 @@ function compileCategory(categoryName) {
 }
 
 exports.default = () => {
-    watch(`${DATA_PATH}/**/*.ts`, { ignoreInitial: false }, cb => compileData(cb))
+    watch(`${DATA_PATH}/**/definitions/**/*.ts`, { ignoreInitial: false }, cb => compileData(cb))
 }

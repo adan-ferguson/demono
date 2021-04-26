@@ -1,10 +1,10 @@
 import { ChoiceRequirement } from 'game/models/combat/choice'
 import { Action } from '../combat/action'
-import * as DemonAbilityDefinitions from './abilities/definitionLoader'
-import { Tiered } from './abilities/tiered'
+import * as DemonAbilityDefinitions from 'game/data/abilities/definitionLoader'
 import { Ability, AbilityClassification } from 'game/models/combat/ability'
 import { PlayerAttackAction, PlayerAttackDefinition } from 'game/models/combat/player/playerAttack'
 import { PlayerActionDefinition } from 'game/models/combat/player/playerAction'
+import { Tiered } from 'game/tiered'
 
 type DemonAbilityId = keyof typeof DemonAbilityDefinitions
 

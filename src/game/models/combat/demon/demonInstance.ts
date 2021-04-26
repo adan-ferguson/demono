@@ -1,7 +1,8 @@
-import { Demon, DemonStats, ExtendedStats } from '../../demons/demon'
+import { Demon } from '../../demons/demon'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 import { Result } from '../result'
+import { Stats } from 'game/models/stats'
 
 enum EnergyChangeType {
     Cost,
@@ -39,7 +40,7 @@ class EnergyChangeResult extends Result {
 class DemonInstance {
 
     demon: Demon
-    stats: ExtendedStats
+    stats: Stats
     maxEnergy: number
     abilityInstances: DemonAbilityInstance[]
 
@@ -49,7 +50,7 @@ class DemonInstance {
         this.demon = demon
         this.stats = demon.getStats()
         this.maxEnergy = 100
-        this.abilityInstances = demon.loadout.abilities.map(ability => {
+        this.abilityInstances = demon.abilities.map(ability => {
             return new DemonAbilityInstance(ability, this)
         })
     }

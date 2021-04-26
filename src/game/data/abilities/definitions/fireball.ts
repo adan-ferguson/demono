@@ -1,7 +1,7 @@
-import { DemonAbilityDefinition } from '../ability'
-import { PlayerAttackDefinition } from '../../../combat/player/playerAttack'
 import { PlayerActionSubject } from 'game/models/combat/player/playerAction'
 import { DamageType } from 'game/models/combat/damage'
+import { DemonAbilityDefinition } from 'game/models/demons/ability'
+import { PlayerAttackDefinition } from 'game/models/combat/player/playerAttack'
 
 const fireball: DemonAbilityDefinition = {
     id: 'fireball',

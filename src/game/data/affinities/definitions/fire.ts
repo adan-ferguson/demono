@@ -1,4 +1,4 @@
-import { DemonAffinityDefinition } from '../../affinity'
+import { DemonAffinityDefinition } from 'game/models/demons/affinity'
 
 const fire: DemonAffinityDefinition = {
     id: 'fire',

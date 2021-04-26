@@ -1,19 +1,19 @@
-import { Stats } from './stats'
-import * as DemonClassDefinitions from './classes/definitionLoader'
+import { SimpleStats } from '../stats'
+import * as DemonClassDefinitions from 'game/data/classes/definitionLoader'
 
 type DemonClassType = keyof typeof DemonClassDefinitions
 
 interface DemonClassDefinition {
     id: DemonClassType,
     name: string,
-    baseStats: Stats
+    baseStats: SimpleStats
 }
 
 class DemonClass {
 
     id: DemonClassType
     name: string
-    baseStats: Stats
+    baseStats: SimpleStats
 
     static loadFromId(id: DemonClassType): DemonClass {
         const def = DemonClassDefinitions[id as DemonClassType]

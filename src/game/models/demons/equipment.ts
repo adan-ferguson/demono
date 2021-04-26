@@ -1,36 +1,35 @@
-import { Serializable } from '../serializable'
 import { DemonAbilityId } from './ability'
-import { DemonStats } from './demon'
+import { StatModifiers } from 'game/models/stats'
 
 interface DemonEquipmentDef {
-    name: string
+    id: string,
+    name: string,
     abilities: DemonAbilityId[],
-    stats?: ExtendedStats
+    stats: StatModifiers
 }
 
 class Equipment {
 
-    name: string;
-    abilities: DemonAbilityId[]
-    stats: DemonStats
+    readonly id: string
+    readonly name: string
+    readonly abilities: DemonAbilityId[]
+    readonly stats: StatModifiers
 
     constructor(def: DemonEquipmentDef) {
-        this.name = definition.name
-        this.abilities = definition.abilities
-        this.stats = Object.assign({
-            strength: 0,
-            magic: 0,
-            armor: 0,
-            speed: 0
-        }, definition.stats || {})
+        this.id = def.id
+        this.name = def.name
+        this.stats = def.stats
+        this.abilities = def.abilities
     }
 
     serialize(): DemonEquipmentDef {
         return {
+            id: this.id,
             name: this.name,
+            stats: this.stats,
             abilities: this.abilities
         }
     }
 }
 
-export { Equipment, SerializedEquipment }
+export { Equipment, DemonEquipmentDef }
