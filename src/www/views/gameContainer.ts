@@ -2,7 +2,7 @@ import '../styles/gameContainer.sass'
 
 import { DemonoWidget } from './demonoWidget'
 import { LoadGameScene } from './minorScenes/loadGameScene'
-import { Player } from 'game/models/player'
+import { Player } from 'game/models/player/player'
 import { Scene } from './scene'
 import { NewGameScene } from './minorScenes/newGameScene'
 import { SceneManager } from 'www/sceneManager'

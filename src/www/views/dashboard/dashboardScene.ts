@@ -1,4 +1,4 @@
-import { Player } from 'game/models/player'
+import { Player } from 'game/models/player/player'
 import { Scene } from '../scene'
 
 class DashboardScene extends Scene {

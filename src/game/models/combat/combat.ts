@@ -1,7 +1,7 @@
 import { Encounter } from '../encounter'
 import { PlayerCombatant } from './player/playerCombatant'
 import { EnemyCombatant } from './enemy/enemyCombatant'
-import { Player } from '../player'
+import { Player } from '../player/player'
 import { DemonAbilityInstance } from './demon/demonAbilityInstance'
 import { Choice } from 'game/models/combat/choice'
 import { Result } from './result'

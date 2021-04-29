@@ -1,6 +1,6 @@
 import { Scene } from '../scene'
 import { LiteEvent } from 'game/liteEvent'
-import { Player } from 'game/models/player'
+import { Player } from 'game/models/player/player'
 
 const HTML = `
 <input type="text" placeholder="Enter your name..."/>

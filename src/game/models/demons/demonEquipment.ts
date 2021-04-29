@@ -8,7 +8,7 @@ interface DemonEquipmentDef {
     stats: StatModifiers
 }
 
-class Equipment {
+class DemonEquipment {
 
     readonly id: string
     readonly name: string
@@ -32,4 +32,4 @@ class Equipment {
     }
 }
 
-export { Equipment, DemonEquipmentDef }
+export { DemonEquipment, DemonEquipmentDef }

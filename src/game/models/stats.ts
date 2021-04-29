@@ -23,23 +23,23 @@ type StatModifiers = {
 
 class FullStats {
 
-    stats: ExtendedStats
+    readonly statsList: ExtendedStats
 
     constructor(modifiers: StatModifiers = {}){
         const defaults : StatModifiers = {}
         for(const t in StatTypes){
             defaults[t as keyof StatModifiers] = 0
         }
-        this.stats = Object.assign(defaults, modifiers) as ExtendedStats
+        this.statsList = Object.assign(defaults, modifiers) as ExtendedStats
     }
 
     set(key: StatTypes, value: number): void {
-        this.stats[key] = value
+        this.statsList[key] = value
     }
 
     get(key: StatTypes): number {
-        return this.stats[key]
+        return this.statsList[key]
     }
 }
 
-export { SimpleStats, ExtendedStats, StatModifiers, FullStats }
+export { StatTypes, SimpleStats, ExtendedStats, StatModifiers, FullStats }

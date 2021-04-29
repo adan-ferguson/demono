@@ -1,4 +1,4 @@
-import { Demon } from '../../demons/demon'
+import { DemonLoadout } from '../../demons/demonLoadout'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 import { Result } from '../result'
@@ -39,14 +39,14 @@ class EnergyChangeResult extends Result {
 
 class DemonInstance {
 
-    demon: Demon
+    demon: DemonLoadout
     stats: Stats
     maxEnergy: number
     abilityInstances: DemonAbilityInstance[]
 
     private _energy = 50
 
-    constructor(demon: Demon, readonly player: PlayerCombatant){
+    constructor(demon: DemonLoadout, readonly player: PlayerCombatant){
         this.demon = demon
         this.stats = demon.getStats()
         this.maxEnergy = 100

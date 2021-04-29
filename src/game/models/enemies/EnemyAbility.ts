@@ -10,7 +10,7 @@ interface EnemyAbilityDefinition {
     actions: EnemyActionDefinition[]
 }
 
-class Ability extends Ability {
+class EnemyAbility extends Ability {
 
     readonly name: string
     readonly time: number
@@ -39,4 +39,4 @@ function getActions(def: EnemyAbilityDefinition): EnemyAction[]{
     })
 }
 
-export { Ability, EnemyAbilityDefinition }
+export { EnemyAbility, EnemyAbilityDefinition }

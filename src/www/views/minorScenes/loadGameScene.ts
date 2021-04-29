@@ -1,7 +1,7 @@
 import '../../styles/loadGameScene.sass'
 
 import { Scene } from '../scene'
-import { Player } from 'game/models/player'
+import { Player } from 'game/models/player/player'
 import { DemonoWidget } from '../demonoWidget'
 import { DemonoList } from '../demonoList'
 import { TypedEvent } from 'game/liteEvent'

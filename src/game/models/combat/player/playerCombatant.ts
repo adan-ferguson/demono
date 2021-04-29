@@ -1,5 +1,5 @@
-import { Demon } from '../../demons/demon'
-import { Player } from '../../player'
+import { DemonLoadout } from '../../demons/demonLoadout'
+import { Player } from '../../player/player'
 import { DemonInstance } from '../demon/demonInstance'
 import { Combatant } from '../combatant'
 import { Combat } from '../combat'
@@ -22,7 +22,7 @@ class PlayerCombatant extends Combatant {
     constructor(player: Player, readonly combat: Combat){
         super(player.startingHealth, combat)
         this.player = player
-        this.demonInstances = player.demonLoadouts.map((demon: Demon) => new DemonInstance(demon, this))
+        this.demonInstances = player.demonLoadouts.map((demon: DemonLoadout) => new DemonInstance(demon, this))
         this.currentDemonIndex = 0
     }
 
