@@ -4,8 +4,7 @@ import { DemonInstance } from '../demon/demonInstance'
 import { Combatant } from '../combatant'
 import { Combat } from '../combat'
 import { Result } from '../result'
-import { Stats } from 'webpack'
-import { ExtendedStats } from 'game/models/stats'
+import { FullStats, StatType } from 'game/models/stats'
 
 class PlayerBeginTurnResult extends Result {
     constructor(readonly player: PlayerCombatant){
@@ -38,20 +37,16 @@ class PlayerCombatant extends Combatant {
         return this.player.startingHealth
     }
 
-    get stats(): Stats {
+    get stats(): FullStats {
         return this.currentDemonInstance.stats
     }
 
-    get extendedStats(): ExtendedStats {
-        return this.currentDemonInstance.extendedStats
-    }
-
     get physDef(): number {
-        return Math.floor((this.stats.strength + this.stats.armor * 2) / 3)
+        return Math.floor((this.stats.get(StatType.Strength) + this.stats.get(StatType.Armor) * 2) / 3)
     }
 
     get magicDef(): number {
-        return Math.floor((this.stats.magic + this.stats.armor * 2) / 3)
+        return Math.floor((this.stats.get(StatType.Magic) + this.stats.get(StatType.Armor) * 2) / 3)
     }
 
     beginTurn(): Result[] {

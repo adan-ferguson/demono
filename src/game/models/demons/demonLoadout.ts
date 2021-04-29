@@ -4,7 +4,7 @@ import { DemonClass, DemonClassType } from 'game/models/demons/class'
 import { DemonAffinity, DemonAffinityType } from 'game/models/demons/affinity'
 import { v4 as uuid } from 'uuid'
 import { Player } from '../player/player'
-import { FullStats, SimpleStats, StatTypes } from '../stats'
+import { FullStats, SimpleStats, StatType } from '../stats'
 
 interface DemonLoadoutDef {
     id: string,
@@ -54,7 +54,7 @@ class DemonLoadout {
                 }
                 tierMap[id]++
             })
-            let key: StatTypes
+            let key: StatType
             for(key in equipment.stats){
                 stats.set(key, stats.get(key) + (equipment.stats[key] || 0))
             }
@@ -69,10 +69,10 @@ class DemonLoadout {
     private baseStats(): SimpleStats {
 
         const stats: SimpleStats = {
-            [StatTypes.Strength]: 0,
-            [StatTypes.Magic]: 0,
-            [StatTypes.Armor]: 0,
-            [StatTypes.Speed]: 0
+            [StatType.Strength]: 0,
+            [StatType.Magic]: 0,
+            [StatType.Armor]: 0,
+            [StatType.Speed]: 0
         }
 
         if(!this.demonAffinity || !this.demonClass){

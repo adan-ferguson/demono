@@ -1,8 +1,8 @@
-import { EnemyDefinition } from '../enemy'
-import { EnemyAbilityDefinition } from '../ability'
 import { EnemyActionSubject } from 'game/models/combat/enemy/enemyAction'
 import { DamageType } from 'game/models/combat/damage'
-import { EnemyAttackDefinition } from '../../combat/enemy/enemyAttack'
+import { EnemyAbilityDefinition } from 'game/models/enemies/enemyAbility'
+import { EnemyAttackDefinition } from 'game/models/combat/enemy/enemyAttack'
+import { EnemyDefinition } from 'game/models/enemies/enemy'
 
 const bite: EnemyAbilityDefinition = {
     name: 'Bite',

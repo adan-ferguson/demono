@@ -20,6 +20,12 @@ class Player {
     inventory: PlayerInventory
     name: string
 
+    constructor(def ?: SerializedPlayer){
+        if(def){
+            this.deserialize(def)
+        }
+    }
+
     get startingHealth(): number {
         return 1000
     }

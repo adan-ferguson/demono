@@ -10,7 +10,8 @@
     "allowJs": true,
     "baseUrl": "./src",
     "paths": {
-      "game/*" : ["./game/*"]
+      "game/*" : ["./game/*"],
+      "www/*" : ["./www/*"]
     }
   }
 }

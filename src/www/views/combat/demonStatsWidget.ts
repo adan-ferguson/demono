@@ -34,10 +34,10 @@ class DemonStatsWidget extends DemonoWidget {
 
     update(): void {
         let html = ''
-        Object.entries(this.playerCombatant.stats).forEach(([key, val]) => {
-            const previewVal = this.previewDemon && key in this.previewDemon.stats ? this.previewDemon.stats[key] : undefined
-            html += STAT_ROW_HTML(key, val, previewVal)
-        })
+        // Object.entries(this.playerCombatant.stats).forEach(([key, val]) => {
+        //     const previewVal = this.previewDemon && key in this.previewDemon.stats ? this.previewDemon.stats[key] : undefined
+        //     html += STAT_ROW_HTML(key, val, previewVal)
+        // })
         this.element.innerHTML = html
     }
 

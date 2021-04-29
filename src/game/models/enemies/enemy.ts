@@ -1,6 +1,6 @@
 import { DamageType } from '../combat/damage'
-import { EnemyAbility, EnemyAbilityDefinition } from './EnemyAbility'
-import * as EnemyDefinitions from './definitionLoader'
+import { EnemyAbility, EnemyAbilityDefinition } from './enemyAbility'
+import * as EnemyDefinitions from 'game/data/enemies/definitionLoader'
 
 interface Armor {
     type: DamageType,
@@ -30,7 +30,7 @@ class Enemy {
         this.name = enemyDef.name
         this.health = enemyDef.health
         this.armor = enemyDef.armor
-        this.abilities = enemyDef.abilities.map(abilityDef => new Ability(abilityDef))
+        this.abilities = enemyDef.abilities.map(abilityDef => new EnemyAbility(abilityDef))
     }
 }
 

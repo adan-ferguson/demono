@@ -1,4 +1,4 @@
-enum StatTypes {
+enum StatType {
     Strength = 'Strength',
     Magic = 'Magic',
     Armor = 'Armor',
@@ -7,18 +7,18 @@ enum StatTypes {
 }
 
 interface SimpleStats {
-    [StatTypes.Strength]: number,
-    [StatTypes.Magic]: number,
-    [StatTypes.Armor]: number,
-    [StatTypes.Speed]: number
+    [StatType.Strength]: number,
+    [StatType.Magic]: number,
+    [StatType.Armor]: number,
+    [StatType.Speed]: number
 }
 
 type ExtendedStats =  {
-    [keys in StatTypes]: number
+    [keys in StatType]: number
 }
 
 type StatModifiers = {
-    [keys in StatTypes]?: number
+    [keys in StatType]?: number
 }
 
 class FullStats {
@@ -27,19 +27,19 @@ class FullStats {
 
     constructor(modifiers: StatModifiers = {}){
         const defaults : StatModifiers = {}
-        for(const t in StatTypes){
+        for(const t in StatType){
             defaults[t as keyof StatModifiers] = 0
         }
         this.statsList = Object.assign(defaults, modifiers) as ExtendedStats
     }
 
-    set(key: StatTypes, value: number): void {
+    set(key: StatType, value: number): void {
         this.statsList[key] = value
     }
 
-    get(key: StatTypes): number {
+    get(key: StatType): number {
         return this.statsList[key]
     }
 }
 
-export { StatTypes, SimpleStats, ExtendedStats, StatModifiers, FullStats }
+export { StatType, SimpleStats, ExtendedStats, StatModifiers, FullStats }

@@ -1,7 +1,7 @@
 import { EnemyCombatant, EnemyOptions } from './combat/enemy/enemyCombatant'
 import { Enemy } from './enemies/enemy'
-import * as EncounterDefinitions from './encounters/definitionLoader'
-import * as EnemyDefinitions from './enemies/definitionLoader'
+import * as EncounterDefinitions from 'game/data/encounters/definitionLoader'
+import * as EnemyDefinitions from 'game/data/enemies/definitionLoader'
 import { Combat } from './combat/combat'
 
 interface EncounterDefinition {

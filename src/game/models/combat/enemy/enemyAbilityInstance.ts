@@ -1,4 +1,4 @@
-import { EnemyAbility } from '../../enemies/EnemyAbility'
+import { EnemyAbility } from '../../enemies/enemyAbility'
 import { AbilityInstance } from '../abilityInstance'
 import { Combat } from '../combat'
 import { Result } from '../result'

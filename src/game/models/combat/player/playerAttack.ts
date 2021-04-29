@@ -5,7 +5,7 @@ import { DamageResult, DamageType } from '../damage'
 import { Result } from '../result'
 import { DefeatedResult } from '../combatant'
 import { Tiered } from 'game/tiered'
-import { ExtendedStats } from 'game/models/stats'
+import { ExtendedStats, StatType } from 'game/models/stats'
 
 interface PlayerAttackDefinitionArgs {
     readonly damage: Tiered<number>,
@@ -31,10 +31,10 @@ class PlayerAttackAction extends PlayerAction {
         let val = this.def.args.damage(this.tier)
         const scaling = this.def.args.scaling
         if(scaling){
-            Object.keys(scaling).forEach((statName: keyof ExtendedStats) => {
+            Object.keys(scaling).forEach((statName: StatType) => {
                 const scalingFunc = scaling[statName]
                 if(scalingFunc){
-                    val += scalingFunc(this.tier) * player.stats[statName]
+                    val += scalingFunc(this.tier) * player.stats.get(statName)
                 }
             })
         }

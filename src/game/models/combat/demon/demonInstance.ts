@@ -2,7 +2,7 @@ import { DemonLoadout } from '../../demons/demonLoadout'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 import { Result } from '../result'
-import { Stats } from 'game/models/stats'
+import {FullStats, StatType} from 'game/models/stats'
 
 enum EnergyChangeType {
     Cost,
@@ -40,7 +40,6 @@ class EnergyChangeResult extends Result {
 class DemonInstance {
 
     demon: DemonLoadout
-    stats: Stats
     maxEnergy: number
     abilityInstances: DemonAbilityInstance[]
 
@@ -48,7 +47,6 @@ class DemonInstance {
 
     constructor(demon: DemonLoadout, readonly player: PlayerCombatant){
         this.demon = demon
-        this.stats = demon.getStats()
         this.maxEnergy = 100
         this.abilityInstances = demon.abilities.map(ability => {
             return new DemonAbilityInstance(ability, this)
@@ -67,6 +65,10 @@ class DemonInstance {
         return this.player.currentDemonInstance === this
     }
 
+    get stats(): FullStats {
+        return this.demon.stats
+    }
+
     getAbility(abilityId: string): DemonAbilityInstance | false {
         return this.abilityInstances.find(ai => ai.ability.id === abilityId) || false
     }
@@ -74,7 +76,7 @@ class DemonInstance {
     tick(): Result[] {
         const averageSpeed = 5 + 1.5 * this.player.combat.encounter.level
         const before = this.energy
-        this.energy += 10 * this.stats.speed / averageSpeed
+        this.energy += 10 * this.stats.get(StatType.Speed) / averageSpeed
         return [new EnergyChangeResult({
             demon: this,
             before: Math.floor(before),
