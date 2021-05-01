@@ -57,6 +57,9 @@ class GameContainer extends DemonoWidget {
 
     private startGame(): void {
         const dashboardScene = new DashboardScene(this.player)
+        dashboardScene.nextSceneSelected.on(scene => {
+            this.sceneManager.setScene(scene)
+        })
         this.sceneManager.setScene(dashboardScene)
     }
 }

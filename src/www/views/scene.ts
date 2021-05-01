@@ -1,3 +1,4 @@
+import { Player } from 'game/models/player/player'
 import { DemonoWidget } from './demonoWidget'
 
 abstract class Scene extends DemonoWidget {

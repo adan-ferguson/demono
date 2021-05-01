@@ -1,5 +1,5 @@
 import { DemonAbility, DemonAbilityId } from './ability'
-import { DemonEquipment } from './demonEquipment'
+import { DemonAugment } from './demonAugment'
 import { DemonClass, DemonClassType } from 'game/models/demons/class'
 import { DemonAffinity, DemonAffinityType } from 'game/models/demons/affinity'
 import { v4 as uuid } from 'uuid'
@@ -11,7 +11,7 @@ interface DemonLoadoutDef {
     name: string,
     classId: DemonClassType,
     affinityId: DemonAffinityType,
-    equipmentIds: string[]
+    augmentIds: string[]
 }
 
 class DemonLoadout {
@@ -19,21 +19,23 @@ class DemonLoadout {
     public abilities: DemonAbility[] = []
     public stats: FullStats
 
-    readonly id: string = uuid()
+    readonly id: string
     readonly name: string
     readonly demonClass ?: DemonClass
     readonly demonAffinity ?: DemonAffinity
-    readonly equipments: DemonEquipment[] = []
+    readonly augments: DemonAugment[] = []
 
-    constructor(private player: Player, def ?: DemonLoadoutDef){
+    constructor(private player: Player, def: DemonLoadoutDef){
 
-        if(def){
-            this.id = def.id
-            this.name = def.name
-            this.demonClass = DemonClass.loadFromId(def.classId)
-            this.demonAffinity = DemonAffinity.loadFromId(def.affinityId)
-            this.equipments = def.equipmentIds.map(id => player.getEquipmentById(id))
-        }
+        this.id = def.id
+        this.name = def.name
+        this.demonClass = DemonClass.loadFromId(def.classId)
+        this.demonAffinity = DemonAffinity.loadFromId(def.affinityId)
+        this.augments = def.augmentIds
+            .map(id => player.getAugmentById(id))
+            .filter((i): i is DemonAugment => {
+                return i ? true : false
+            })
 
         this.updateCalculations()
     }
@@ -47,16 +49,16 @@ class DemonLoadout {
         const tierMap: Record<string, number> = {}
         const stats = new FullStats(this.baseStats())
 
-        this.equipments.forEach(equipment => {
-            equipment.abilities.forEach(id => {
+        this.augments.forEach(augment => {
+            augment.abilities.forEach(id => {
                 if(!tierMap[id]){
                     tierMap[id] = 0
                 }
                 tierMap[id]++
             })
             let key: StatType
-            for(key in equipment.stats){
-                stats.set(key, stats.get(key) + (equipment.stats[key] || 0))
+            for(key in augment.stats){
+                stats.set(key, stats.get(key) + (augment.stats[key] || 0))
             }
         })
         this.stats = stats
@@ -104,7 +106,7 @@ class DemonLoadout {
             name: this.name,
             classId: this.demonClass.id,
             affinityId: this.demonAffinity.id,
-            equipmentIds: this.equipments.map(equipment => equipment.id)
+            augmentIds: this.augments.map(augment => augment.id)
         }
     }
 }

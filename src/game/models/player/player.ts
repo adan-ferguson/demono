@@ -1,29 +1,41 @@
 import { DemonLoadout, DemonLoadoutDef } from '../demons/demonLoadout'
 import { PlayerLoadout, PlayerLoadoutDef } from './playerLoadout'
-import { DemonEquipment } from 'game/models/demons/demonEquipment'
+import { DemonAugment } from 'game/models/demons/demonAugment'
 import { PlayerInventory, PlayerInventoryDef } from 'game/models/player/playerInventory'
 import { PlayerItem } from './playerItem.js'
+import { PlayerFlags } from './playerFlags'
 
-interface SerializedPlayer {
+interface PlayerDef {
     name: string,
     experience: number,
+    selectedLoadout: string
     playerLoadouts: PlayerLoadoutDef[]
     demonLoadouts: DemonLoadoutDef[],
-    playerInventory: PlayerInventoryDef
+    playerInventory: PlayerInventoryDef,
+    flags: PlayerFlags
 }
 
 class Player {
 
+    name: string
     experience: number
+    selectedLoadoutId: string
     demonLoadouts: DemonLoadout[]
     playerLoadouts: PlayerLoadout[]
     inventory: PlayerInventory
-    name: string
+    flags: PlayerFlags
 
-    constructor(def ?: SerializedPlayer){
-        if(def){
-            this.deserialize(def)
+    constructor(def ?: PlayerDef){
+        if(!def){
+            def = newPlayerDef()
         }
+        this.name = def.name
+        this.experience = def.experience
+        this.selectedLoadoutId = def.selectedLoadout
+        this.inventory = new PlayerInventory(def.playerInventory)
+        this.demonLoadouts = def.demonLoadouts.map(loadoutDef => new DemonLoadout(this, loadoutDef))
+        this.playerLoadouts = def.playerLoadouts.map(squadDef => new PlayerLoadout(this, squadDef))
+        this.flags = def.flags
     }
 
     get startingHealth(): number {
@@ -34,50 +46,60 @@ class Player {
         return expToLevel(this.experience)
     }
 
-    serialize(): SerializedPlayer {
+    get selectedLoadout(): DemonLoadout | undefined {
+        return this.getDemonLoadoutByID(this.selectedLoadoutId)
+    }
+
+    serialize(): PlayerDef {
         return {
             name: this.name,
             experience: this.experience,
+            selectedLoadout: this.selectedLoadoutId,
             demonLoadouts: this.demonLoadouts.map(loadout => loadout.serialize()),
             playerLoadouts: this.playerLoadouts.map(loadout => loadout.serialize()),
-            playerInventory: this.inventory.serialize()
+            playerInventory: this.inventory.serialize(),
+            flags: this.flags
         }
-    }
-
-    deserialize(serialized: SerializedPlayer): void {
-        this.name = serialized.name
-        this.experience = serialized.experience
-        this.inventory = new PlayerInventory(serialized.playerInventory)
-        this.demonLoadouts = serialized.demonLoadouts.map(loadoutDef => new DemonLoadout(this, loadoutDef))
-        this.playerLoadouts = serialized.playerLoadouts.map(squadDef => new PlayerLoadout(this, squadDef))
     }
 
     isNew(): boolean {
         return this.name ? false : true
     }
 
-    getDemonLoadoutByID(id: string): DemonLoadout {
-        const loadout = this.demonLoadouts.find(loadout => loadout.id === id)
-        if(!loadout){
-            throw 'Undefined demon loadout, id: ' + id
-        }
-        return loadout
+    getDemonLoadoutByID(id: string): DemonLoadout | undefined {
+        return this.demonLoadouts.find(loadout => loadout.id === id)
     }
 
-    getEquipmentById(id: string): DemonEquipment {
-        const equipment = this.inventory.getDemonEquipmentById(id)
-        if(!equipment){
-            throw 'Undefined demon equipment, id: ' + id
-        }
-        return equipment
+    getAugmentById(id: string): DemonAugment | undefined {
+        return this.inventory.getDemonAugmentById(id)
     }
 
-    getPlayerItemById(id: string): PlayerItem {
-        const item = this.inventory.getPlayerItemById(id)
-        if(!item){
-            throw 'Undefined player item, id: ' + id
+    getPlayerItemById(id: string): PlayerItem | undefined {
+        return this.inventory.getPlayerItemById(id)
+    }
+}
+
+function newPlayerDef(): PlayerDef{
+    return {
+        name: '',
+        experience: 0,
+        playerInventory: PlayerInventory.newPlayerInventoryDef(),
+        demonLoadouts: [{
+            id: 'default-demon-loadout',
+            name: 'Blasto',
+            classId: 'brawler',
+            affinityId: 'fire',
+            augmentIds: ['default-brawler-augment', 'default-fire-augment']
+        }],
+        playerLoadouts: [{
+            id: 'default-player-loadout',
+            demonLoadoutIDs: ['default-demon-loadout'],
+            itemIDs: []
+        }],
+        selectedLoadout: 'default-player-loadout',
+        flags: {
+            tutorialComplete: false
         }
-        return item
     }
 }
 
