@@ -1,7 +1,9 @@
-import { Player } from 'game/models/player/player'
 import { DemonoWidget } from './demonoWidget'
+import { GameContainer } from './gameContainer'
 
 abstract class Scene extends DemonoWidget {
+
+    gameContainer: GameContainer
 
     constructor(className: string) {
         super('scene ' + className)

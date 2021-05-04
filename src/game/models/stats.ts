@@ -1,7 +1,8 @@
 enum StatType {
     Strength = 'Strength',
     Magic = 'Magic',
-    Armor = 'Armor',
+    Attack = 'Attack',
+    Defense = 'Defense',
     Speed = 'Speed',
     ShieldPower = 'Shield Power'
 }
@@ -9,7 +10,8 @@ enum StatType {
 interface SimpleStats {
     [StatType.Strength]: number,
     [StatType.Magic]: number,
-    [StatType.Armor]: number,
+    [StatType.Attack]: number,
+    [StatType.Defense]: number,
     [StatType.Speed]: number
 }
 

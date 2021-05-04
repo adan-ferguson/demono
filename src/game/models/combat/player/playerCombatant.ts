@@ -42,11 +42,11 @@ class PlayerCombatant extends Combatant {
     }
 
     get physDef(): number {
-        return Math.floor((this.stats.get(StatType.Strength) + this.stats.get(StatType.Armor) * 2) / 3)
+        return Math.floor((this.stats.get(StatType.Strength) + this.stats.get(StatType.Defense) * 2) / 3)
     }
 
     get magicDef(): number {
-        return Math.floor((this.stats.get(StatType.Magic) + this.stats.get(StatType.Armor) * 2) / 3)
+        return Math.floor((this.stats.get(StatType.Magic) + this.stats.get(StatType.Defense) * 2) / 3)
     }
 
     beginTurn(): Result[] {

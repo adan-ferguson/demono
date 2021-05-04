@@ -25,8 +25,8 @@ class Player {
     inventory: PlayerInventory
     flags: PlayerFlags
 
-    constructor(def ?: PlayerDef){
-        if(!def){
+    constructor(def ?: PlayerDef) {
+        if (!def) {
             def = newPlayerDef()
         }
         this.name = def.name
@@ -46,8 +46,8 @@ class Player {
         return expToLevel(this.experience)
     }
 
-    get selectedLoadout(): DemonLoadout | undefined {
-        return this.getDemonLoadoutByID(this.selectedLoadoutId)
+    get selectedLoadout(): PlayerLoadout | undefined {
+        return this.getPlayerLoadoutById(this.selectedLoadoutId)
     }
 
     serialize(): PlayerDef {
@@ -66,7 +66,11 @@ class Player {
         return this.name ? false : true
     }
 
-    getDemonLoadoutByID(id: string): DemonLoadout | undefined {
+    getPlayerLoadoutById(id: string): PlayerLoadout | undefined {
+        return this.playerLoadouts.find(loadout => loadout.id === id)
+    }
+
+    getDemonLoadoutById(id: string): DemonLoadout | undefined {
         return this.demonLoadouts.find(loadout => loadout.id === id)
     }
 
@@ -79,11 +83,32 @@ class Player {
     }
 }
 
-function newPlayerDef(): PlayerDef{
+function newPlayerDef(): PlayerDef {
     return {
         name: '',
         experience: 0,
-        playerInventory: PlayerInventory.newPlayerInventoryDef(),
+        playerInventory: {
+            playerItems: [],
+            demonAugments: [{
+                id: 'default-brawler-augment',
+                name: 'Razor Claws',
+                abilities: ['slash'],
+                class: {
+                    type: 'brawler',
+                    requires: 1
+                }
+            }, {
+                id: 'default-fire-augment',
+                name: 'Fire Jewel',
+                abilities: ['sear'],
+                affinity: {
+                    type: 'fire',
+                    requires: 1
+                }
+            }],
+            demonClasses: ['brawler'],
+            demonAffinities: ['fire']
+        },
         demonLoadouts: [{
             id: 'default-demon-loadout',
             name: 'Blasto',
@@ -105,10 +130,11 @@ function newPlayerDef(): PlayerDef{
 
 const LEVEL_EXP_BASE = 100
 const LEVEL_EXP_MULTIPLIER = 1.4
+
 function expToLevel(exp: number): number {
     let baseExp = LEVEL_EXP_BASE
     let baseLevel = 0
-    while(baseExp < exp){
+    while (baseExp < exp) {
         baseExp *= LEVEL_EXP_MULTIPLIER
         baseLevel++
     }
@@ -118,7 +144,7 @@ function expToLevel(exp: number): number {
 function expRequiredForLevel(level: number): number {
     let baseExp = LEVEL_EXP_BASE
     let baseLevel = 1
-    while (baseLevel < level){
+    while (baseLevel < level) {
         baseExp *= LEVEL_EXP_MULTIPLIER
         baseLevel++
     }

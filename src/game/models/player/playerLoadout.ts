@@ -16,7 +16,7 @@ class PlayerLoadout {
 
     constructor(player: Player, def: PlayerLoadoutDef){
         this.id = def.id
-        this.demonLoadouts = def.demonLoadoutIDs.map(id => player.getDemonLoadoutByID(id))
+        this.demonLoadouts = def.demonLoadoutIDs.map(id => player.getDemonLoadoutById(id))
             .filter((i): i is DemonLoadout => {
                 return i ? true : false
             })

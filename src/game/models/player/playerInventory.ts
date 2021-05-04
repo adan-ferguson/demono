@@ -41,29 +41,6 @@ class PlayerInventory {
             demonClasses: this.demonClasses.slice()
         }
     }
-
-    static newPlayerInventoryDef(): PlayerInventoryDef {
-        return {
-            playerItems: [],
-            demonAugments: [{
-                name: 'Razor Claws',
-                abilities: ['slash'],
-                class: {
-                    type: 'brawler',
-                    requires: 1
-                }
-            }, {
-                name: 'Fire Jewel',
-                abilities: ['sear'],
-                affinity: {
-                    type: 'fire',
-                    requires: 1
-                }
-            }],
-            demonClasses: ['brawler'],
-            demonAffinities: ['fire']
-        }
-    }
 }
 
 export { PlayerInventory, PlayerInventoryDef }

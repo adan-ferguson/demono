@@ -18,6 +18,7 @@ class DashboardScene extends Scene {
     }
 
     private encounterSelectButton() {
+        debugger
         const btn = this.makeButton('Encounters', new EncounterSelectScene(this.player))
         if(!this.player.selectedLoadout){
             btn.disabled = true

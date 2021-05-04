@@ -34,6 +34,10 @@ class GameContainer extends DemonoWidget {
         this.sceneManager.setScene(loadGameScene)
     }
 
+    save(): void {
+        window.localStorage.setItem('slot' + this.saveSlot, JSON.stringify(this.player.serialize()))
+    }
+
     private loadSlot(slot: number): void {
         if(!isValidSlotNumber(slot)){
             throw 'Invalid slot number ' + slot
@@ -65,10 +69,10 @@ class GameContainer extends DemonoWidget {
 }
 
 function loadPlayers(){
-    const serializedPlayers =  window.JSON.parse(window.localStorage.getItem('players') || '[]')
     const players: Player[] = []
     for(let i = 0; i < 3; i++){
-        players[i] = new Player(serializedPlayers[i])
+        const def = window.JSON.parse(window.localStorage.getItem('slot' + i) || '0')
+        players[i] = new Player(def)
     }
     return players
 }

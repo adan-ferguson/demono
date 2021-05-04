@@ -5,7 +5,7 @@ import { DemonAffinityType } from 'game/models/demons/affinity'
 import { DemonClassType } from './class'
 
 interface DemonAugmentDef {
-    id?: string,
+    id: string,
     name: string,
     abilities: DemonAbilityId[],
     stats?: StatModifiers,
@@ -27,7 +27,7 @@ class DemonAugment {
     readonly stats: StatModifiers
 
     constructor(def: DemonAugmentDef) {
-        this.id = def.id || uuid()
+        this.id = def.id
         this.name = def.name
         this.stats = def.stats || {}
         this.abilities = def.abilities

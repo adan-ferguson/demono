@@ -73,7 +73,7 @@ class DemonLoadout {
         const stats: SimpleStats = {
             [StatType.Strength]: 0,
             [StatType.Magic]: 0,
-            [StatType.Armor]: 0,
+            [StatType.Defense]: 0,
             [StatType.Speed]: 0
         }
 

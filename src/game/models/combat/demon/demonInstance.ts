@@ -2,7 +2,7 @@ import { DemonLoadout } from '../../demons/demonLoadout'
 import { DemonAbilityInstance } from './demonAbilityInstance'
 import { PlayerCombatant } from '../player/playerCombatant'
 import { Result } from '../result'
-import {FullStats, StatType} from 'game/models/stats'
+import { FullStats, StatType } from 'game/models/stats'
 
 enum EnergyChangeType {
     Cost,
