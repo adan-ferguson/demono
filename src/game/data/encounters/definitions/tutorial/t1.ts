@@ -1,6 +1,6 @@
 import { EncounterDefinition } from 'game/models/encounters/encounter'
 
-const test: EncounterDefinition = {
+const t1: EncounterDefinition = {
     level: 0,
     enemies: [
         {
@@ -21,4 +21,4 @@ const test: EncounterDefinition = {
     ]
 }
 
-export { test }
+export { t1 }

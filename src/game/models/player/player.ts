@@ -123,7 +123,8 @@ function newPlayerDef(): PlayerDef {
         }],
         selectedLoadout: 'default-player-loadout',
         flags: {
-            tutorialComplete: false
+            tutorialComplete: false,
+            encounters: []
         }
     }
 }

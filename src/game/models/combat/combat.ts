@@ -1,4 +1,4 @@
-import { Encounter } from '../encounter'
+import { Encounter } from '../encounters/encounter'
 import { PlayerCombatant } from './player/playerCombatant'
 import { EnemyCombatant } from './enemy/enemyCombatant'
 import { Player } from '../player/player'

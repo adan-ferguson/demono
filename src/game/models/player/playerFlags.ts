@@ -1,5 +1,8 @@
+import { EncounterFlags } from '../encounters/encounterFlags'
+
 interface PlayerFlags {
-    tutorialComplete: boolean
+    tutorialComplete: boolean,
+    encounters: EncounterFlags[]
 }
 
 export { PlayerFlags }

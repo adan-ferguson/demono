@@ -7,7 +7,7 @@ class EncounterSelectScene extends Scene {
     }
 
     begin(): void{
-
+        
     }
 }
 

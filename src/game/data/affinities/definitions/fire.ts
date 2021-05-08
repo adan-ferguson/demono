@@ -7,8 +7,7 @@ const fire: DemonAffinityDefinition = {
     baseStats: {
         [StatType.Strength]: 5,
         [StatType.Magic]: 5,
-        [StatType.Attack]: 5,
-        [StatType.Defense]: 5,
+        [StatType.Armor]: 5,
         [StatType.Speed]: 5
     }
 }
