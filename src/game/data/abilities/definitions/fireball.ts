@@ -5,7 +5,6 @@ import { PlayerAttackDefinition } from 'game/models/combat/player/playerAttack'
 import { StatType } from 'game/models/stats'
 
 const fireball: DemonAbilityDefinition = {
-    id: 'fireball',
     name: 'Fireball',
     cost: tier => 30 + tier * 10,
     choiceRequirement: 'enemy',

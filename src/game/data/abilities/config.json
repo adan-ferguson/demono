@@ -1,0 +1,5 @@
+{
+  "className": "DemonAbility",
+  "interfaceName": "DemonAbilityDefinition",
+  "interfacePath": "game/models/demons/ability"
+}
