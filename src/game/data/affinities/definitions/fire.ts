@@ -2,7 +2,6 @@ import { DemonAffinityDefinition } from 'game/models/demons/affinity'
 import { StatType } from 'game/models/stats'
 
 const fire: DemonAffinityDefinition = {
-    id: 'fire',
     name: 'Fire',
     baseStats: {
         [StatType.Strength]: 5,

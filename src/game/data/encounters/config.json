@@ -1,0 +1,5 @@
+{
+  "className": "Encounter",
+  "interfaceName": "EncounterDefinition",
+  "interfacePath": "game/models/encounters/encounter"
+}

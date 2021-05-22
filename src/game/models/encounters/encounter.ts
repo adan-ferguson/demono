@@ -1,9 +1,9 @@
 import { EnemyCombatant, EnemyOptions } from '../combat/enemy/enemyCombatant'
 import { Enemy } from '../enemies/enemy'
-import { IDs as EncounterID } from 'game/data/encounters/definitionLoader'
-import { IDs as EnemyID } from 'game/data/enemies/definitionLoader'
 import { Combat } from '../combat/combat'
-import { DataDefinition } from '../../data/dataDefinition'
+import { DataDefinition } from 'game/data/dataDefinition'
+import { EnemyID } from 'game/data/enemies/definitionLoader'
+import { EncounterDefinitions, EncounterID } from 'game/data/encounters/definitionLoader'
 
 interface EncounterDefinition extends DataDefinition {
     enemies: {
@@ -21,8 +21,8 @@ class Encounter {
     }[]
     level: number
 
-    static loadFromId(id: string): Encounter {
-        const def = EncounterDefinitions[id as keyof typeof EncounterDefinitions]
+    static loadFromId(id: EncounterID): Encounter {
+        const def = EncounterDefinitions[id]
         return new Encounter(def)
     }
 

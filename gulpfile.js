@@ -15,12 +15,12 @@ function compileData(cb) {
 }
 
 function compileCategory(categoryName) {
-    let contents = ''
-    let names = []
+    let data = []
     const basePath = path.join(DATA_PATH, categoryName, 'definitions')
     readDir()
-    contents += generateDataTypes(getConfig(categoryName), names)
+    const contents = generateLoaderCode(getConfig(categoryName), data)
     fs.writeFileSync(path.join(DATA_PATH, categoryName, 'definitionLoader.ts'), contents)
+
     console.log(`Definition Loader for ${categoryName} compiled.`)
 
     function readDir(subdirs = []){
@@ -31,12 +31,10 @@ function compileCategory(categoryName) {
             if(fs.lstatSync(filepath).isDirectory()) {
                 readDir([...subdirs, name])
             }else{
-                names.push(name)
-                contents += `import { ${name} } from './definitions/${subdirs.join('/')}/${name}'
-${name}.categories = '${subdirs}'
-${name}.id = '${name}'
-
-`
+                data.push({
+                    name: name,
+                    categories: subdirs
+                })
             }
         })
     }
@@ -54,22 +52,18 @@ function getConfig(categoryName){
     return parsedData
 }
 
-function generateDataTypes(config, names){
-    return `import { ${config.interfaceName} } from '${config.interfacePath}'
-    
-enum ${config.className}IDs {
-    ${names.map(name => `${name} = '${name}'`).join(',\n\t')}
+function generateLoaderCode(config, data){
+    return `import { DataDefinitionRecord } from 'game/data/dataCollection'
+import { ${config.interfaceName} } from '${config.interfacePath}'
+${data.map(d => `import { ${d.name} } from './definitions/${d.categories.join('/')}/${d.name}'`).join('\n')}
+
+type ${config.className}ID = ${data.map(d => `'${d.name}'`).join(' | ')}
+
+const ${config.className}Definitions: DataDefinitionRecord<${config.className}ID, ${config.interfaceName}> = {
+    ${data.map(d => `${d.name}: { definition: ${d.name}, categories: [${d.categories}] }`).join(',\n    ')}
 }
 
-type ${config.className}DefinitionList = {
-    [keys in ${config.className}IDs]: ${config.interfaceName}
-}
-
-const ${config.className}Definitions: ${config.className}DefinitionList = {
-    ${names.join(', ')}
-}
-
-export { ${config.className}IDs, ${config.className}Definitions }
+export { ${config.className}ID, ${config.className}Definitions }
 `
 }
 

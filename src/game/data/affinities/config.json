@@ -1,0 +1,5 @@
+{
+  "className": "DemonAffinity",
+  "interfaceName": "DemonAffinityDefinition",
+  "interfacePath": "game/models/demons/affinity"
+}

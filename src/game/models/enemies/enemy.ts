@@ -1,23 +1,24 @@
 import { DamageType } from '../combat/damage'
 import { EnemyAbility, EnemyAbilityDefinition } from './enemyAbility'
-import * as EnemyDefinitions from 'game/data/enemies/definitionLoader'
+import { EnemyDefinitions, EnemyID } from 'game/data/enemies/definitionLoader'
 
 interface Armor {
-    type: DamageType,
+    type: DamageType
     value: number
 }
 
 interface EnemyDefinition {
-    name: string,
-    health: number,
-    armor?: Armor,
+    id?: EnemyID
+    name: string
+    health: number
+    armor?: Armor
     abilities: EnemyAbilityDefinition[]
 }
 
 class Enemy {
 
-    static loadFromId(id: string): Enemy {
-        const def = EnemyDefinitions[id as keyof typeof EnemyDefinitions]
+    static loadFromId(id: EnemyID): Enemy {
+        const def = EnemyDefinitions[id]
         return new Enemy(def)
     }
 

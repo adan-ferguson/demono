@@ -1,0 +1,5 @@
+{
+  "className": "Enemy",
+  "interfaceName": "EnemyDefinition",
+  "interfacePath": "game/models/enemies/enemy"
+}

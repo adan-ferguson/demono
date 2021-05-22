@@ -1,36 +1,29 @@
-import { DataDefinition } from 'game/data/dataDefinition'
-
 interface CategoryRecord<T> {
     defs: T[],
     categories: Record<string, CategoryRecord<T>>
 }
 
-class DataCollection<Def extends DataDefinition>{
-    
-    readonly byCategory: CategoryRecord<Def> = { defs: [], categories: {} }
-    readonly byId: Record<string, Def>
+type DataDefinitionRecord<IDType extends string, Def> = Record<IDType, {
+  definition: Def,
+  categories: string[]  
+}>
 
-    constructor(readonly defs: Def[]){
-        defs.forEach(def => {
-            if(!def.id || !def.categories){
-                throw 'Failed to load definition, properties not set correctly.'
-            }
-            const categories = def.categories ? def.categories.split(',') : ['uncategorized']
+class DataCollection<IDType extends string, Def> {
+
+    readonly byCategory: CategoryRecord<Def> = { defs: [], categories: {} }
+
+    constructor(readonly definitionList: DataDefinitionRecord<IDType, Def>) {
+        Object.values(definitionList).forEach(({ definition, categories }) => {
             let currentRecord = this.byCategory
-            categories.forEach(category => {
-                if(!currentRecord.categories[category]){
+            categories.forEach((category: string) => {
+                if (!currentRecord.categories[category]) {
                     currentRecord.categories[category] = { defs: [], categories: {} }
                 }
                 currentRecord = currentRecord.categories[category]
             })
-            currentRecord.defs.push(def)
-            this.byId[def.id] = def
+            currentRecord.defs.push(definition)
         })
-    }
-
-    getById(id: string){
-
     }
 }
 
-export { DataCollection }
+export { DataCollection, DataDefinitionRecord }

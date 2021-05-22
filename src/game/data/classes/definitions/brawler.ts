@@ -2,7 +2,6 @@ import { DemonClassDefinition } from 'game/models/demons/class'
 import { StatType } from 'game/models/stats'
 
 const brawler: DemonClassDefinition = {
-    id: 'brawler',
     name: 'Brawler',
     baseStats: {
         [StatType.Strength]: 5,
