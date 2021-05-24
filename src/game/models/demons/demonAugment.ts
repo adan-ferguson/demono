@@ -1,20 +1,19 @@
-import { DemonAbilityId } from './ability'
 import { StatModifiers } from 'game/models/stats'
-import { v4 as uuid } from 'uuid'
-import { DemonAffinityType } from 'game/models/demons/affinity'
-import { DemonClassType } from './class'
+import { DemonAbilityID } from 'game/data/abilities/definitionLoader'
+import { DemonAffinityID } from 'game/data/affinities/definitionLoader'
+import { DemonClassID } from 'game/data/classes/definitionLoader'
 
 interface DemonAugmentDef {
     id: string,
     name: string,
-    abilities: DemonAbilityId[],
+    abilities: DemonAbilityID[],
     stats?: StatModifiers,
     class?: {
-        type: DemonClassType,
+        type: DemonClassID,
         requires: number
     },
     affinity?: {
-        type: DemonAffinityType,
+        type: DemonAffinityID,
         requires: number
     }
 }
@@ -23,7 +22,7 @@ class DemonAugment {
 
     readonly id: string
     readonly name: string
-    readonly abilities: DemonAbilityId[]
+    readonly abilities: DemonAbilityID[]
     readonly stats: StatModifiers
 
     constructor(def: DemonAugmentDef) {

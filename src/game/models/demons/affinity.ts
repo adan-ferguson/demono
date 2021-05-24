@@ -8,20 +8,14 @@ interface DemonAffinityDefinition {
 
 class DemonAffinity {
 
-    id: DemonAffinityID
     name: string
     baseStats: SimpleStats
 
     static loadFromId(id: DemonAffinityID): DemonAffinity {
-        const def = DemonAffinityDefinitions[id as DemonAffinityID]
-        return new DemonAffinity(def)
+        return new DemonAffinity(id, DemonAffinityDefinitions.getDefinition(id))
     }
 
-    constructor(def: DemonAffinityDefinition){
-        if(!def.id){
-            throw 'Definition not loaded correctly.'
-        }
-        this.id = def.id
+    constructor(readonly id: DemonAffinityID, def: DemonAffinityDefinition){
         this.name = def.name
         this.baseStats = def.baseStats
     }

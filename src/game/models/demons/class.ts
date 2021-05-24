@@ -8,20 +8,14 @@ interface DemonClassDefinition {
 
 class DemonClass {
 
-    id: DemonClassID
     name: string
     baseStats: SimpleStats
 
     static loadFromId(id: DemonClassID): DemonClass {
-        const def = DemonClassDefinitions[id as DemonClassID]
-        return new DemonClass(def)
+        return new DemonClass(id, DemonClassDefinitions.getDefinition(id))
     }
 
-    constructor(def: DemonClassDefinition){
-        if(!def.id){
-            throw 'Definition not loaded correctly.'
-        }
-        this.id = def.id
+    constructor(readonly id: DemonClassID, def: DemonClassDefinition){
         this.name = def.name
         this.baseStats = def.baseStats
     }

@@ -1,16 +1,18 @@
-import { DemonAbility, DemonAbilityId } from './ability'
+import { DemonAbility } from './ability'
 import { DemonAugment } from './demonAugment'
-import { DemonClass, DemonClassType } from 'game/models/demons/class'
-import { DemonAffinity, DemonAffinityType } from 'game/models/demons/affinity'
-import { v4 as uuid } from 'uuid'
+import { DemonClass } from 'game/models/demons/class'
+import { DemonAffinity } from 'game/models/demons/affinity'
 import { Player } from '../player/player'
 import { FullStats, SimpleStats, StatType } from '../stats'
+import { DemonAffinityID } from 'game/data/affinities/definitionLoader'
+import { DemonClassID } from 'game/data/classes/definitionLoader'
+import { DemonAbilityID } from 'game/data/abilities/definitionLoader'
 
 interface DemonLoadoutDef {
     id: string,
     name: string,
-    classId: DemonClassType,
-    affinityId: DemonAffinityType,
+    classId: DemonClassID,
+    affinityId: DemonAffinityID,
     augmentIds: string[]
 }
 
@@ -64,7 +66,7 @@ class DemonLoadout {
         this.stats = stats
 
         this.abilities = Object.keys(tierMap).map(id => {
-            return DemonAbility.loadFromId(id as DemonAbilityId, tierMap[id])
+            return DemonAbility.loadFromId(id as DemonAbilityID, tierMap[id])
         })
     }
 

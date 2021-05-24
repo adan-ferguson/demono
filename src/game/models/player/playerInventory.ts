@@ -1,21 +1,21 @@
 import { DemonAugment, DemonAugmentDef } from '../demons/demonAugment'
 import { PlayerItem, PlayerItemDef } from './playerItem.js'
-import { DemonClassType } from 'game/models/demons/class'
-import { DemonAffinityType } from 'game/models/demons/affinity'
+import { DemonAffinityID } from 'game/data/affinities/definitionLoader'
+import { DemonClassID } from 'game/data/classes/definitionLoader'
 
 interface PlayerInventoryDef {
     playerItems: PlayerItemDef[]
     demonAugments: DemonAugmentDef[]
-    demonAffinities: DemonAffinityType[]
-    demonClasses: DemonClassType[]
+    demonAffinities: DemonAffinityID[]
+    demonClasses: DemonClassID[]
 }
 
 class PlayerInventory {
 
     readonly playerItems: PlayerItem[]
     readonly demonAugments: DemonAugment[]
-    readonly demonAffinities: DemonAffinityType[]
-    readonly demonClasses: DemonClassType[]
+    readonly demonAffinities: DemonAffinityID[]
+    readonly demonClasses: DemonClassID[]
 
     constructor(def: PlayerInventoryDef){
         this.playerItems = def.playerItems.map(itemDef => new PlayerItem(itemDef))

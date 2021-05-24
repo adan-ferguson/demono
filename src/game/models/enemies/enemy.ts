@@ -18,8 +18,7 @@ interface EnemyDefinition {
 class Enemy {
 
     static loadFromId(id: EnemyID): Enemy {
-        const def = EnemyDefinitions[id]
-        return new Enemy(def)
+        return new Enemy(EnemyDefinitions.getDefinition(id))
     }
 
     name: string

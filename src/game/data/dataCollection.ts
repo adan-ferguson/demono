@@ -24,6 +24,10 @@ class DataCollection<IDType extends string, Def> {
             currentRecord.defs.push(definition)
         })
     }
+
+    getDefinition(id: IDType): Def {
+        return this.definitionList[id].definition
+    }
 }
 
 export { DataCollection, DataDefinitionRecord }

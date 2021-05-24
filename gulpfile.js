@@ -53,15 +53,15 @@ function getConfig(categoryName){
 }
 
 function generateLoaderCode(config, data){
-    return `import { DataDefinitionRecord } from 'game/data/dataCollection'
+    return `import { DataCollection } from 'game/data/dataCollection'
 import { ${config.interfaceName} } from '${config.interfacePath}'
 ${data.map(d => `import { ${d.name} } from './definitions/${d.categories.join('/')}/${d.name}'`).join('\n')}
 
 type ${config.className}ID = ${data.map(d => `'${d.name}'`).join(' | ')}
 
-const ${config.className}Definitions: DataDefinitionRecord<${config.className}ID, ${config.interfaceName}> = {
-    ${data.map(d => `${d.name}: { definition: ${d.name}, categories: [${d.categories}] }`).join(',\n    ')}
-}
+const ${config.className}Definitions = new DataCollection<${config.className}ID, ${config.interfaceName}>({
+    ${data.map(d => `${d.name}: { definition: ${d.name}, categories: [${d.categories.map(name => `'${name}'`)}] }`).join(',\n    ')}
+})
 
 export { ${config.className}ID, ${config.className}Definitions }
 `

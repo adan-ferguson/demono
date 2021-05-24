@@ -4,11 +4,9 @@ import { Ability, AbilityClassification } from 'game/models/combat/ability'
 import { PlayerAttackAction, PlayerAttackDefinition } from 'game/models/combat/player/playerAttack'
 import { PlayerActionDefinition } from 'game/models/combat/player/playerAction'
 import { Tiered } from 'game/tiered'
-import { DataDefinition } from 'game/data/dataDefinition'
-import { DataCollection } from 'game/data/dataCollection'
 import { DemonAbilityDefinitions, DemonAbilityID } from 'game/data/abilities/definitionLoader'
 
-interface DemonAbilityDefinition extends DataDefinition {
+interface DemonAbilityDefinition {
     id?: DemonAbilityID,
     name: string,
     cost: Tiered<number>,
@@ -17,7 +15,6 @@ interface DemonAbilityDefinition extends DataDefinition {
     actions: PlayerActionDefinition[]
 }
 
-const defCollection = new DataCollection(DemonAbilityDefinitions)
 
 class DemonAbility extends Ability {
 
@@ -29,11 +26,7 @@ class DemonAbility extends Ability {
     readonly _classification: AbilityClassification
 
     static loadFromId(id: DemonAbilityID, tier = 1): DemonAbility {
-        const def = defCollection.definitionList[id]
-        if(!def){
-            throw 'DemonAbility not found, Id: ' + id
-        }
-        return new DemonAbility(def, tier)
+        return new DemonAbility(DemonAbilityDefinitions.getDefinition(id), tier)
     }
 
     constructor(readonly def: DemonAbilityDefinition, readonly tier: number){
