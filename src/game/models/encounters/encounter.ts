@@ -3,6 +3,7 @@ import { Enemy } from '../enemies/enemy'
 import { Combat } from '../combat/combat'
 import { EnemyID } from 'game/data/enemies/definitionLoader'
 import { EncounterDefinitions, EncounterID } from 'game/data/encounters/definitionLoader'
+import { PlayerFlags } from '../player/playerFlags'
 
 interface EncounterDefinition {
     enemies: {
@@ -33,6 +34,14 @@ class Encounter {
         return this.enemies.map(enemyData => {
             return new EnemyCombatant(Enemy.loadFromId(enemyData.id), combat, enemyData.options)
         })
+    }
+
+    isVisible(playerFlags: PlayerFlags){
+
+    }
+
+    isSelectable(playerFlags: PlayerFlags){
+
     }
 }
 
